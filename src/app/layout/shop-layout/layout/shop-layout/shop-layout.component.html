@@ -1,0 +1,18 @@
+<app-shop-layout-navbar></app-shop-layout-navbar>
+<div
+  class="container-fluid d-flex flex-column p-2"
+  style="
+    min-height: 100vh;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    overflow: auto;
+  "
+>
+  <div class="top-margin" style="height: 56px"></div>
+  <router-outlet></router-outlet>
+
+  <div class="mt-auto">
+    <app-shop-layout-footer></app-shop-layout-footer>
+  </div>
+</div>

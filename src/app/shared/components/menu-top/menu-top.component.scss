@@ -1,0 +1,5 @@
+.scroll-custom {
+  scroll-snap-type: x proximity;
+  overflow-x: auto;
+  overflow-y: hidden;
+}

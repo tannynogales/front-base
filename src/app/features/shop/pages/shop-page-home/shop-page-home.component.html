@@ -1,0 +1,57 @@
+<section class="container">
+  <!-- <h1 class="h6 text-muted fw-light">Máquinas de Gastronomía</h1> -->
+  <app-menu-top [items]="menu"></app-menu-top>
+</section>
+
+<div class="container py-3">
+  <div class="row">
+    <div
+      class="col-3 d-none d-lg-block"
+      style="overflow: auto"
+      [style.height.px]="alturaDiv"
+    >
+      <div class="contenido">
+        <app-menu-list></app-menu-list>
+      </div>
+    </div>
+    <div class="col-12 col-lg-9">
+      <div #miDiv>
+        <section class="mb-4">
+          <app-carousel></app-carousel>
+        </section>
+        <h5 class="mb-3">Productos destacados</h5>
+        <section class="d-flex justify-content-between scroll-custom gap-3">
+          <app-card
+            *ngFor="let hotProduct of hotProducts"
+            [item]="hotProduct"
+            [button]="false"
+          ></app-card>
+        </section>
+      </div>
+    </div>
+  </div>
+  <div class="row py-5">
+    <h3>Ofertas</h3>
+    <section class="d-flex justify-content-between scroll-custom d-grid gap-3">
+      <app-card></app-card>
+      <app-card></app-card>
+      <app-card></app-card>
+      <app-card></app-card>
+      <app-card></app-card>
+      <app-card></app-card>
+    </section>
+  </div>
+</div>
+<app-subscribe></app-subscribe>
+
+<div class="container">
+  <h3>Descubre más oportunidades</h3>
+  <section class="d-flex justify-content-between scroll-custom d-grid gap-3">
+    <app-card></app-card>
+    <app-card></app-card>
+    <app-card></app-card>
+    <app-card></app-card>
+    <app-card></app-card>
+    <app-card></app-card>
+  </section>
+</div>

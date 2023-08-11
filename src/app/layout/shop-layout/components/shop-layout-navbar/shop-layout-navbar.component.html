@@ -1,0 +1,62 @@
+<nav class="navbar sticky-top bg-body-tertiary">
+  <div class="container">
+    <div class="d-flex align-items-center w-100">
+      <div class="me-auto">Flex item</div>
+
+      <div class="text-body-secondary">
+        <small class="mx-3"> +569 76901120, Santiago</small>
+      </div>
+
+      <!-- d-none d-lg-block: Hide on screens smaller than lg -->
+      <div class="p-2 d-none d-lg-block">
+        <app-button-icon [icon]="'bell'" [badge]="1"></app-button-icon>
+      </div>
+
+      <!-- d-none d-lg-block: Hide on screens smaller than lg -->
+      <div class="p-2 d-none d-lg-block">
+        <app-button-icon [icon]="'cart-shopping'" [badge]="2"></app-button-icon>
+      </div>
+
+      <!-- d-none d-lg-block: Hide on screens smaller than lg -->
+      <div class="p-2 d-none d-lg-block">
+        <app-button-icon [icon]="'user'"></app-button-icon>
+      </div>
+
+      <!-- d-lg-none: Hide on lg and wider screens -->
+      <div class="p-2 d-lg-none">
+        <button
+          class="btn btn-sm btn-outline-secondary"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasNavbar"
+          aria-controls="offcanvasNavbar"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+
+      <!-- Offcanvas Tab -->
+      <div
+        class="offcanvas offcanvas-end"
+        tabindex="-1"
+        id="offcanvasNavbar"
+        aria-labelledby="offcanvasNavbarLabel"
+      >
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="offcanvas-body">
+          <app-menu-list></app-menu-list>
+          <!-- <app-p-multiple></app-p-multiple> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,12 @@
+<div class="d-flex justify-content-center">
+  <div class="d-inline-flex scroll-custom gap-4">
+    <div *ngFor="let item of items" class="text-nowrap py-4">
+      <a
+        class="link-body-emphasis text-decoration-none"
+        [attr.href]="item.link"
+      >
+        {{ item.title }}
+      </a>
+    </div>
+  </div>
+</div>

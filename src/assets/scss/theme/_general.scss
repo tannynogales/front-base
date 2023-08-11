@@ -1,0 +1,63 @@
+/*--------------------------------------------------------------
+# General
+--------------------------------------------------------------*/
+body {
+  font-family: $font-family-sans-serif;
+  color: $black;
+}
+
+a {
+  // color: #0563bb;
+  text-decoration: none;
+}
+
+a:hover {
+  color: $primary;
+  text-decoration: none;
+}
+
+// h1,
+// h2,
+// h3,
+// h4,
+// h5,
+// h6 {
+//   font-family: "Raleway", sans-serif;
+// }
+
+/*--------------------------------------------------------------
+# Disable aos animation delay on mobile devices
+--------------------------------------------------------------*/
+@media screen and (max-width: 768px) {
+  [data-aos-delay] {
+    transition-delay: 0 !important;
+  }
+}
+
+html,
+body {
+  height: 100%;
+}
+
+/*
+*
+* ===============================================================
+* HERO
+* ===============================================================
+*
+*/
+.hero {
+  padding: 10rem 0 8rem;
+  @include media-breakpoint-up(lg) {
+    padding: 6rem 0;
+    min-height: 40rem;
+  }
+}
+
+.sub-hero {
+  padding: 9rem 0 5rem;
+  @include media-breakpoint-up(lg) {
+    padding: 3rem 0;
+    min-height: 20rem;
+  }
+}

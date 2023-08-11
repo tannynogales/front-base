@@ -1,0 +1,10 @@
+// Custom variables
+$primary: #0563bb;
+$font-family-sans-serif: "Poppins", sans-serif;
+
+// Import the bootstrap functions and  variables
+@import "./../../../node_modules/bootstrap/scss/functions";
+@import "./../../../node_modules/bootstrap/scss/variables";
+
+// Custom Theme Variables
+@import "./theme/variables";

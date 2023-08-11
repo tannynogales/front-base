@@ -1,0 +1,16 @@
+.texto-limitado {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.5; /* Ajusta la altura de línea según tus necesidades */
+  max-height: 3em; /* Ajusta el valor según el número de líneas deseadas (2 líneas x altura de línea) */
+  -webkit-line-clamp: 2; /* Número máximo de líneas a mostrar */
+  text-overflow: ellipsis;
+}
+
+.card2 {
+  max-width: 250px;
+  // width: 250px
+  min-width: 200px;
+  // margin: 10px;
+}
