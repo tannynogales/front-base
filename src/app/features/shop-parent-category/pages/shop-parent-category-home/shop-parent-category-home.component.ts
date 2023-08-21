@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Category } from '@layout/shop-layout/models';
 
 @Component({
@@ -40,4 +41,18 @@ export class ShopParentCategoryHomeComponent {
     },
   ];
   products = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
+
+  selectedMenuItem: string = '';
+
+  constructor(private route: ActivatedRoute) {}
+
+  ngOnInit(): void {
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      const productId = params.get('productId');
+      if (productId !== null) {
+        this.selectedMenuItem = productId;
+        console.log(productId);
+      }
+    });
+  }
 }

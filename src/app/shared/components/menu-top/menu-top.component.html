@@ -2,9 +2,11 @@
   <div #scrollContainer class="d-flex scroll-custom gap-4">
     <div *ngFor="let item of items; let first = first" class="text-nowrap py-4">
       <a
-        class="link-body-emphasis text-decoration-none"
+        class="text-decoration-none"
         [routerLink]="['/', item.slug]"
+        [ngClass]="{ 'link-body-emphasis': selected !== item.slug }"
       >
+        <!-- link-body-emphasis -->
         {{ item.name }}
       </a>
     </div>

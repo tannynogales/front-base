@@ -14,6 +14,7 @@ import { Category } from '@layout/shop-layout/models';
   styleUrls: ['./menu-top.component.scss'],
 })
 export class MenuTopComponent implements AfterViewInit {
+  @Input() selected: string = '';
   @Input() items: Category[] = [
     {
       id: 1,
