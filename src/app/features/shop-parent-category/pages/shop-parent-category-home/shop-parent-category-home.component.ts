@@ -39,4 +39,5 @@ export class ShopParentCategoryHomeComponent {
       slug: 'Otros',
     },
   ];
+  products = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
 }

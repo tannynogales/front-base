@@ -1,0 +1,19 @@
+.category-title {
+  --opacidad: 0.5;
+
+  height: 100px;
+  //   background: url("./../../../../../assets/panaderia-y-pasteleria.jpg");
+  background-image: linear-gradient(
+      rgba(0, 0, 0, var(--opacidad)),
+      rgba(165, 39, 77, var(--opacidad))
+    ),
+    url("./../../../../../assets/panaderia-y-pasteleria.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  //   filter: brightness(50%); // Más oscura
+}
