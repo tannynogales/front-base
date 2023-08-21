@@ -1,10 +1,10 @@
 <div
   id="carouselExampleIndicators"
-  class="carousel carousel-dark slide bg-light-subtle py-3"
+  class="carousel slide py-3"
   data-bs-ride="carousel"
   data-bs-touch="true"
 >
-  <div class="carousel-indicators">
+  <div class="carousel-indicators d-none d-md-flex">
     <button
       type="button"
       data-bs-target="#carouselExampleIndicators"
@@ -44,7 +44,11 @@
     data-bs-target="#carouselExampleIndicators"
     data-bs-slide="prev"
   >
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <div
+      class="carousel-control-prev-icon bg-dark rounded d-md-none"
+      aria-hidden="true"
+      style="height: 40px"
+    ></div>
     <span class="visually-hidden">Previous</span>
   </button>
   <button
@@ -53,7 +57,11 @@
     data-bs-target="#carouselExampleIndicators"
     data-bs-slide="next"
   >
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <div
+      class="carousel-control-next-icon bg-dark rounded d-md-none"
+      aria-hidden="true"
+      style="height: 40px"
+    ></div>
     <span class="visually-hidden">Next</span>
   </button>
 </div>

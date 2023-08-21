@@ -7,4 +7,6 @@ import { Component, Input } from '@angular/core';
 })
 export class PlaceholderImgComponent {
   @Input({ required: false }) name: string = 'Some Text';
+  @Input() width: number = 800;
+  @Input() height: number = 400;
 }

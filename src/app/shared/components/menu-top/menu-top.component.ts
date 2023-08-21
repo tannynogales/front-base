@@ -1,20 +1,52 @@
-import { Component, Input } from '@angular/core';
-
-interface Item {
-  title: string;
-  link: string;
-}
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  HostListener,
+  Input,
+  ViewChild,
+} from '@angular/core';
+import { Category } from '@layout/shop-layout/models';
 
 @Component({
   selector: 'app-menu-top',
   templateUrl: './menu-top.component.html',
   styleUrls: ['./menu-top.component.scss'],
 })
-export class MenuTopComponent {
-  @Input() items: Item[] = [
+export class MenuTopComponent implements AfterViewInit {
+  @Input() items: Category[] = [
     {
-      title: 'Home',
-      link: '/home',
+      id: 1,
+      name: 'Home',
+      slug: 'home',
     },
   ];
+
+  @ViewChild('scrollContainer') scrollContainer!: ElementRef;
+  @ViewChild('rightArrow') rightArrow!: ElementRef;
+
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    if (
+      this.scrollContainer.nativeElement.scrollWidth >
+      this.scrollContainer.nativeElement.clientWidth
+    ) {
+      this.rightArrow.nativeElement.classList.add('scrollActive');
+    } else {
+      this.rightArrow.nativeElement.classList.remove('scrollActive');
+    }
+  }
+
+  ngAfterViewInit() {
+    this.onResize();
+    // Detect scroll evento on scrollContainer
+    // this.scrollContainer.nativeElement.addEventListener('scroll', () => {});
+  }
+
+  moveScroll() {
+    const currentScrollPosition = this.scrollContainer.nativeElement.scrollLeft;
+    const newScrollPosition = currentScrollPosition + 70;
+
+    this.scrollContainer.nativeElement.scrollLeft = newScrollPosition;
+  }
 }

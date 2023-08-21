@@ -21,9 +21,10 @@
     The current link item
   </a> -->
   <a
+    (click)="emitelementClickedEvent(product.item.slug)"
     *ngFor="let product of productsFiltered"
     class="list-group-item list-group-item-action"
-    [routerLink]="['/products', product.id]"
+    [routerLink]="['/home', product.item.slug]"
     >{{ product?.item?.name }}</a
   >
 </div>

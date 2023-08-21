@@ -1,25 +1,39 @@
 <nav class="navbar sticky-top bg-body-tertiary">
   <div class="container">
     <div class="d-flex align-items-center w-100">
-      <div class="me-auto">Flex item</div>
+      <h1
+        class="me-auto d-flex fs-6 my-0"
+        [routerLink]="['/home']"
+        style="cursor: pointer"
+      >
+        <span class="d-none d-lg-block">Máquinas de Gastronomía&nbsp;</span>
+        <span>Roble</span>
+      </h1>
 
       <div class="text-body-secondary">
         <small class="mx-3"> +569 76901120, Santiago</small>
       </div>
 
       <!-- d-none d-lg-block: Hide on screens smaller than lg -->
-      <div class="p-2 d-none d-lg-block">
+      <!-- <div class="p-2 d-none d-lg-block">
         <app-button-icon [icon]="'bell'" [badge]="1"></app-button-icon>
+      </div> -->
+
+      <!-- d-none d-lg-block: Hide on screens smaller than lg -->
+      <div class="p-2 d-none d-lg-block">
+        <app-button-icon
+          [routerLink]="['/cart-shopping']"
+          [icon]="'cart-shopping'"
+          [badge]="2"
+        ></app-button-icon>
       </div>
 
       <!-- d-none d-lg-block: Hide on screens smaller than lg -->
       <div class="p-2 d-none d-lg-block">
-        <app-button-icon [icon]="'cart-shopping'" [badge]="2"></app-button-icon>
-      </div>
-
-      <!-- d-none d-lg-block: Hide on screens smaller than lg -->
-      <div class="p-2 d-none d-lg-block">
-        <app-button-icon [icon]="'user'"></app-button-icon>
+        <app-button-icon
+          [routerLink]="['/user']"
+          [icon]="'user'"
+        ></app-button-icon>
       </div>
 
       <!-- d-lg-none: Hide on lg and wider screens -->
@@ -38,7 +52,8 @@
 
       <!-- Offcanvas Tab -->
       <div
-        class="offcanvas offcanvas-end"
+        #offcanvasNavbar
+        class="offcanvas offcanvas-start"
         tabindex="-1"
         id="offcanvasNavbar"
         aria-labelledby="offcanvasNavbarLabel"
@@ -53,8 +68,9 @@
           ></button>
         </div>
         <div class="offcanvas-body">
-          <app-menu-list></app-menu-list>
-          <!-- <app-p-multiple></app-p-multiple> -->
+          <app-menu-list
+            (elementClickedEvent)="closeOffcanvasNavbar()"
+          ></app-menu-list>
         </div>
       </div>
     </div>

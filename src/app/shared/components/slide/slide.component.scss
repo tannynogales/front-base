@@ -1,17 +1,40 @@
+@import "/src/assets/scss/core";
+
+// Import Bootstrap variables for use within theme
+@import "bootstrap/scss/functions.scss";
+@import "bootstrap/scss/variables.scss";
+@import "bootstrap/scss/mixins.scss";
+
 .shape-container {
   width: 300px;
   height: 300px;
   background: white;
 }
 
+// Mobile first, los estilos por defecto son para mobile
 .blob {
   width: 100%;
   height: 100%;
-  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  // border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
   // clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 25% 100%, 0% 50%);
   // background-color: red;
   background-image: url(./../../../../assets/moledora.webp);
   background-repeat: no-repeat;
   background-position: center center;
-  background-size: 80%;
+  background-size: 70%;
+}
+
+// Mobile first, luego se manejan estilos para otras resoluciones
+@include media-breakpoint-up(md) {
+  .blob {
+    width: 100%;
+    height: 100%;
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    // clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 25% 100%, 0% 50%);
+    background-color: $primary-bg-subtle;
+    background-image: url(./../../../../assets/moledora.webp);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 80%;
+  }
 }

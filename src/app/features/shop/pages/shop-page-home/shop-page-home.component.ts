@@ -7,6 +7,7 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
+import { Category } from '@layout/shop-layout/models';
 
 @Component({
   selector: 'app-shop-page-home',
@@ -22,7 +23,7 @@ export class ShopPageHomeComponent implements OnInit, AfterViewInit {
     // console.log(event);
     // Actualizar la altura del div cuando cambie el tamaño del navegador
     this.alturaDiv = this.miDiv.nativeElement.offsetHeight;
-    console.log('Altura del div:', this.alturaDiv, 'px');
+    // console.log('Altura del div:', this.alturaDiv, 'px');
   }
 
   constructor(private cd: ChangeDetectorRef) {}
@@ -30,7 +31,7 @@ export class ShopPageHomeComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     // this.cd.detectChanges();
     this.alturaDiv = this.miDiv.nativeElement.offsetHeight;
-    console.log('ngAfterViewInit', this.alturaDiv);
+    // console.log('ngAfterViewInit', this.alturaDiv);
     this.cd.detectChanges();
   }
   ngOnInit(): void {
@@ -38,54 +39,89 @@ export class ShopPageHomeComponent implements OnInit, AfterViewInit {
     // console.log('ngOnInit', this.alturaDiv);
   }
 
-  hotProducts = [
+  hotProducts: Category[] = [
     {
-      title:
-        'Revolvedora de Masas de productos electricos modernos y funcionales de gran calidad',
-      image: './../../assets/tachos.png',
-    },
-    {
-      title: 'Moledora de Carne',
-      image: './../../assets/moledora.png',
-    },
-    {
-      title: 'Motores Eléctricos',
+      id: 1,
+      name: 'Motores Eléctricos',
+      slug: 'motores-electricos',
       image: './../../assets/motor.png',
     },
     {
-      title: 'Embutidoras de longanizas',
+      id: 1,
+      name: 'Picadora de Papas Fritas y Cebollas',
+      slug: 'picadora-de-papas',
+      image: './../../assets/picadora-papas.png',
+    },
+    {
+      id: 1,
+      name: 'Canastillo para Freidoras',
+      slug: 'canastillo',
+      image: './../../assets/canastillo.png',
+    },
+    {
+      id: 1,
+      name: 'Deposito Gastronomico de Acero',
+      slug: 'deposito-gastronomico',
+      image: './../../assets/tachos.png',
+    },
+    {
+      id: 1,
+      name: 'Termómetro',
+      slug: 'termometro',
+      image: './../../assets/termometro.png',
+    },
+
+    {
+      id: 1,
+      name: 'Moledora de Carne',
+      slug: 'moledora',
+      image: './../../assets/moledora.png',
+    },
+
+    {
+      id: 1,
+      name: 'Embutidoras de longanizas',
+      slug: 'embutidoras',
       image: './../../assets/churros.png',
     },
     {
-      title: 'Batidoras',
+      id: 1,
+      name: 'Batidoras',
+      slug: 'batidoras',
       image: './../../assets/batidora.png',
     },
   ];
 
-  menu = [
+  menu: Category[] = [
     {
-      title: 'Refrigeración',
-      link: '/refrigeracion',
+      id: 1,
+      name: 'Panadería y Pastelería',
+      slug: 'panaderia-y-pasteleria',
     },
     {
-      title: 'Gastronomía',
-      link: '',
+      id: 2,
+      name: 'Carnicería',
+      slug: 'carniceria',
     },
     {
-      title: 'Panadería',
-      link: '',
+      id: 3,
+      name: 'Panadería',
+      slug: 'panaderia',
     },
     {
-      title: 'Comercio',
-      link: '',
+      id: 4,
+      name: 'Refrigeración',
+      slug: 'refrigeracion',
     },
     {
-      title: 'Acero Inoxidable',
-      link: '',
+      id: 5,
+      name: 'Restaurant',
+      slug: 'acero-inoxidable',
     },
     {
-      title: 'Accesorios',
-      link: '',
+      id: 6,
+      name: 'Otros',
+      slug: 'Otros',
     },
   ];
 }

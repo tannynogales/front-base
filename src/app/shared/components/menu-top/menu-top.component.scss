@@ -2,4 +2,13 @@
   scroll-snap-type: x proximity;
   overflow-x: auto;
   overflow-y: hidden;
+  scroll-behavior: smooth;
+}
+
+.rightArrow {
+  display: none;
+}
+
+.scrollActive {
+  display: inline;
 }

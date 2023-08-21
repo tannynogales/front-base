@@ -27,6 +27,9 @@
       ],
       "@shared/*": [
         "src/app/shared/*"
+      ],
+      "@layout/*": [
+        "src/app/layout/*"
       ]
     },
     "useDefineForClassFields": false,

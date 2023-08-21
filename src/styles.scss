@@ -12,12 +12,65 @@
 // ICONS
 @import url("https://kit-pro.fontawesome.com/releases/v6.1.1/css/pro.min.css");
 
-// Personalización de variables de tema para la industria de máquinas de gastronomía
-// $primary: #198754;
-// $secondary: #6c757d;
-// $success: #0d6efd;
-// $info: #0dcaf0;
-// $warning: #ffc107;
-// $danger: #dc3545;
-// $light: #f8f9fa;
-// $dark: #212529;
+@import "nouislider/dist/nouislider.css";
+
+/* ==========================================
+    NOUI RANGE SLIDER
+   ========================================== */
+
+html {
+  scroll-behavior: smooth;
+}
+
+.noUi-horizontal- {
+  height: 3px !important;
+}
+
+.noUi-target {
+  background-color: #e9ecef !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+.noUi-connect {
+  background: #111111 !important;
+}
+
+.noUi-handle- {
+  width: 10px !important;
+  height: 10px !important;
+  border-radius: 50% !important;
+  background: #111111 !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: pointer !important;
+  top: -4px !important;
+  right: -8px !important;
+}
+
+.noUi-handle::before,
+.noUi-handle::after {
+  display: none !important;
+}
+
+.noUi-handle:hover,
+.noUi-handle:focus {
+  outline: none !important;
+  border: none !important;
+}
+
+// Mobile first, los estilos por defecto son para mobile
+.noUi-tooltip {
+  display: none !important;
+}
+
+// Mobile first, luego se manejan estilos para otras resoluciones
+@include media-breakpoint-up(lg) {
+  .noUi-tooltip {
+    display: block !important;
+    font-weight: bold !important;
+    border: none !important;
+    padding: 3px 5px !important;
+    font-size: 0.7rem !important;
+  }
+}

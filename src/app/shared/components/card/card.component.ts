@@ -1,10 +1,5 @@
 import { Component, Input } from '@angular/core';
-
-interface Item {
-  title: string;
-  image: string;
-  description?: string;
-}
+import { Category } from '@layout/shop-layout/models';
 
 @Component({
   selector: 'app-card',
@@ -12,7 +7,7 @@ interface Item {
   styleUrls: ['./card.component.scss'],
 })
 export class CardComponent {
-  @Input() item!: Item;
+  @Input() item!: Category;
   @Input() buttonLink!: string;
   @Input() buttonLabel!: string;
   @Input() button: boolean = true;

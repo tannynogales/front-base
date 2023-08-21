@@ -1,0 +1,103 @@
+<h5 class="mb-4">Price range</h5>
+<div class="price-range pt-1 pt-lg-4 mb-5">
+  <nouislider
+    [step]="1000"
+    [min]="0"
+    [connect]="[false, true, false]"
+    [max]="500000"
+    [tooltips]="[tooltips, tooltips]"
+    [animate]="true"
+    [(ngModel)]="someRange"
+  ></nouislider>
+
+  <div class="row pt-2 d-lg-none">
+    <div class="col-6">
+      <strong class="small font-weight-bold"
+        >From: {{ tooltips.to(someRange[0]) }}</strong
+      >
+    </div>
+    <div class="col-6 text-end">
+      <strong class="small font-weight-bold"
+        >To: {{ tooltips.to(someRange[1]) }}</strong
+      >
+    </div>
+  </div>
+</div>
+<h5 class="mb-3">Show by brand</h5>
+<div class="mb-2 form-check">
+  <input class="form-check-input" id="exampleCheck1" type="checkbox" checked />
+  <label class="form-check-label" for="exampleCheck1">Zara</label>
+</div>
+<div class="mb-2 form-check">
+  <input class="form-check-input" id="exampleCheck2" type="checkbox" checked />
+  <label class="form-check-label" for="exampleCheck2">Cucci</label>
+</div>
+<div class="mb-2 form-check">
+  <input class="form-check-input" id="exampleCheck3" type="checkbox" checked />
+  <label class="form-check-label" for="exampleCheck3">Rayban</label>
+</div>
+<div class="mb-2 form-check">
+  <input class="form-check-input" id="exampleCheck4" type="checkbox" checked />
+  <label class="form-check-label" for="exampleCheck4">Defactu</label>
+</div>
+<div class="mb-2 form-check">
+  <input class="form-check-input" id="exampleCheck5" type="checkbox" />
+  <label class="form-check-label" for="exampleCheck5">River Nine</label>
+</div>
+<div class="mb-2 form-check">
+  <input class="form-check-input" id="exampleCheck6" type="checkbox" />
+  <label class="form-check-label" for="exampleCheck6">Puma</label>
+</div>
+<div class="mb-2 form-check">
+  <input class="form-check-input" id="exampleCheck7" type="checkbox" />
+  <label class="form-check-label" for="exampleCheck7">Nike</label>
+</div>
+<div class="mb-5 form-check">
+  <input class="form-check-input" id="exampleCheck8" type="checkbox" />
+  <label class="form-check-label" for="exampleCheck8">Ravin</label>
+</div>
+<h5 class="mb-3">Shop by color</h5>
+<form action="#">
+  <div class="form-check">
+    <input class="form-check-input" id="seaColor" type="checkbox" />
+    <label class="form-check-label d-flex align-items-center" for="seaColor"
+      ><i class="fas fa-circle text-primary me-2 text-xs"></i
+      ><span>Sea</span></label
+    >
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" id="yellowColor" type="checkbox" />
+    <label class="form-check-label d-flex align-items-center" for="yellowColor"
+      ><i class="fas fa-circle text-warning me-2 text-xs"></i
+      ><span>Yellow</span></label
+    >
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" id="greenColor" type="checkbox" />
+    <label class="form-check-label d-flex align-items-center" for="greenColor"
+      ><i class="fas fa-circle text-success me-2 text-xs"></i
+      ><span>Green</span></label
+    >
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" id="cyanColor" type="checkbox" />
+    <label class="form-check-label d-flex align-items-center" for="cyanColor"
+      ><i class="fas fa-circle text-info me-2 text-xs"></i
+      ><span>Cyan</span></label
+    >
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" id="redColor" type="checkbox" />
+    <label class="form-check-label d-flex align-items-center" for="redColor"
+      ><i class="fas fa-circle text-danger me-2 text-xs"></i
+      ><span>Red</span></label
+    >
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" id="blackColor" type="checkbox" />
+    <label class="form-check-label d-flex align-items-center" for="blackColor"
+      ><i class="fas fa-circle text-dark me-2 text-xs"></i
+      ><span>Black</span></label
+    >
+  </div>
+</form>
