@@ -1,4 +1,11 @@
-import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  inject,
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -7,6 +14,8 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./shop-product-category.component.scss'],
 })
 export class ShopProductCategoryComponent implements OnInit, OnDestroy {
+  @ViewChild('offcanvasFilters') offcanvasFilters!: ElementRef;
+
   products = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
 
   constructor(private route: ActivatedRoute) {}
@@ -16,6 +25,12 @@ export class ShopProductCategoryComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    // throw new Error('Method not implemented.');
+    this.closeOffcanvasNavbar();
+  }
+
+  closeOffcanvasNavbar() {
+    const myOffcanvas = this.offcanvasFilters.nativeElement;
+    let openedCanvas = bootstrap.Offcanvas.getInstance(myOffcanvas);
+    openedCanvas.hide();
   }
 }
