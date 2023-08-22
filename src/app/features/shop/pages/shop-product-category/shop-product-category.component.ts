@@ -29,8 +29,8 @@ export class ShopProductCategoryComponent implements OnInit, OnDestroy {
   }
 
   closeOffcanvasNavbar() {
-    const myOffcanvas = this.offcanvasFilters.nativeElement;
+    const myOffcanvas = this.offcanvasFilters?.nativeElement;
     let openedCanvas = bootstrap.Offcanvas.getInstance(myOffcanvas);
-    openedCanvas.hide();
+    if (openedCanvas) openedCanvas.hide();
   }
 }
