@@ -62,7 +62,10 @@
             <i class="fas fa-shopping-bag py-1 me-2"></i>Add to cart</a
           ><a class="p-0 reset-anchor d-inline-block mx-2" href="#"
             ><i class="fas fa-heart"></i></a
-          ><a class="p-0 reset-anchor d-inline-block mx-2" href="#"
+          ><a
+            *ngIf="isShareEnable"
+            class="p-0 reset-anchor d-inline-block mx-2"
+            (click)="share()"
             ><i class="fas fa-share-alt"></i
           ></a>
         </div>
