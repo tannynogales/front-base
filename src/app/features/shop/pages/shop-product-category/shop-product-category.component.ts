@@ -24,6 +24,11 @@ export class ShopProductCategoryComponent implements OnInit, OnDestroy {
     console.log(this.route.snapshot.paramMap);
   }
 
+  /** 
+  Previene el problema que se da cuando tienes el offcanvas abierto y se retocede 
+  con el navegador. En ese caso el offcanvas se cierra "a la fuerza", sin dar clic 
+  en la "X" y quedan estilos en el body del sitio que impiden hacer scroll
+  */
   ngOnDestroy(): void {
     this.closeOffcanvasNavbar();
   }
