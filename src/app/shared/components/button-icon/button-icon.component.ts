@@ -8,5 +8,5 @@ import { Component, Input } from '@angular/core';
 export class ButtonIconComponent {
   @Input() icon: 'cart-shopping' | 'user' | 'bell' = 'bell';
   @Input() badge!: number;
-  style = 'fa-solid fa-';
+  style = 'fa-regular fa-';
 }

@@ -20,9 +20,12 @@
       </div> -->
 
       <!-- d-none d-lg-block: Hide on screens smaller than lg -->
-      <div class="p-2 d-none d-lg-block">
+      <div class="p-2">
         <app-button-icon
-          [routerLink]="['/cart-shopping']"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasShoppingCart"
+          aria-controls="offcanvasNavbar"
+          aria-label="Toggle navigation"
           [icon]="'cart-shopping'"
           [badge]="2"
         ></app-button-icon>
@@ -46,7 +49,8 @@
           aria-controls="offcanvasNavbar"
           aria-label="Toggle navigation"
         >
-          <span class="navbar-toggler-icon"></span>
+          <!-- <span class="navbar-toggler-icon"></span> -->
+          <i class="fa-regular fa-magnifying-glass"></i>
         </button>
       </div>
 
@@ -59,7 +63,7 @@
         aria-labelledby="offcanvasNavbarLabel"
       >
         <div class="offcanvas-header">
-          <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
+          <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Productos</h5>
           <button
             type="button"
             class="btn-close"
@@ -71,6 +75,75 @@
           <app-menu-list
             (elementClickedEvent)="closeOffcanvasNavbar()"
           ></app-menu-list>
+        </div>
+      </div>
+
+      <!-- Offcanvas Shopping Cart -->
+      <div
+        #offcanvasShoppingCart
+        class="offcanvas offcanvas-start"
+        tabindex="-1"
+        id="offcanvasShoppingCart"
+        aria-labelledby="offcanvasShoppingCartLabel"
+      >
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasShoppingCartLabel">
+            Carrito de Compra
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="offcanvas-body">
+          <div
+            *ngFor="let product of products"
+            class="row d-flex align-items-center py-2 border-bottom"
+          >
+            <div class="col-auto">
+              <div
+                style="
+                  height: 80px;
+                  width: 80px;
+                  background-color: blanchedalmond;
+                "
+              ></div>
+            </div>
+            <div class="col">
+              <p class="fs-6 fw-lighter lh-sm">
+                Revolvedora de masas para 15 [Kg], sin tapas laterales<br />
+                $ 279.690 CLP
+              </p>
+            </div>
+            <div class="col-auto">
+              <div class="d-flex flex-column">
+                <button
+                  class="btn btn-light btn-sm border p-0"
+                  aria-label="Increase product quantity"
+                >
+                  <i class="fa-thin fa-angle-up"></i>
+                </button>
+                <!-- <div>1</div> -->
+                <input
+                  class="text-center border-0 my-1 fs-6 fw-lighter lh-sm"
+                  value="1"
+                  type="number"
+                  style="width: 30px"
+                />
+                <button
+                  class="btn btn-light btn-sm border p-0"
+                  aria-label="Decrease product quantity"
+                >
+                  <i class="fa-thin fa-angle-down"></i>
+                </button>
+              </div>
+            </div>
+            <!-- <div class="col-auto">
+                <i class="fa-sharp fa-regular fa-trash"></i>
+              </div> -->
+          </div>
         </div>
       </div>
     </div>
