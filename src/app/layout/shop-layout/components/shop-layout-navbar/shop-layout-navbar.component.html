@@ -98,9 +98,10 @@
             aria-label="Close"
           ></button>
         </div>
-        <div class="offcanvas-body">
+        <div class="offcanvas-body" style="margin-bottom: 55px">
           <div
-            *ngFor="let product of products"
+            *ngFor="let product of products; let last = last"
+            [ngClass]="{ 'border-bottom': !last }"
             class="row d-flex align-items-center py-2 border-bottom"
           >
             <div class="col-auto">
@@ -145,16 +146,25 @@
                 <i class="fa-sharp fa-regular fa-trash"></i>
               </div> -->
           </div>
-          <div class="d-grid mt-4">
-            <button
-              data-bs-dismiss="offcanvas"
-              aria-label="Close"
-              class="btn btn-primary"
-              type="button"
-            >
-              Ir a Pagar
-            </button>
-          </div>
+        </div>
+        <div
+          class="d-grid p-3 border-top"
+          style="
+            position: fixed;
+            bottom: 0;
+            background-color: white;
+            width: 100%;
+          "
+        >
+          <button
+            [routerLink]="['/cart-shopping']"
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"
+            class="btn btn-primary"
+            type="button"
+          >
+            Ir a Pagar
+          </button>
         </div>
       </div>
     </div>

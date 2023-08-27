@@ -7,7 +7,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 })
 export class ShopLayoutNavbarComponent {
   @ViewChild('offcanvasNavbar') offcanvasNavbar!: ElementRef;
-  products: any[] = [{}, {}, {}, {}, {}, {}];
+  products: any[] = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
 
   closeOffcanvasNavbar() {
     const myOffcanvas = this.offcanvasNavbar.nativeElement;
