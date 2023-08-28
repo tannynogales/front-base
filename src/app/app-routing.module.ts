@@ -54,10 +54,12 @@ export class TemplatePageTitleStrategy extends TitleStrategy {
 }
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes{
-    scrollPositionRestoration: 'disabled', // Habilitar la restauración de posición de desplazamiento
-    anchorScrolling: 'enabled', // Habilitar el desplazamiento a anclajes en la página
-  } )],
+  imports: [
+    RouterModule.forRoot(routes, {
+      scrollPositionRestoration: 'disabled', // Habilitar la restauración de posición de desplazamiento
+      anchorScrolling: 'enabled', // Habilitar el desplazamiento a anclajes en la página
+    }),
+  ],
   exports: [RouterModule],
   providers: [{ provide: TitleStrategy, useClass: TemplatePageTitleStrategy }],
 })
