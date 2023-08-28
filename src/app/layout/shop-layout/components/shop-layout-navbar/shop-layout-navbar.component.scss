@@ -1,0 +1,10 @@
+@import "/src/assets/scss/core";
+
+// Import Bootstrap variables for use within theme
+@import "bootstrap/scss/functions.scss";
+@import "bootstrap/scss/variables.scss";
+@import "bootstrap/scss/mixins.scss";
+
+.offcanvas-footer {
+  width: $offcanvas-horizontal-width;
+}

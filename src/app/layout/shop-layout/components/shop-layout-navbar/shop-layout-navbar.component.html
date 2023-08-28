@@ -98,7 +98,7 @@
             aria-label="Close"
           ></button>
         </div>
-        <div class="offcanvas-body" style="margin-bottom: 55px">
+        <div class="offcanvas-body">
           <div
             *ngFor="let product of products; let last = last"
             [ngClass]="{ 'border-bottom': !last }"
@@ -153,15 +153,28 @@
                 <i class="fa-sharp fa-regular fa-trash"></i>
               </div> -->
           </div>
+
+          <br />
+          <div class="small">
+            <div class="row px-3 py-2 mb-1 bg-light text-muted">
+              <div class="col text-uppercase">
+                <strong>Total Bruto</strong>
+              </div>
+              <div class="col-auto">$ 20.001</div>
+            </div>
+            <div class="row px-3 py-2 mb-1 bg-light text-muted">
+              <div class="col text-uppercase"><strong>IVA</strong></div>
+              <div class="col-auto">$ 5.001</div>
+            </div>
+            <div class="row px-3 py-2 mb-1 bg-light text-dark">
+              <div class="col text-uppercase"><strong>Total Neto</strong></div>
+              <div class="col-auto">$ 20.001</div>
+            </div>
+          </div>
         </div>
         <div
           class="d-grid p-3 border-top"
-          style="
-            position: fixed;
-            bottom: 0;
-            background-color: white;
-            width: 100%;
-          "
+          style="bottom: 0; background-color: white"
         >
           <button
             [routerLink]="['/cart-shopping']"
