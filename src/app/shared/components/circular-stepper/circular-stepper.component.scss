@@ -1,0 +1,21 @@
+@import "/src/assets/scss/core";
+
+// Import Bootstrap variables for use within theme
+@import "bootstrap/scss/functions.scss";
+@import "bootstrap/scss/variables.scss";
+@import "bootstrap/scss/mixins.scss";
+
+#circular-stepper .inner-circle circle {
+  -webkit-transform-origin: 50% 50%;
+  transform-origin: 50% 50%;
+  -webkit-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+  stroke: $primary;
+}
+#circular-stepper .outer-circle circle {
+  -webkit-transform-origin: 50% 50%;
+  transform-origin: 50% 50%;
+  -webkit-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+  stroke: #b0c5dc;
+}

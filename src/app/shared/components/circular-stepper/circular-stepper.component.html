@@ -1,0 +1,37 @@
+<section id="circular-stepper" class="d-flex align-items-center d-md-none">
+  <div
+    class="inner-circle position-absolute d-flex justify-content-center align-items-center"
+  >
+    <svg height="56" width="56">
+      <circle
+        stroke-width="6"
+        stroke-linecap="round"
+        fill="transparent"
+        r="24"
+        cx="28"
+        cy="28"
+        [attr.stroke-dasharray]="strokeDasharray"
+        [attr.stroke-dashoffset]="strokeDashoffset"
+      ></circle>
+    </svg>
+    <div class="position-absolute">
+      <span class="text-primary-emphasis"> {{ step }}/{{ steps }} </span>
+    </div>
+  </div>
+  <div class="outer-circle">
+    <svg height="56" width="56">
+      <circle
+        stroke-width="6"
+        fill="transparent"
+        r="24"
+        cx="28"
+        cy="28"
+        stroke-dasharray="150.79644737231007"
+        stroke-dashoffset="0"
+      ></circle>
+    </svg>
+  </div>
+  <p class="text-primary-emphasis m-0 ps-2" style="font-weight: 500">
+    {{ title }}
+  </p>
+</section>
