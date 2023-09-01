@@ -8,6 +8,7 @@ import { SubscribeComponent } from './subscribe/subscribe.component';
 import { ButtonIconComponent } from './button-icon/button-icon.component';
 import { SlideComponent } from './slide/slide.component';
 import { CircularStepperComponent } from './circular-stepper/circular-stepper.component';
+import { HorizontalStepperComponent } from './horizontal-stepper/horizontal-stepper.component';
 
 export const components = [
   CardComponent,
@@ -20,6 +21,7 @@ export const components = [
   ButtonIconComponent,
   SlideComponent,
   CircularStepperComponent,
+  HorizontalStepperComponent,
 ];
 
 export * from './card/card.component';
@@ -32,3 +34,4 @@ export * from './subscribe/subscribe.component';
 export * from './button-icon/button-icon.component';
 export * from './slide/slide.component';
 export * from './circular-stepper/circular-stepper.component';
+export * from './horizontal-stepper/horizontal-stepper.component';

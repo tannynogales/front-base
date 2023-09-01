@@ -1,0 +1,70 @@
+<section
+  class="d-none d-md-block"
+  style="position: relative; margin-bottom: 100px"
+>
+  <!-- Horizontal Line -->
+  <div
+    [ngStyle]="{
+      width:
+        'calc(' +
+        this.getA() +
+        ' * 100% - ' +
+        this.getB() +
+        'px + ' +
+        this.getC() +
+        'px)'
+    }"
+    class="border-top linea"
+    style="
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    "
+  ></div>
+  <div class="d-flex justify-content-evenly">
+    <ng-container *ngFor="let step of steps; let index = index">
+      <div
+        class="border rounded-circle text-center"
+        style="position: relative"
+        [ngClass]="{
+          'bg-primary-subtle': index + 1 < activeStep,
+          'bg-primary border-primary-subtle': index + 1 == activeStep,
+          'bg-secondary-subtle ': index + 1 > activeStep
+        }"
+      >
+        <div
+          style="
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+          "
+          class="text-primary-emphasis"
+        >
+          <i *ngIf="index + 1 < activeStep" class="fa-thin fa-check"></i>
+          <span
+            [ngClass]="{
+              'text-light fw-light': index + 1 == activeStep,
+              'text-black-50 ': index + 1 > activeStep
+            }"
+            *ngIf="index + 1 >= activeStep"
+            >{{ index + 1 }}</span
+          >
+        </div>
+        <div
+          style="position: absolute; top: 50px; left: -25px; width: 100px"
+          class="text-primary-emphasis"
+        >
+          <a
+            *ngIf="index + 1 < activeStep"
+            class="text-decoration-none"
+            [routerLink]="['/' + step.url]"
+            >{{ step.title }}</a
+          >
+          <span *ngIf="index + 1 >= activeStep">{{ step.title }}</span>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</section>
