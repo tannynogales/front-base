@@ -14,11 +14,11 @@ export class AppComponent {
 
   constructor(private router: Router) {
     const navEndEvents$ = this.router.events.pipe(
-      filter((event) => event instanceof NavigationEnd)
+      filter((event): event is NavigationEnd => event instanceof NavigationEnd)
     );
 
-    navEndEvents$.subscribe((event: any) => {
-      console.log(event.urlAfterRedirects);
+    navEndEvents$.subscribe((event: NavigationEnd) => {
+      console.log(event);
       gtag('config', 'G-XVMF57F2DX', {
         page_path: event.urlAfterRedirects,
       });
