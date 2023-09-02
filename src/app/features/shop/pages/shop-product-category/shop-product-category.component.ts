@@ -21,7 +21,7 @@ export class ShopProductCategoryComponent implements OnInit, OnDestroy {
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    console.log(this.route.snapshot.paramMap);
+    // console.log(this.route.snapshot.paramMap);
   }
 
   /** 

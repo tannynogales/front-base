@@ -51,7 +51,7 @@ export class ShopParentCategoryHomeComponent {
       const productId = params.get('productId');
       if (productId !== null) {
         this.selectedMenuItem = productId;
-        console.log(productId);
+        // console.log(productId);
       }
     });
   }
