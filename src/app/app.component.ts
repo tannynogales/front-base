@@ -18,6 +18,19 @@ export class AppComponent {
     );
 
     navEndEvents$.subscribe((event: NavigationEnd) => {
+      const history = localStorage.getItem('history');
+      if (!history) {
+        const home = ['/home', event.urlAfterRedirects];
+        const historyJSON = JSON.stringify(home);
+        localStorage.setItem('history', historyJSON);
+      } else {
+        let historyArray = JSON.parse(history);
+
+        if (historyArray[historyArray.length - 1] != event.urlAfterRedirects) {
+          historyArray.push(event.urlAfterRedirects);
+          localStorage.setItem('history', JSON.stringify(historyArray));
+        }
+      }
       gtag('config', 'G-XVMF57F2DX', {
         page_path: event.urlAfterRedirects,
       });

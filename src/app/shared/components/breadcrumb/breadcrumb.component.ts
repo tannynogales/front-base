@@ -13,13 +13,18 @@ interface BreadcrumbItem {
 export class BreadcrumbComponent {
   @Input() items: BreadcrumbItem[] = [];
   @Input() backRoute!: string;
+  historyPreviousRoute!: string;
 
-  obtenerPaginaAnterior() {
-    let prevUrl = document.referrer;
-    console.log('prevUrl', prevUrl);
-    if (prevUrl.indexOf(window.location.host) !== -1) {
-      // Ir a la página anterior
-      window.history.back();
-    }
+  getRoute2Back(): string {
+    if (this.backRoute) return this.backRoute;
+    else return this.getHistoryPreviousRoute();
+  }
+
+  getHistoryPreviousRoute(): string {
+    const history = localStorage.getItem('history');
+    if (history) {
+      let historyArray = JSON.parse(history);
+      return historyArray[historyArray.length - 2];
+    } else return '/home';
   }
 }
