@@ -15,6 +15,10 @@
   <form class="form-floating">
     <app-circular-stepper [title]="'Pago'"></app-circular-stepper>
 
+    <div class="container">
+      <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+    </div>
+
     <div class="text-center">
       <button
         [routerLink]="['/cart-shopping/payment']"
