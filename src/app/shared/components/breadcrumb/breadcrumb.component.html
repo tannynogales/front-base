@@ -1,0 +1,33 @@
+<!-- Desktop View -->
+<div class="container d-none d-md-block">
+  <nav
+    class="mt-3"
+    style="--bs-breadcrumb-divider: '>'"
+    aria-label="breadcrumb"
+  >
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a [routerLink]="['/home']">Home</a></li>
+      <li
+        *ngFor="let item of items; let last = last"
+        class="breadcrumb-item"
+        [ngClass]="{ active: last }"
+      >
+        <a *ngIf="!last" [routerLink]="[item.url]">{{ item.title }}</a>
+        <span *ngIf="last">{{ item.title }}</span>
+      </li>
+    </ol>
+  </nav>
+</div>
+
+<!-- Mobile View -->
+<div class="container mt-3">
+  <h2
+    class="mb-4 text-center fs-6 text-primary d-md-none"
+    style="font-weight: 500; line-height: 27px"
+  >
+    <a *ngIf="backRoute" [routerLink]="[backRoute]" class="float-start">
+      <i class="fa-regular fa-chevron-left"></i>
+    </a>
+    {{ items[items.length - 1].title }}
+  </h2>
+</div>

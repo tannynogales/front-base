@@ -9,6 +9,14 @@ import { environment } from 'src/environments/environment.development';
 })
 export class ShopCartPaymentComponent implements OnInit {
   public payPalConfig?: IPayPalConfig;
+  paypalOnInit: boolean = false;
+
+  breadcrumbItems = [
+    {
+      title: 'Carrito de Compras',
+      url: '/cart-shopping',
+    },
+  ];
 
   steps = [
     {
@@ -70,6 +78,10 @@ export class ShopCartPaymentComponent implements OnInit {
       style: {
         label: 'paypal',
         layout: 'vertical',
+      },
+      onInit: (data, actions) => {
+        this.paypalOnInit = true;
+        console.log('onInit', data, actions);
       },
       onApprove: (data, actions) => {
         console.log(

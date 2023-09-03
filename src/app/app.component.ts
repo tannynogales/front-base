@@ -18,7 +18,6 @@ export class AppComponent {
     );
 
     navEndEvents$.subscribe((event: NavigationEnd) => {
-      console.log(event);
       gtag('config', 'G-XVMF57F2DX', {
         page_path: event.urlAfterRedirects,
       });

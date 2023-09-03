@@ -1,25 +1,39 @@
+<app-breadcrumb
+  [backRoute]="'/cart-shopping/billing'"
+  [items]="breadcrumbItems"
+></app-breadcrumb>
+
 <div class="container mt-4">
   <app-horizontal-stepper
     [steps]="steps"
     [activeStep]="activeStep"
   ></app-horizontal-stepper>
-  <h2
-    class="mb-4 text-center fs-6 text-primary d-md-none"
-    style="font-weight: 500; line-height: 27px"
-  >
-    <a href="#" class="float-start">
-      <i class="fa-regular fa-chevron-left"></i>
-    </a>
-    Carrito de Compras
-  </h2>
-  <form class="form-floating">
-    <app-circular-stepper [title]="'Pago'"></app-circular-stepper>
 
-    <div class="container">
-      <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+  <form class="form-floating">
+    <app-circular-stepper
+      [step]="3"
+      [steps]="3"
+      [title]="'Pago'"
+    ></app-circular-stepper>
+
+    <div class="container mt-4">
+      <div class="alert alert-info" role="alert">
+        Debes permitir que se abran ventanas emergentes
+      </div>
+
+      <ngx-paypal
+        [ngClass]="{ 'd-none': !paypalOnInit }"
+        [config]="payPalConfig"
+      ></ngx-paypal>
+      <div *ngIf="!paypalOnInit" class="placeholder-glow">
+        <div
+          class="placeholder border rounded w-100"
+          style="height: 140px"
+        ></div>
+      </div>
     </div>
 
-    <div class="text-center">
+    <div class="text-center" style="display: none">
       <button
         [routerLink]="['/cart-shopping/payment']"
         type="button"

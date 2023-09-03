@@ -6,6 +6,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./shop-cart-billing.component.scss'],
 })
 export class ShopCartBillingComponent {
+  breadcrumbItems = [
+    {
+      title: 'Carrito de Compras',
+      url: '/cart-shopping',
+    },
+  ];
   steps = [
     {
       title: 'Despacho',

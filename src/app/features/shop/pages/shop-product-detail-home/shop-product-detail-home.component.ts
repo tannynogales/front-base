@@ -10,6 +10,17 @@ export class ShopProductDetailHomeComponent {
   public href: string = '';
   isShareEnable = false;
 
+  breadcrumbItems = [
+    {
+      title: 'Revolvedora',
+      url: '/home/revolvedora-de-masas',
+    },
+    {
+      title: 'Resolvedora de 15 kilos',
+      url: '/home/revolvedora-de-masas/resolvedora-15-kilos',
+    },
+  ];
+
   constructor(private router: Router) {}
   ngOnInit() {
     this.href = this.router.url;

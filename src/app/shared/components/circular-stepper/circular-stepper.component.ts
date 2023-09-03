@@ -10,9 +10,13 @@ export class CircularStepperComponent {
   @Input() steps: number = 3;
   @Input() step: number = 1;
 
-  strokeDasharray = 2 * Math.PI * 24;
-  strokeDashoffset =
-    this.strokeDasharray - (this.strokeDasharray / this.steps) * this.step;
+  strokeDasharray = 2 * Math.PI * 24; // 24 is the radius
+
+  get strokeDashoffset() {
+    return (
+      this.strokeDasharray - (this.strokeDasharray / this.steps) * this.step
+    );
+  }
 
   constructor() {}
 }
