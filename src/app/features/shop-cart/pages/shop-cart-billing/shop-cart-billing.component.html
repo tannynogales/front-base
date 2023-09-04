@@ -3,19 +3,21 @@
   [items]="breadcrumbItems"
 ></app-breadcrumb>
 
-<div class="container mt-4">
+<div class="container">
   <app-horizontal-stepper
     [steps]="steps"
     [activeStep]="activeStep"
   ></app-horizontal-stepper>
+  <app-circular-stepper
+    [step]="2"
+    [steps]="3"
+    [title]="'Facturación'"
+  ></app-circular-stepper>
+</div>
 
+<div class="container mt-4">
   <form class="form-floating">
-    <app-circular-stepper
-      [step]="2"
-      [steps]="3"
-      [title]="'Facturación'"
-    ></app-circular-stepper>
-    <div class="container my-4">
+    <div class="container my-4" style="max-width: 992px">
       <div class="row border-bottom mb-2">
         <div class="col-3">Rut</div>
         <div class="col ms-2 ms-md-0 text-break">17.327.515-3</div>

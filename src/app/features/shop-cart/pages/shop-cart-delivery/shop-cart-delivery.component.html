@@ -2,11 +2,13 @@
   [backRoute]="'/cart-shopping'"
   [items]="breadcrumbItems"
 ></app-breadcrumb>
-<div class="container mt-4">
+<div class="container">
   <app-horizontal-stepper
     [steps]="steps"
     [activeStep]="activeStep"
   ></app-horizontal-stepper>
+</div>
+<div class="container mt-4" style="max-width: 992px">
   <form class="form-floating">
     <app-circular-stepper
       [step]="1"
