@@ -1,11 +1,11 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 
 @Component({
-  selector: 'app-shop-layout-navbar',
-  templateUrl: './shop-layout-navbar.component.html',
-  styleUrls: ['./shop-layout-navbar.component.scss'],
+  selector: 'app-layout-shop-navbar',
+  templateUrl: './layout-shop-navbar.component.html',
+  styleUrls: ['./layout-shop-navbar.component.scss'],
 })
-export class ShopLayoutNavbarComponent {
+export class LayoutShopNavbarComponent {
   @ViewChild('offcanvasNavbar') offcanvasNavbar!: ElementRef;
   products: any[] = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
 

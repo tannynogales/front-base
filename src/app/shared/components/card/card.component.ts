@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Category } from '@layout/shop-layout/models';
+import { Category } from '@layout/layout-shop/models';
 
 @Component({
   selector: 'app-card',

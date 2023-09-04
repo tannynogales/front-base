@@ -7,7 +7,7 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
-import { Category } from '@layout/shop-layout/models';
+import { Category } from '@layout/layout-shop/models';
 import Fuse from 'fuse.js';
 
 export interface FilteredObject {

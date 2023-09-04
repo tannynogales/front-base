@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { Category } from '@layout/shop-layout/models';
+import { Category } from '@layout/layout-shop/models';
 
 @Component({
   selector: 'app-shop-parent-category-home',

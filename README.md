@@ -25,3 +25,23 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Project Foldering
+
+    .
+    ├── build
+    ├── src
+    ├──── app
+    ├────── shared
+    ├────── layout
+    ├──────── layout-shop
+    ├────────── layout
+    ├──────────── layout-shop-component.ts
+    ├──────────── layout-shop-component.scss
+    ├──────────── layout-shop-component.html
+    ├────────── components
+    ├────────── layout-shop.module.ts
+    ├────────── layout-shop.routing.module.ts
+    ├──────── layout-admin
+    ├────── features
+    └── README.md

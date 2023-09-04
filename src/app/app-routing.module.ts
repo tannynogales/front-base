@@ -6,8 +6,8 @@ import {
   TitleStrategy,
 } from '@angular/router';
 import { ErrorComponent } from './error/error.component';
-import { ShopLayoutComponent } from './layout/shop-layout/layout/shop-layout/shop-layout.component';
-import { AdminLayoutComponent } from './layout/admin-layout/layout/admin-layout/admin-layout.component';
+import { LayoutShopComponent } from '@layout/layout-shop/layout/layout-shop.component';
+import { AdminLayoutComponent } from '@layout/admin-layout/layout/admin-layout/admin-layout.component';
 import { Title } from '@angular/platform-browser';
 
 const routes: Routes = [
@@ -22,10 +22,10 @@ const routes: Routes = [
   },
   {
     path: '',
-    component: ShopLayoutComponent,
+    component: LayoutShopComponent,
     loadChildren: () =>
-      import('./layout/shop-layout/shop-layout.module').then(
-        (m) => m.ShopLayoutModule
+      import('@layout/layout-shop/layout-shop.module').then(
+        (m) => m.LayoutShopModule
       ),
   },
   {
