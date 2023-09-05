@@ -35,7 +35,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
     ├────── shared
     ├────── layout
     ├──────── layout-shop
-    ├────────── layout
+    ├────────── layout                            # just one layout
     ├──────────── layout-shop-component.ts
     ├──────────── layout-shop-component.scss
     ├──────────── layout-shop-component.html
@@ -44,4 +44,13 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
     ├────────── layout-shop.routing.module.ts
     ├──────── layout-admin
     ├────── features
+    ├──────── shop-home
+    ├────────── pages                              # several layouts
+    ├──────────── page-shop-home
+    ├────────── shop-home.module.ts
+    ├────────── shop-home-routing.module.ts        # path: '', -> page-shop-homes
+    ├──────── shop-category
+    ├──────── shop-product-list
+    ├──────── shop-product-detail
+    ├──────── shop-cart
     └── README.md

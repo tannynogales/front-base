@@ -10,11 +10,11 @@ import {
 import { Category } from '@layout/layout-shop/models';
 
 @Component({
-  selector: 'app-shop-page-home',
-  templateUrl: './shop-page-home.component.html',
-  styleUrls: ['./shop-page-home.component.scss'],
+  selector: 'app-page-shop-home',
+  templateUrl: './page-shop-home.component.html',
+  styleUrls: ['./page-shop-home.component.scss'],
 })
-export class ShopPageHomeComponent implements OnInit, AfterViewInit {
+export class PageShopHomeComponent implements OnInit, AfterViewInit {
   @ViewChild('miDiv', { static: true }) miDiv!: ElementRef;
   alturaDiv!: number;
 
@@ -26,13 +26,13 @@ export class ShopPageHomeComponent implements OnInit, AfterViewInit {
     // console.log('Altura del div:', this.alturaDiv, 'px');
   }
 
-  constructor(private cd: ChangeDetectorRef) {}
+  constructor(private changeDetectorRef: ChangeDetectorRef) {}
 
   ngAfterViewInit(): void {
     // this.cd.detectChanges();
     this.alturaDiv = this.miDiv.nativeElement.offsetHeight;
     // console.log('ngAfterViewInit', this.alturaDiv);
-    this.cd.detectChanges();
+    this.changeDetectorRef.detectChanges();
   }
   ngOnInit(): void {
     // this.alturaDiv = this.miDiv.nativeElement.offsetHeight;

@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { NouiFormatter } from 'ng2-nouislider';
 
 @Component({
-  selector: 'app-shop-product-category-filters',
-  templateUrl: './shop-product-category-filters.component.html',
-  styleUrls: ['./shop-product-category-filters.component.scss'],
+  selector: 'app-shop-product-list-filters',
+  templateUrl: './shop-product-list-filters.component.html',
+  styleUrls: ['./shop-product-list-filters.component.scss'],
 })
-export class ShopProductCategoryFiltersComponent {
+export class ShopProductListFiltersComponent {
   someRange = [100000, 300000];
 
   formatForSlider: NouiFormatter = {

@@ -10,9 +10,24 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    title: 'Home',
     loadChildren: () =>
-      import('@features/shop/shop.module').then((m) => m.ShopModule),
+      import('@features/shop-home/shop-home.module').then(
+        (m) => m.ShopHomeModule
+      ),
+  },
+  {
+    path: 'home/:categoryId',
+    loadChildren: () =>
+      import('@features/shop-product-list/shop-product-list.module').then(
+        (m) => m.ShopProductListModule
+      ),
+  },
+  {
+    path: 'home/:categoryId/:productId',
+    loadChildren: () =>
+      import('@features/shop-product-detail/shop-product-detail.module').then(
+        (m) => m.ShopProductDetailModule
+      ),
   },
   {
     path: 'user',

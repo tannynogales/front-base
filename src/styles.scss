@@ -74,3 +74,9 @@ html {
     font-size: 0.7rem !important;
   }
 }
+
+.scroll-custom {
+  scroll-snap-type: x proximity;
+  overflow-x: auto;
+  overflow-y: hidden;
+}

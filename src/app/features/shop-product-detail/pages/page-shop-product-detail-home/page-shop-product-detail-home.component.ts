@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-shop-product-detail-home',
-  templateUrl: './shop-product-detail-home.component.html',
-  styleUrls: ['./shop-product-detail-home.component.scss'],
+  selector: 'app-page-shop-product-detail-home',
+  templateUrl: './page-shop-product-detail-home.component.html',
+  styleUrls: ['./page-shop-product-detail-home.component.scss'],
 })
-export class ShopProductDetailHomeComponent {
+export class PageShopProductDetailHomeComponent {
   public href: string = '';
   isShareEnable = false;
 
