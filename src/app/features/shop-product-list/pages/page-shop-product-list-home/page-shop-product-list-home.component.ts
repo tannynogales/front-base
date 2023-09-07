@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { Category } from '@layout/layout-shop/models';
+import { Category } from '@core/models';
 
 @Component({
   selector: 'app-page-shop-product-list-home',

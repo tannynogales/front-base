@@ -73,9 +73,21 @@
           ></button>
         </div>
         <div class="offcanvas-body">
-          <app-menu-list
-            (elementClickedEvent)="closeOffcanvasNavbar()"
-          ></app-menu-list>
+          <ng-container *ngIf="category$ | async as category">
+            <ng-container *ngIf="category.loading; else loading">
+              <div class="contenido">
+                <app-menu-list
+                  (elementClickedEvent)="closeOffcanvasNavbar()"
+                  [products]="category.data"
+                ></app-menu-list>
+              </div>
+            </ng-container>
+            <ng-template #loading>
+              <div class="placeholder-glow h-100">
+                <div class="placeholder w-100 rounded h-100">some</div>
+              </div>
+            </ng-template>
+          </ng-container>
         </div>
       </div>
 

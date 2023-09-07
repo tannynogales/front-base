@@ -7,8 +7,10 @@ import { ShopHomeRoutingModule } from './shop-home-routing.module';
 import * as shopHomePages from './pages';
 
 import { SharedModule } from '@shared/shared.module';
+// import { ProductsService } from './../../layout/layout-shop/services/products.service';
 
 @NgModule({
+  // providers: [ProductsService],
   declarations: [...shopHomePages.pages],
   imports: [CommonModule, ShopHomeRoutingModule, SharedModule],
 })

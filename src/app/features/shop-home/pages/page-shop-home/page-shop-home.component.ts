@@ -7,7 +7,9 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { Category } from '@layout/layout-shop/models';
+import { CategoriesService } from '@core/services';
+import { Category, CategoryObject } from '@core/models';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-page-shop-home',
@@ -26,7 +28,13 @@ export class PageShopHomeComponent implements OnInit, AfterViewInit {
     // console.log('Altura del div:', this.alturaDiv, 'px');
   }
 
-  constructor(private changeDetectorRef: ChangeDetectorRef) {}
+  category$: Observable<CategoryObject>;
+  constructor(
+    private changeDetectorRef: ChangeDetectorRef,
+    private categoriesService: CategoriesService
+  ) {
+    this.category$ = this.categoriesService.categories$;
+  }
 
   ngAfterViewInit(): void {
     // this.cd.detectChanges();
@@ -34,7 +42,14 @@ export class PageShopHomeComponent implements OnInit, AfterViewInit {
     // console.log('ngAfterViewInit', this.alturaDiv);
     this.changeDetectorRef.detectChanges();
   }
+
+  // productList: any;
   ngOnInit(): void {
+    // this.productsService.fetch();
+    // this.productsService.getTest$().subscribe((data) => {
+    //   this.productList = data;
+    //   console.log(data);
+    // });
     // this.alturaDiv = this.miDiv.nativeElement.offsetHeight;
     // console.log('ngOnInit', this.alturaDiv);
   }

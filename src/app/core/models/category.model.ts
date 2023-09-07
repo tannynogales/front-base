@@ -7,3 +7,8 @@ export interface Category {
   // productsQuantity: number;
   image?: string;
 }
+
+export interface CategoryObject {
+  data: Category[];
+  loading: boolean;
+}
