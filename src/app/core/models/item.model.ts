@@ -11,3 +11,16 @@ export interface Item {
   attributes: Array<string>;
   description?: string;
 }
+
+export interface ItemObject {
+  data: Item[];
+  loading: boolean;
+  meta: {
+    pagination: {
+      page: number;
+      pageCount: number;
+      pageSize: number;
+      total: number;
+    };
+  };
+}

@@ -3,8 +3,8 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   line-height: 1.5; /* Ajusta la altura de línea según tus necesidades */
-  max-height: 3em; /* Ajusta el valor según el número de líneas deseadas (2 líneas x altura de línea) */
-  -webkit-line-clamp: 2; /* Número máximo de líneas a mostrar */
+  max-height: 4.5em; /* Ajusta el valor para mostrar un máximo de 3 líneas de texto */
+  -webkit-line-clamp: 3; /* Número máximo de líneas a mostrar */
   text-overflow: ellipsis;
 }
 

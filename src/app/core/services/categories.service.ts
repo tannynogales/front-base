@@ -28,8 +28,8 @@ export class CategoriesService {
   }
 
   fetch() {
-    // this.categoryObject.loading = false;
-    // this._categories.next(this.categoryObject);
+    this.categoryObject.loading = false;
+    this._categories.next(this.categoryObject);
     const url =
       this.baseUrl +
       `/categories?filters[site][id][$eq]=${this.siteID}&populate[products]=*`;
@@ -48,7 +48,6 @@ export class CategoriesService {
         })
       )
       .subscribe((data) => {
-        console.log(data);
         this.categoryObject.data = data;
         this.categoryObject.loading = true;
         this._categories.next(this.categoryObject);

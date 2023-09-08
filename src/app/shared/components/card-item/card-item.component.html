@@ -1,0 +1,31 @@
+<div
+  class="card2 card text-center"
+  aria-hidden="true"
+  data-content-name="someName"
+>
+  <div
+    style="
+      height: 180px;
+      width: 100%;
+      background-image: url('{{ item.primary_image }}');
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+    "
+    class="card-img-top"
+  >
+    <!-- <img [ngSrc]="item.primary_image" fill priority /> -->
+  </div>
+
+  <div class="card-body">
+    <!-- <h5 class="card-title">
+      <span class="">{{ item.name }}</span>
+    </h5> -->
+    <p class="card-text texto-limitado">
+      <span class="">{{ item.name }}</span>
+    </p>
+    <a *ngIf="button" [attr.href]="buttonLink" class="btn btn-primary">{{
+      buttonLabel
+    }}</a>
+  </div>
+</div>

@@ -1,13 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { Category } from '@core/models';
+import { Category, ItemObject } from '@core/models';
+import { ProductsService } from '@core/services';
+import { Observable } from 'rxjs';
 
 @Component({
+  providers: [ProductsService],
   selector: 'app-page-shop-product-list-home',
   templateUrl: './page-shop-product-list-home.component.html',
   styleUrls: ['./page-shop-product-list-home.component.scss'],
 })
-export class PageShopProductListHomeComponent {
+export class PageShopProductListHomeComponent implements OnInit, OnDestroy {
+  Arr = Array;
   menu: Category[] = [
     {
       id: 1,
@@ -40,18 +44,30 @@ export class PageShopProductListHomeComponent {
       slug: 'Otros',
     },
   ];
-  products = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
+  // products = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
 
   selectedMenuItem: string = '';
 
-  constructor(private activatedRoute: ActivatedRoute) {}
+  products$: Observable<ItemObject>;
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    public productsService: ProductsService
+  ) {
+    this.products$ = this.productsService.products$;
+  }
+
+  ngOnDestroy(): void {
+    // if (this.products$) {
+    //   this.products$.);
+    // }
+  }
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
-      const productId = params.get('productId');
-      if (productId !== null) {
-        this.selectedMenuItem = productId;
-        // console.log(productId);
+      const categoryId = params.get('categoryId');
+      if (categoryId !== null) {
+        this.selectedMenuItem = categoryId;
+        this.productsService.fetch(categoryId);
       }
     });
   }

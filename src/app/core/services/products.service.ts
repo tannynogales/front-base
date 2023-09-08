@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, map, of } from 'rxjs';
-import { Category, CategoryObject, Response } from '@core/models';
+import { Item, ItemObject, Response } from '@core/models';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment.development';
 
@@ -12,55 +12,85 @@ export class ProductsService {
   siteID = environment.strapiSiteID;
 
   // Initialize data
-  private categoryObject: CategoryObject = {
-    data: [
-      {
-        id: 1,
-        name: 'Product 1',
-        slug: 'product-1',
-        image: 'https://via.placeholder.com/150',
-      },
-    ],
+  private productsObject: ItemObject = {
+    data: [],
     loading: false,
+    meta: {
+      pagination: {
+        page: 0,
+        pageCount: 0,
+        pageSize: 0,
+        total: 0,
+      },
+    },
   };
 
-  private _products: BehaviorSubject<CategoryObject> = new BehaviorSubject(
-    this.categoryObject
+  private _products: BehaviorSubject<ItemObject> = new BehaviorSubject(
+    this.productsObject
   );
 
-  constructor(private httpClient: HttpClient) {
-    console.log(this.categoryObject);
-  }
+  constructor(private httpClient: HttpClient) {}
 
-  get products$(): Observable<CategoryObject> {
+  get products$(): Observable<ItemObject> {
     return this._products.asObservable();
   }
 
-  fetch() {
-    // this.categoryObject.loading = false;
-    // this._products.next(this.categoryObject);
+  fetch(categorySlug: string, page: number = 1) {
+    let totalPages: number; // Declarar la variable totalPages aquí
+    // this.productsObject.loading = false;
+    // this._products.next(this.productsObject);
     const url =
       this.baseUrl +
-      `/categories?filters[site][id][$eq]=${this.siteID}&populate[products]=*`;
+      `/products?filters[categories][slug][$eq]=${categorySlug}&[categories][site][id][$eq]=${this.siteID}&populate[primary_image]=*&populate[categories]=*&populate[product_attribute_values]=*&pagination[pageSize]=12&pagination[page]=${page}`;
     // console.log(url);
     this.httpClient
       .get<Response>(url)
       .pipe(
-        map((response: Response) => {
-          return response.data.map((element: any): Category => {
+        map((response: any) => {
+          console.log(response.meta);
+
+          this.productsObject.meta.pagination = {
+            page: response.meta.pagination.page,
+            pageCount: response.meta.pagination.pageCount,
+            pageSize: response.meta.pagination.pageSize,
+            total: response.meta.pagination.total,
+          };
+
+          return response.data.map((element: any): Item => {
+            const attributesValues =
+              element.attributes.product_attribute_values.data.map(
+                (element: any) => {
+                  return element.attributes.value;
+                }
+              );
+
+            // console.log('photo', element.attributes.primary_image);
+
             return {
               id: element.id,
+              code: element.attributes.code,
               name: element.attributes.name,
-              slug: element.attributes.slug,
+              price: parseInt(element.attributes.price),
+              primary_image: element.attributes.primary_image.data
+                ? element.attributes.primary_image.data?.attributes?.formats
+                    .small?.url
+                : '',
+              tag: '',
+              images: [],
+              category: element.attributes.categories.data.map(
+                (element: any) => {
+                  return element.attributes.slug;
+                }
+              ),
+              attributes: attributesValues,
             };
           });
         })
       )
       .subscribe((data) => {
-        console.log(data);
-        this.categoryObject.data = data;
-        this.categoryObject.loading = true;
-        this._products.next(this.categoryObject);
+        this.productsObject.data = data;
+        this.productsObject.loading = true;
+        this._products.next(this.productsObject);
       });
   }
 

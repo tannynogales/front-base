@@ -10,6 +10,8 @@ import { SlideComponent } from './slide/slide.component';
 import { CircularStepperComponent } from './circular-stepper/circular-stepper.component';
 import { HorizontalStepperComponent } from './horizontal-stepper/horizontal-stepper.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
+import { CardItemComponent } from './card-item/card-item.component';
+import { CardItemLoadingComponent } from './card-item-loading/card-item-loading.component';
 
 export const components = [
   CardComponent,
@@ -24,6 +26,8 @@ export const components = [
   CircularStepperComponent,
   HorizontalStepperComponent,
   BreadcrumbComponent,
+  CardItemComponent,
+  CardItemLoadingComponent,
 ];
 
 export * from './card/card.component';
@@ -38,3 +42,5 @@ export * from './slide/slide.component';
 export * from './circular-stepper/circular-stepper.component';
 export * from './horizontal-stepper/horizontal-stepper.component';
 export * from './breadcrumb/breadcrumb.component';
+export * from './card-item-loading/card-item-loading.component';
+export * from './card-item/card-item.component';
