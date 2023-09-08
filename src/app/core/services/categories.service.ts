@@ -32,7 +32,7 @@ export class CategoriesService {
     this._categories.next(this.categoryObject);
     const url =
       this.baseUrl +
-      `/categories?filters[site][id][$eq]=${this.siteID}&populate[products]=*`;
+      `/categories?filters[site][id][$eq]=${this.siteID}&populate[products]=*&sort=name`;
     // console.log(url);
     this.httpClient
       .get<Response>(url)
