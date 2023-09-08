@@ -10,14 +10,20 @@
       <!-- Slider thumbnails-->
 
       <button
+        *ngFor="let slide of slides; let isFirst = first; let index = index"
         type="button"
         data-bs-target="#carouselExampleDark"
-        data-bs-slide-to="0"
-        class="active border border-primary"
-        aria-current="true"
-        aria-label="Slide 1"
+        [attr.data-bs-slide-to]="index"
+        [ngClass]="
+          activeSlide == index ? 'active border border-primary' : 'border'
+        "
+        class="rounded"
+        [attr.aria-current]="activeSlide == index ? true : false"
+        [attr.aria-label]="'Slide ' + (index + 1)"
+        [ngStyle]="{ 'background-image': 'url(' + slide + ')' }"
+        (click)="setActiveSlide(index)"
       ></button>
-      <button
+      <!-- <button
         type="button"
         class="border-0"
         data-bs-target="#carouselExampleDark"
@@ -30,32 +36,29 @@
         data-bs-target="#carouselExampleDark"
         data-bs-slide-to="2"
         aria-label="Slide 3"
-      ></button>
+      ></button> -->
     </div>
     <div class="col-md-10 order-1 order-md-2 p-0 mb-3 mb-lg-0">
       <!-- Item slider-->
       <div class="  ">
         <div class="carousel-inner">
-          <div class="carousel-item active" data-bs-interval="10000">
-            <app-placeholder-img
+          <div
+            *ngFor="let slide of slides; let isFirst = first; let index = index"
+            class="carousel-item"
+            [ngClass]="isFirst ? 'active' : ''"
+            data-bs-interval="10000"
+          >
+            <img
+              class="d-block w-100 border rounded img-fluid"
+              src="{{ slide }}"
+              [alt]="'Slide ' + (index + 1)"
+              style="max-width: 800px; max-height: 400px"
+            />
+            <!-- <app-placeholder-img
               class="d-block w-100"
-              [name]="'Slide 1'"
+              [name]="'Slide ' + (index + 1)"
               alt=".."
-            ></app-placeholder-img>
-          </div>
-          <div class="carousel-item" data-bs-interval="2000">
-            <app-placeholder-img
-              class="d-block w-100"
-              [name]="'Slide 2'"
-              alt=".."
-            ></app-placeholder-img>
-          </div>
-          <div class="carousel-item">
-            <app-placeholder-img
-              class="d-block w-100"
-              [name]="'Slide 3'"
-              alt=".."
-            ></app-placeholder-img>
+            ></app-placeholder-img> -->
           </div>
         </div>
       </div>

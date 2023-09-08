@@ -3,72 +3,79 @@
 <section class="py-4">
   <div class="container">
     <div class="row">
-      <div class="col-lg-6 mb-5 mb-lg-0">
-        <app-shop-product-detail-slider></app-shop-product-detail-slider>
-      </div>
-      <!-- Item info-->
-      <div class="col-lg-6">
-        <div class="badge bg-info small rounded-0 mb-2">Trending</div>
-        <h1>Red digital smartwatch</h1>
-        <div class="d-flex align-items-center">
-          <ul class="list-inline mb-2 me-3 small">
-            <li class="list-inline-item m-0">
-              <i class="fas fa-star small text-warning"></i>
-            </li>
-            <li class="list-inline-item m-0">
-              <i class="fas fa-star small text-warning"></i>
-            </li>
-            <li class="list-inline-item m-0">
-              <i class="fas fa-star small text-warning"></i>
-            </li>
-            <li class="list-inline-item m-0">
-              <i class="fas fa-star small text-warning"></i>
-            </li>
-            <li class="list-inline-item m-0">
-              <i class="fas fa-star small text-muted"></i>
-            </li>
-          </ul>
-          <p class="small text-muted mb-2">12 customer reviews</p>
-        </div>
-        <p class="h4">$250</p>
-        <p class="text-small mb-4">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ut
-          ullamcorper leo, eget euismod orci. Cum sociis natoque penatibus et
-          magnis dis parturient montes nascetur ridiculus mus. Vestibulum
-          ultricies aliquam convallis.
-        </p>
+      <ng-container *ngIf="product$ | async as product">
+        <ng-container *ngIf="!product.loading">
+          <div class="col-lg-6 mb-5 mb-lg-0">
+            <app-shop-product-detail-slider
+              [slides]="
+                getImages(product.data?.primary_image, product.data?.images)
+              "
+            ></app-shop-product-detail-slider>
+          </div>
+          <!-- Item info-->
+          <div class="col-lg-6">
+            <!-- <div class="badge bg-info small rounded-0 mb-2">Trending</div> -->
+            <h1>{{ product.data?.name }}</h1>
+            <div class="d-flex align-items-center">
+              <ul class="list-inline mb-2 me-3 small">
+                <li class="list-inline-item m-0">
+                  <i class="fas fa-star small text-warning"></i>
+                </li>
+                <li class="list-inline-item m-0">
+                  <i class="fas fa-star small text-warning"></i>
+                </li>
+                <li class="list-inline-item m-0">
+                  <i class="fas fa-star small text-warning"></i>
+                </li>
+                <li class="list-inline-item m-0">
+                  <i class="fas fa-star small text-warning"></i>
+                </li>
+                <li class="list-inline-item m-0">
+                  <i class="fas fa-star small text-muted"></i>
+                </li>
+              </ul>
+              <p class="small text-muted mb-2">12 customer reviews</p>
+            </div>
+            <p class="h4">$ {{ product.data?.price | currency : "CLP" }}</p>
+            <p class="text-small mb-4">
+              <markdown ngPreserveWhitespaces>
+                {{ product.data?.description }}
+              </markdown>
+            </p>
 
-        <div class="d-flex align-items-center mb-4">
-          <a
-            class="btn btn-primary btn-sm py-2 border-bottom-0 px-5 me-3"
-            href="cart.html"
-          >
-            <i class="fas fa-shopping-bag py-1 me-2"></i>Add to cart</a
-          ><a class="p-0 reset-anchor d-inline-block mx-2" href="#"
-            ><i class="fas fa-heart"></i></a
-          ><a
-            *ngIf="isShareEnable"
-            class="p-0 reset-anchor d-inline-block mx-2"
-            (click)="share()"
-            ><i class="fas fa-share-alt"></i
-          ></a>
-        </div>
-        <br />
-        <ul class="list-unstyled small d-inline-block">
-          <li class="px-3 py-2 mb-1 bg-light">
-            <strong class="text-uppercase">SKU:</strong
-            ><span class="ms-2 text-muted">039</span>
-          </li>
-          <li class="px-3 py-2 mb-1 bg-light text-muted">
-            <strong class="text-uppercase text-dark">Category:</strong
-            ><a class="reset-anchor ms-2" href="#">Demo Products</a>
-          </li>
-          <li class="px-3 py-2 mb-1 bg-light text-muted">
-            <strong class="text-uppercase text-dark">Tags:</strong
-            ><a class="reset-anchor ms-2" href="#">Innovation</a>
-          </li>
-        </ul>
-      </div>
+            <div class="d-flex align-items-center mb-4">
+              <a
+                class="btn btn-primary btn-sm py-2 border-bottom-0 px-5 me-3"
+                href="cart.html"
+              >
+                <i class="fas fa-shopping-bag py-1 me-2"></i>Agregar al carro</a
+              ><a class="p-0 reset-anchor d-inline-block mx-2" href="#"
+                ><i class="fas fa-heart"></i></a
+              ><a
+                *ngIf="isShareEnable"
+                class="p-0 reset-anchor d-inline-block mx-2"
+                (click)="share()"
+                ><i class="fas fa-share-alt"></i
+              ></a>
+            </div>
+            <br />
+            <ul class="list-unstyled small d-inline-block">
+              <li class="px-3 py-2 mb-1 bg-light">
+                <strong class="text-uppercase">SKU:</strong
+                ><span class="ms-2 text-muted">{{ product.data?.code }}</span>
+              </li>
+              <!-- <li class="px-3 py-2 mb-1 bg-light text-muted">
+                <strong class="text-uppercase text-dark">Category:</strong
+                ><a class="reset-anchor ms-2" href="#">Demo Products</a>
+              </li>
+              <li class="px-3 py-2 mb-1 bg-light text-muted">
+                <strong class="text-uppercase text-dark">Tags:</strong
+                ><a class="reset-anchor ms-2" href="#">Innovation</a>
+              </li> -->
+            </ul>
+          </div>
+        </ng-container>
+      </ng-container>
     </div>
   </div>
 </section>

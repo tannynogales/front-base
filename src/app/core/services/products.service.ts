@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, map, of } from 'rxjs';
-import { Item, ItemObject, Response } from '@core/models';
+import { Item, ItemsObject, Response } from '@core/models';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment.development';
 
@@ -12,7 +12,7 @@ export class ProductsService {
   siteID = environment.strapiSiteID;
 
   // Initialize data
-  private productsObject: ItemObject = {
+  private productsObject: ItemsObject = {
     data: [],
     loading: true,
     meta: {
@@ -25,13 +25,13 @@ export class ProductsService {
     },
   };
 
-  private _products: BehaviorSubject<ItemObject> = new BehaviorSubject(
+  private _products: BehaviorSubject<ItemsObject> = new BehaviorSubject(
     this.productsObject
   );
 
   constructor(private httpClient: HttpClient) {}
 
-  get products$(): Observable<ItemObject> {
+  get products$(): Observable<ItemsObject> {
     return this._products.asObservable();
   }
 
@@ -74,6 +74,7 @@ export class ProductsService {
             // console.log('photo', element.attributes.primary_image);
 
             return {
+              slug: element.attributes.slug,
               id: element.id,
               code: element.attributes.code,
               name: element.attributes.name,

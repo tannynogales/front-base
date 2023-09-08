@@ -32,7 +32,7 @@
         <span>(Precio en tienda)</span>
       </ng-template>
     </p>
-    <a *ngIf="button" [attr.href]="buttonLink" class="btn btn-primary">{{
+    <a *ngIf="button" [routerLink]="[buttonLink]" class="btn btn-primary">{{
       buttonLabel
     }}</a>
   </div>

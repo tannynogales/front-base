@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { Category, CategoryObject, ItemObject } from '@core/models';
+import { Category, CategoryObject, ItemsObject } from '@core/models';
 import { CategoriesService, ProductsService } from '@core/services';
 import { Observable } from 'rxjs';
 
@@ -49,7 +49,7 @@ export class PageShopProductListHomeComponent implements OnInit, OnDestroy {
   categoryId: string = '';
 
   categories$: Observable<CategoryObject>;
-  products$: Observable<ItemObject>;
+  products$: Observable<ItemsObject>;
   constructor(
     private activatedRoute: ActivatedRoute,
     public productsService: ProductsService,

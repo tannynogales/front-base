@@ -1,5 +1,6 @@
 export interface Item {
   //[key: string]: string | number;
+  slug: string;
   id: number;
   code: string;
   name: string;
@@ -12,7 +13,7 @@ export interface Item {
   description?: string;
 }
 
-export interface ItemObject {
+export interface ItemsObject {
   data: Item[];
   loading: boolean;
   meta: {
@@ -23,4 +24,8 @@ export interface ItemObject {
       total: number;
     };
   };
+}
+export interface ItemObject {
+  data?: Item;
+  loading: boolean;
 }

@@ -11,6 +11,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { CardItemLoadingComponent } from './components/card-item-loading/card-item-loading.component';
 import { CardItemComponent } from './components/card-item/card-item.component';
 
+import { MarkdownModule } from 'ngx-markdown';
+
 @NgModule({
   declarations: [
     ...sharedComponents.components,
@@ -24,12 +26,14 @@ import { CardItemComponent } from './components/card-item/card-item.component';
     NouisliderModule,
     FormsModule,
     HttpClientModule,
+    MarkdownModule.forRoot(),
   ],
   exports: [
     ...sharedComponents.components,
     NouisliderModule,
     FormsModule,
     HttpClientModule,
+    MarkdownModule,
   ],
 })
 export class SharedModule {}
