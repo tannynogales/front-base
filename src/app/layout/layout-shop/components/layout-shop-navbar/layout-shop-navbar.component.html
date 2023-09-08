@@ -73,12 +73,12 @@
           ></button>
         </div>
         <div class="offcanvas-body">
-          <ng-container *ngIf="category$ | async as category">
-            <ng-container *ngIf="category.loading; else loading">
+          <ng-container *ngIf="categories$ | async as categories">
+            <ng-container *ngIf="!categories.loading; else loading">
               <div class="contenido">
                 <app-menu-list
                   (elementClickedEvent)="closeOffcanvasNavbar()"
-                  [products]="category.data"
+                  [products]="categories.data"
                 ></app-menu-list>
               </div>
             </ng-container>

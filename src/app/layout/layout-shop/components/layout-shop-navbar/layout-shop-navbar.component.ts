@@ -11,10 +11,10 @@ import { Observable } from 'rxjs';
 export class LayoutShopNavbarComponent {
   @ViewChild('offcanvasNavbar') offcanvasNavbar!: ElementRef;
   products: any[] = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
-  category$: Observable<CategoryObject>;
+  categories$: Observable<CategoryObject>;
 
   constructor(private categoriesService: CategoriesService) {
-    this.category$ = this.categoriesService.categories$;
+    this.categories$ = this.categoriesService.categories$;
   }
 
   closeOffcanvasNavbar() {
