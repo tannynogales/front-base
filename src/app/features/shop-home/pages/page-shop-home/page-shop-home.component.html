@@ -11,15 +11,15 @@
 
 <div class="container py-3">
   <div class="row">
-    <ng-container *ngIf="category$ | async as category">
+    <ng-container *ngIf="categories$ | async as categories">
       <div
         class="col-3 d-none d-lg-block"
         style="overflow: auto"
         [style.height.px]="alturaDiv"
       >
-        <ng-container *ngIf="category.loading; else loading">
+        <ng-container *ngIf="!categories.loading; else loading">
           <div class="contenido">
-            <app-menu-list [products]="category.data"></app-menu-list>
+            <app-menu-list [products]="categories.data"></app-menu-list>
           </div>
         </ng-container>
         <ng-template #loading>

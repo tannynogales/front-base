@@ -14,7 +14,7 @@ export class ProductsService {
   // Initialize data
   private productsObject: ItemObject = {
     data: [],
-    loading: false,
+    loading: true,
     meta: {
       pagination: {
         page: 0,
@@ -36,9 +36,8 @@ export class ProductsService {
   }
 
   fetch(categorySlug: string, page: number = 1) {
-    let totalPages: number; // Declarar la variable totalPages aquí
-    // this.productsObject.loading = false;
-    // this._products.next(this.productsObject);
+    this.productsObject.loading = true;
+    this._products.next(this.productsObject);
     const url =
       this.baseUrl +
       `/products?filters[categories][slug][$eq]=${categorySlug}&[categories][site][id][$eq]=${this.siteID}&populate[primary_image]=*&populate[categories]=*&populate[product_attribute_values]=*&pagination[pageSize]=12&pagination[page]=${page}`;
@@ -89,7 +88,7 @@ export class ProductsService {
       )
       .subscribe((data) => {
         this.productsObject.data = data;
-        this.productsObject.loading = true;
+        this.productsObject.loading = false;
         this._products.next(this.productsObject);
       });
   }

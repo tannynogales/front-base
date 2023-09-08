@@ -1,5 +1,12 @@
 <div class="container mt-3">
-  <h1 class="">Amasadoras</h1>
+  <ng-container *ngIf="categories$ | async as categories">
+    <ng-container *ngIf="!categories.loading; else loading">
+      <h1 class="">{{ getCategoryName(categories.data) }}</h1>
+    </ng-container>
+    <ng-template #loading>
+      <h1 class="placeholder rounded">loading</h1>
+    </ng-template>
+  </ng-container>
 </div>
 
 <section class="">
@@ -16,7 +23,7 @@
           <div class="col-md-6 text-center text-md-start">
             <p class="small text-muted">
               <ng-container *ngIf="products$ | async as products">
-                <ng-container *ngIf="products.loading">
+                <ng-container *ngIf="!products.loading; else loading">
                   Mostrando página
                   <strong class="text-dark"
                     >{{ products.meta.pagination.page }} </strong
@@ -25,6 +32,9 @@
                     >{{ products.meta.pagination.pageCount }}
                   </strong>
                 </ng-container>
+                <ng-template #loading>
+                  <span class="placeholder col-6 rounded">&nbsp;</span>
+                </ng-template>
               </ng-container>
             </p>
           </div>
@@ -35,12 +45,10 @@
               <ul class="list-inline mb-0 ms-2">
                 <li class="list-inline-item text-start">
                   <select class="form-control js-sort" name="sort">
-                    <option value="">Sort by</option>
-                    <option value="Option 1">Price: low to high</option>
-                    <option value="Option 1">Price: high to low</option>
-                    <option value="Option 1">Best match</option>
-                    <option value="Option 1">Top rated</option>
-                    <option value="Option 1">Popularity</option>
+                    <option value="">Ordenar por</option>
+                    <option value="Option 1">Precio: bajo a alto</option>
+                    <option value="Option 2">Precio: alto a bajo</option>
+                    <option value="Option 3">Nombre</option>
                   </select>
                 </li>
               </ul>
@@ -59,7 +67,7 @@
         <div class="row">
           <!-- Product-->
           <ng-container *ngIf="products$ | async as products">
-            <ng-container *ngIf="products.loading; else loading">
+            <ng-container *ngIf="!products.loading; else loading">
               <div
                 class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12 mb-4 p-2"
                 *ngFor="let product of products.data"
@@ -88,13 +96,22 @@
                       active: index + 1 == products.meta.pagination.page
                     }"
                   >
-                    <a
-                      class="page-link"
-                      (click)="
-                        productsService.fetch(selectedMenuItem, index + 1)
+                    <ng-container
+                      *ngIf="
+                        index + 1 == products.meta.pagination.page;
+                        else link
                       "
-                      >{{ index + 1 }}</a
                     >
+                      <span class="page-link">{{ index + 1 }}</span>
+                    </ng-container>
+                    <ng-template #link
+                      ><a
+                        style="cursor: pointer"
+                        class="page-link"
+                        (click)="changePage(index + 1)"
+                        >{{ index + 1 }}</a
+                      >
+                    </ng-template>
                   </li>
                   <!-- <li class="page-item">
                     <a class="page-link" href="#">Siguiente</a>

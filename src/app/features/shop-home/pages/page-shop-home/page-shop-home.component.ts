@@ -28,12 +28,12 @@ export class PageShopHomeComponent implements OnInit, AfterViewInit {
     // console.log('Altura del div:', this.alturaDiv, 'px');
   }
 
-  category$: Observable<CategoryObject>;
+  categories$: Observable<CategoryObject>;
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
     private categoriesService: CategoriesService
   ) {
-    this.category$ = this.categoriesService.categories$;
+    this.categories$ = this.categoriesService.categories$;
   }
 
   ngAfterViewInit(): void {

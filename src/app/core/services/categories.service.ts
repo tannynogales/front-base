@@ -14,7 +14,7 @@ export class CategoriesService {
   /* Initialize data */
   private categoryObject: CategoryObject = {
     data: [],
-    loading: false,
+    loading: true,
   };
 
   private _categories: BehaviorSubject<CategoryObject> = new BehaviorSubject(
@@ -28,7 +28,7 @@ export class CategoriesService {
   }
 
   fetch() {
-    this.categoryObject.loading = false;
+    this.categoryObject.loading = true;
     this._categories.next(this.categoryObject);
     const url =
       this.baseUrl +
@@ -49,7 +49,7 @@ export class CategoriesService {
       )
       .subscribe((data) => {
         this.categoryObject.data = data;
-        this.categoryObject.loading = true;
+        this.categoryObject.loading = false;
         this._categories.next(this.categoryObject);
       });
   }

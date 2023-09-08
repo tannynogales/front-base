@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { Category, ItemObject } from '@core/models';
-import { ProductsService } from '@core/services';
+import { Category, CategoryObject, ItemObject } from '@core/models';
+import { CategoriesService, ProductsService } from '@core/services';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -46,14 +46,17 @@ export class PageShopProductListHomeComponent implements OnInit, OnDestroy {
   ];
   // products = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
 
-  selectedMenuItem: string = '';
+  categoryId: string = '';
 
+  categories$: Observable<CategoryObject>;
   products$: Observable<ItemObject>;
   constructor(
     private activatedRoute: ActivatedRoute,
-    public productsService: ProductsService
+    public productsService: ProductsService,
+    private categoriesService: CategoriesService
   ) {
     this.products$ = this.productsService.products$;
+    this.categories$ = this.categoriesService.categories$;
   }
 
   ngOnDestroy(): void {
@@ -66,9 +69,24 @@ export class PageShopProductListHomeComponent implements OnInit, OnDestroy {
     this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
       const categoryId = params.get('categoryId');
       if (categoryId !== null) {
-        this.selectedMenuItem = categoryId;
+        this.categoryId = categoryId;
         this.productsService.fetch(categoryId);
       }
     });
+  }
+
+  changePage(page: number) {
+    this.scrollToTop();
+    this.productsService.fetch(this.categoryId, page);
+  }
+
+  scrollToTop() {
+    // Esto hace que el scroll suba suavemente al principio de la página
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  getCategoryName(categories: Category[]) {
+    return categories.find((category) => category.slug === this.categoryId)
+      ?.name;
   }
 }
