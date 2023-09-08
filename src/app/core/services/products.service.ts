@@ -56,8 +56,6 @@ export class ProductsService {
       .get<Response>(url)
       .pipe(
         map((response: any) => {
-          console.log(response.meta);
-
           this.productsObject.meta.pagination = {
             page: response.meta.pagination.page,
             pageCount: response.meta.pagination.pageCount,
