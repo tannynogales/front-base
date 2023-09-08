@@ -44,12 +44,26 @@
             >
               <ul class="list-inline mb-0 ms-2">
                 <li class="list-inline-item text-start">
-                  <select class="form-control js-sort" name="sort">
+                  <!-- <select class="form-control js-sort" name="sort">
                     <option value="">Ordenar por</option>
-                    <option value="Option 1">Precio: bajo a alto</option>
-                    <option value="Option 2">Precio: alto a bajo</option>
-                    <option value="Option 3">Nombre</option>
-                  </select>
+                    <option value="Option 1"></option>
+                    <option value="Option 2"></option>
+                    <option value="Option 3"></option>
+                  </select> -->
+
+                  <div class="form-floating">
+                    <select
+                      name="sortBy"
+                      class="form-select"
+                      id="sortBy"
+                      aria-label="Ordenar por"
+                      (change)="sortByOnChange($event)"
+                    >
+                      <option value="asc" selected>Precio: bajo a alto</option>
+                      <option value="desc">Precio: alto a bajo</option>
+                    </select>
+                    <label for="floatingSelect">Ordenar por</label>
+                  </div>
                 </li>
               </ul>
               <button
@@ -125,7 +139,7 @@
                 *ngFor="let product of [{}, {}, {}, {}, {}, {}, {}, {}, {}]"
               >
                 <div class="d-flex justify-content-center m-0 p-0">
-                  <app-card></app-card>
+                  <app-card-item-loading></app-card-item-loading>
                 </div>
               </div>
             </ng-template>

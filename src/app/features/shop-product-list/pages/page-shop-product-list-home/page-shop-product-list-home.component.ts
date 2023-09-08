@@ -89,4 +89,9 @@ export class PageShopProductListHomeComponent implements OnInit, OnDestroy {
     return categories.find((category) => category.slug === this.categoryId)
       ?.name;
   }
+
+  sortByOnChange(event: any) {
+    this.productsService.order = event.target.value;
+    this.productsService.fetch(this.categoryId, 1);
+  }
 }

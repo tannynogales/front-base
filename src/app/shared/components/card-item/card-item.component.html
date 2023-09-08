@@ -21,8 +21,16 @@
     <!-- <h5 class="card-title">
       <span class="">{{ item.name }}</span>
     </h5> -->
-    <p class="card-text texto-limitado">
-      <span class="">{{ item.name }}</span>
+    <p class="card-text texto-limitado mb-1">
+      <span>{{ item.name }}</span>
+    </p>
+    <p class="fs-6 card-text text-muted mb-2">
+      <ng-container *ngIf="item.price; else noPrice">
+        <span>$ {{ item.price | number : "1.0-0" }}</span>
+      </ng-container>
+      <ng-template #noPrice>
+        <span>(Precio en tienda)</span>
+      </ng-template>
     </p>
     <a *ngIf="button" [attr.href]="buttonLink" class="btn btn-primary">{{
       buttonLabel
