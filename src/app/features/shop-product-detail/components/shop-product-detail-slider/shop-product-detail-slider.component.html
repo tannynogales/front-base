@@ -48,12 +48,15 @@
             [ngClass]="isFirst ? 'active' : ''"
             data-bs-interval="10000"
           >
-            <img
-              class="d-block w-100 border rounded img-fluid"
-              src="{{ slide }}"
-              [alt]="'Slide ' + (index + 1)"
-              style="max-width: 800px; max-height: 400px"
-            />
+            <div class="border">
+              <img
+                class="d-block w-100 border rounded img-fluid"
+                src="{{ slide }}"
+                [alt]="'Slide ' + (index + 1)"
+                style="max-width: 800px; max-height: 400px"
+              />
+            </div>
+
             <!-- <app-placeholder-img
               class="d-block w-100"
               [name]="'Slide ' + (index + 1)"

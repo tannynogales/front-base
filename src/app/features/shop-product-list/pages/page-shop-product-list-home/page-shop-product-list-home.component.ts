@@ -1,4 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Category, CategoryObject, ItemsObject } from '@core/models';
 import { CategoriesService, ProductsService } from '@core/services';
@@ -11,6 +17,8 @@ import { Observable } from 'rxjs';
   styleUrls: ['./page-shop-product-list-home.component.scss'],
 })
 export class PageShopProductListHomeComponent implements OnInit, OnDestroy {
+  @ViewChild('offcanvasFilters') offcanvasFilters!: ElementRef;
+
   Arr = Array;
   menu: Category[] = [
     {
@@ -63,6 +71,13 @@ export class PageShopProductListHomeComponent implements OnInit, OnDestroy {
     // if (this.products$) {
     //   this.products$.);
     // }
+
+    /**
+  Previene el problema que se da cuando tienes el offcanvas abierto y se retocede
+  con el navegador. En ese caso el offcanvas se cierra "a la fuerza", sin dar clic
+  en la "X" y quedan estilos en el body del sitio que impiden hacer scroll
+  */
+    this.closeOffcanvasNavbar();
   }
 
   ngOnInit(): void {
@@ -93,5 +108,11 @@ export class PageShopProductListHomeComponent implements OnInit, OnDestroy {
   sortByOnChange(event: any) {
     this.productsService.order = event.target.value;
     this.productsService.fetch(this.categoryId, 1);
+  }
+
+  closeOffcanvasNavbar() {
+    const myOffcanvas = this.offcanvasFilters?.nativeElement;
+    let openedCanvas = bootstrap.Offcanvas.getInstance(myOffcanvas);
+    if (openedCanvas) openedCanvas.hide();
   }
 }
