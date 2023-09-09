@@ -5,7 +5,7 @@
     <div class="row">
       <ng-container *ngIf="product$ | async as product">
         <ng-container *ngIf="!product.loading">
-          <div class="col-lg-6 mb-3 mb-lg-0">
+          <div class="col-lg-6 mb-4 mb-lg-0">
             <app-shop-product-detail-slider
               [slides]="
                 getImages(product.data?.primary_image, product.data?.images)
