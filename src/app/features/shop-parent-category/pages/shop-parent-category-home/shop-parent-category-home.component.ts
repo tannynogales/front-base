@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { Category } from '@core/models';
+import { Category, CategoryObject } from '@core/models';
+import { CategoriesService } from '@core/services';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-shop-parent-category-home',
@@ -43,8 +45,14 @@ export class ShopParentCategoryHomeComponent {
   products = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
 
   selectedMenuItem: string = '';
+  categories$: Observable<CategoryObject>;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(
+    private route: ActivatedRoute,
+    private categoriesService: CategoriesService
+  ) {
+    this.categories$ = this.categoriesService.categories$;
+  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params: ParamMap) => {

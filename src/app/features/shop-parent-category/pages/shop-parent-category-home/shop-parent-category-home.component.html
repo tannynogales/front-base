@@ -5,7 +5,18 @@
 <div class="container py-3">
   <div class="row">
     <div class="col-3 d-none d-lg-block">
-      <app-menu-list></app-menu-list>
+      <ng-container *ngIf="categories$ | async as categories">
+        <ng-container *ngIf="!categories.loading; else loading">
+          <div class="contenido">
+            <app-menu-list [products]="categories.data"></app-menu-list>
+          </div>
+        </ng-container>
+        <ng-template #loading>
+          <div class="placeholder-glow h-100">
+            <div class="placeholder w-100 rounded h-100">some</div>
+          </div>
+        </ng-template>
+      </ng-container>
     </div>
     <div class="col-12 col-lg-9">
       <!-- <section class="mb-4">
