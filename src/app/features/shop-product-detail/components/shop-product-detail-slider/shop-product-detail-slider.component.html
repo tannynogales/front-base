@@ -41,28 +41,21 @@
     </div>
     <div class="col-md-10 order-1 order-md-2 p-0 mb-3 mb-lg-0">
       <!-- Item slider-->
-      <div class="  ">
-        <div class="carousel-inner">
-          <div
-            *ngFor="let slide of slides; let isFirst = first; let index = index"
-            class="carousel-item"
-            [ngClass]="isFirst ? 'active' : ''"
-          >
-            <div class="border">
-              <img
-                class="d-block w-100 border rounded img-fluid"
-                src="{{ slide }}"
-                [alt]="'Slide ' + (index + 1)"
-                style="max-width: 800px; max-height: 400px"
-              />
-            </div>
 
-            <!-- <app-placeholder-img
+      <div class="carousel-inner border rounded">
+        <div
+          *ngFor="let slide of slides; let isFirst = first; let index = index"
+          class="carousel-item rounded w-100"
+          [ngClass]="isFirst ? 'active' : ''"
+          [ngStyle]="{ 'background-image': 'url(' + slide + ')' }"
+        >
+          <!-- <img src="{{ slide }}" [alt]="'Slide ' + (index + 1)" /> -->
+
+          <!-- <app-placeholder-img
               class="d-block w-100"
               [name]="'Slide ' + (index + 1)"
               alt=".."
             ></app-placeholder-img> -->
-          </div>
         </div>
       </div>
     </div>

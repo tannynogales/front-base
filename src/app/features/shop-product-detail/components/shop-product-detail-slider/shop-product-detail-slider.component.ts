@@ -37,4 +37,6 @@ export class ShopProductDetailSliderComponent implements AfterViewInit {
       this.activeSlide = e.to;
     });
   }
+
+  // TODO on destroy carrousel
 }
