@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { CategoryObject } from '@core/models';
-import { CategoriesService } from '@core/services';
+import { CategoryObject, ParentCategoryObject } from '@core/models';
+import { CategoriesService, ParentCategoriesService } from '@core/services';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -12,9 +12,14 @@ export class LayoutShopNavbarComponent {
   @ViewChild('offcanvasNavbar') offcanvasNavbar!: ElementRef;
   products: any[] = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
   categories$: Observable<CategoryObject>;
+  parentCategories$: Observable<ParentCategoryObject>;
 
-  constructor(private categoriesService: CategoriesService) {
+  constructor(
+    private categoriesService: CategoriesService,
+    private parentCategoriesService: ParentCategoriesService
+  ) {
     this.categories$ = this.categoriesService.categories$;
+    this.parentCategories$ = this.parentCategoriesService.parentCategories$;
   }
 
   closeOffcanvasNavbar() {

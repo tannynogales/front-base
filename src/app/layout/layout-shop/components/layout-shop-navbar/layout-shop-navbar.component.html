@@ -89,6 +89,31 @@
             </ng-template>
           </ng-container>
         </div>
+        <ng-container *ngIf="parentCategories$ | async as parentCategories">
+          <ng-container *ngIf="!parentCategories.loading">
+            <div
+              class="form-floating d-grid p-3 border-top bg-body-tertiary"
+              style="bottom: 0"
+            >
+              <select
+                class="form-select"
+                id="floatingSelect"
+                aria-label="Floating label select example"
+              >
+                <option selected>Todas</option>
+                <option
+                  *ngFor="
+                    let parentCategory of parentCategories.data;
+                    let first = first
+                  "
+                >
+                  {{ parentCategory.name }}
+                </option>
+              </select>
+              <label for="floatingSelect">Selecciona una categoría</label>
+            </div>
+          </ng-container>
+        </ng-container>
       </div>
 
       <!-- Offcanvas Shopping Cart -->
