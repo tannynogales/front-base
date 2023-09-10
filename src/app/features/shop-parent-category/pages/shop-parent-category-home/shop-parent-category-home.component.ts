@@ -37,7 +37,7 @@ export class ShopParentCategoryHomeComponent implements OnInit {
       const parentCategoryID = params.get('parentCategoryID');
       if (parentCategoryID !== null) {
         this.selectedMenuItem = parentCategoryID;
-        console.log(parentCategoryID);
+        // console.log(parentCategoryID);
         this.categoriesService.filterByParent(parentCategoryID);
         this.selectedParentCategoryService.setSelectedParentCategory(
           parentCategoryID

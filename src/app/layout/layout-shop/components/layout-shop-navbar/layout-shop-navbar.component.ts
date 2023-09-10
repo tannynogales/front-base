@@ -37,6 +37,9 @@ export class LayoutShopNavbarComponent {
   }
 
   changeParentCategory(event: any) {
+    this.selectedParentCategoryService.setSelectedParentCategory(
+      event.target.value
+    );
     if (event.target.value == 'all') this.categoriesService.filterReset();
     else this.categoriesService.filterByParent(event.target.value);
   }

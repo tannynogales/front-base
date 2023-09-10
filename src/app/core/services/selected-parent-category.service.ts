@@ -22,6 +22,7 @@ export class SelectedParentCategoryService {
   constructor() {}
 
   setSelectedParentCategory(selectedParentCategory: string) {
+    // console.log(selectedParentCategory);
     // TODO validate that the parent category exists in ParentCategoryObject
     this.selectedParentCategory = selectedParentCategory;
     this._selectedParentCategory.next(this.selectedParentCategory);
