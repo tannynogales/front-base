@@ -20,6 +20,7 @@ export class MenuTopComponent implements AfterViewInit {
       id: 1,
       name: 'Home',
       slug: 'home',
+      parent_categories: [],
     },
   ];
 

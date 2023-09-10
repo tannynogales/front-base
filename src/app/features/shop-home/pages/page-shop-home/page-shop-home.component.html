@@ -1,5 +1,18 @@
 <section class="container">
-  <app-menu-top [items]="menu"></app-menu-top>
+  <ng-container *ngIf="parentCategories$ | async as parentCategories">
+    <ng-container
+      *ngIf="!parentCategories.loading; else loadingParentCategories"
+    >
+      <div class="contenido">
+        <app-menu-top [items]="parentCategories.data"></app-menu-top>
+      </div>
+    </ng-container>
+    <ng-template #loadingParentCategories>
+      <div class="placeholder-glow h-100">
+        <app-menu-top class="placeholder w-100 rounded"></app-menu-top>
+      </div>
+    </ng-template>
+  </ng-container>
 </section>
 
 <!-- <ng-container *ngIf="category$ | async as category; else loading">

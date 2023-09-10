@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CategoriesService, ProductsService } from '@core/services';
+import { CategoriesService, ParentCategoriesService } from '@core/services';
 
 @Component({
   selector: 'app-layout-shop',
@@ -7,7 +7,11 @@ import { CategoriesService, ProductsService } from '@core/services';
   styleUrls: ['./layout-shop.component.scss'],
 })
 export class LayoutShopComponent {
-  constructor(private categoriesService: CategoriesService) {
+  constructor(
+    private categoriesService: CategoriesService,
+    private parentCategoriesService: ParentCategoriesService
+  ) {
     this.categoriesService.fetch();
+    this.parentCategoriesService.fetch();
   }
 }

@@ -47,7 +47,7 @@ const routes: Routes = [
   },
 
   {
-    path: ':productId',
+    path: ':parentCategoryID',
     loadChildren: () =>
       import('@features/shop-parent-category/shop-parent-category.module').then(
         (m) => m.ShopParentCategoryModule

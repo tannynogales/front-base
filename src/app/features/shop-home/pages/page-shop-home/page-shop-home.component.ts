@@ -7,8 +7,8 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { CategoriesService } from '@core/services';
-import { Category, CategoryObject } from '@core/models';
+import { CategoriesService, ParentCategoriesService } from '@core/services';
+import { Category, CategoryObject, ParentCategoryObject } from '@core/models';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -29,11 +29,14 @@ export class PageShopHomeComponent implements OnInit, AfterViewInit {
   }
 
   categories$: Observable<CategoryObject>;
+  parentCategories$: Observable<ParentCategoryObject>;
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
-    private categoriesService: CategoriesService
+    private categoriesService: CategoriesService,
+    private parentCategoriesService: ParentCategoriesService
   ) {
     this.categories$ = this.categoriesService.categories$;
+    this.parentCategories$ = this.parentCategoriesService.parentCategories$;
   }
 
   ngAfterViewInit(): void {
@@ -45,6 +48,8 @@ export class PageShopHomeComponent implements OnInit, AfterViewInit {
 
   // productList: any;
   ngOnInit(): void {
+    this.categoriesService.filterReset();
+    // this.parentCategoriesService.fetch();
     // this.productsService.fetch();
     // this.productsService.getTest$().subscribe((data) => {
     //   this.productList = data;
@@ -104,39 +109,6 @@ export class PageShopHomeComponent implements OnInit, AfterViewInit {
       name: 'Batidoras',
       slug: 'batidoras',
       image: './../../assets/batidora.png',
-    },
-  ];
-
-  menu: Category[] = [
-    {
-      id: 1,
-      name: 'Panadería y Pastelería',
-      slug: 'panaderia-y-pasteleria',
-    },
-    {
-      id: 2,
-      name: 'Carnicería',
-      slug: 'carniceria',
-    },
-    {
-      id: 3,
-      name: 'Panadería',
-      slug: 'panaderia',
-    },
-    {
-      id: 4,
-      name: 'Refrigeración',
-      slug: 'refrigeracion',
-    },
-    {
-      id: 5,
-      name: 'Restaurant',
-      slug: 'acero-inoxidable',
-    },
-    {
-      id: 6,
-      name: 'Otros',
-      slug: 'Otros',
     },
   ];
 }

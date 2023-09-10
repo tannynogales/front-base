@@ -32,17 +32,28 @@ export class CategoriesService {
     this._categories.next(this.categoryObject);
     const url =
       this.baseUrl +
-      `/categories?filters[site][id][$eq]=${this.siteID}&populate[products]=*&sort=name`;
+      `/categories?filters[site][id][$eq]=${this.siteID}&sort=name&populate[parent_categories]=*`;
     // console.log(url);
+
     this.httpClient
       .get<Response>(url)
       .pipe(
         map((response: Response) => {
           return response.data.map((element: any): Category => {
+            // if (element.attributes.slug == 'embutidoras-y-churreras')
+            // console.log(element.attributes.parent_categories.data);
             return {
               id: element.id,
               name: element.attributes.name,
               slug: element.attributes.slug,
+              parent_categories:
+                element.attributes.parent_categories?.data.length > 0
+                  ? element.attributes.parent_categories.data.map(
+                      (parent_category: any) => {
+                        return parent_category.attributes.slug;
+                      }
+                    )
+                  : [],
             };
           });
         })
@@ -52,5 +63,18 @@ export class CategoriesService {
         this.categoryObject.loading = false;
         this._categories.next(this.categoryObject);
       });
+  }
+
+  filterByParent(parent: string) {
+    this._categories.next({
+      data: this.categoryObject.data.filter((category) =>
+        category.parent_categories?.includes(parent)
+      ),
+      loading: false,
+    });
+  }
+
+  filterReset() {
+    this._categories.next(this.categoryObject);
   }
 }

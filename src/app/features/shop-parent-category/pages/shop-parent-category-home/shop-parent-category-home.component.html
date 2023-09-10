@@ -1,5 +1,21 @@
 <section class="container">
-  <app-menu-top [items]="menu" [selected]="selectedMenuItem"></app-menu-top>
+  <ng-container *ngIf="parentCategories$ | async as parentCategories">
+    <ng-container
+      *ngIf="!parentCategories.loading; else loadingParentCategories"
+    >
+      <div class="contenido">
+        <app-menu-top
+          [items]="parentCategories.data"
+          [selected]="selectedMenuItem"
+        ></app-menu-top>
+      </div>
+    </ng-container>
+    <ng-template #loadingParentCategories>
+      <div class="placeholder-glow h-100">
+        <app-menu-top class="placeholder w-100 rounded"></app-menu-top>
+      </div>
+    </ng-template>
+  </ng-container>
 </section>
 
 <div class="container py-3">
@@ -25,7 +41,7 @@
           <h5 class="mb-3">Panadería y Pastelería</h5>
         </div>
       </section> -->
-      <h1>Panadería y Pastelería</h1>
+      <h1>{{ selectedMenuItem }}</h1>
       <section>
         <div class="row">
           <div
