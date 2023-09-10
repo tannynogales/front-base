@@ -100,17 +100,19 @@
                 id="floatingSelect"
                 aria-label="Floating label select example"
               >
-                <option selected>Todas</option>
                 <option
-                  *ngFor="
-                    let parentCategory of parentCategories.data;
-                    let first = first
+                  *ngFor="let parentCategory of parentCategories.data"
+                  [selected]="
+                    parentCategory.slug == (selectedParentCategory$ | async)
                   "
                 >
                   {{ parentCategory.name }}
                 </option>
+                <option [selected]="'all' == (selectedParentCategory$ | async)">
+                  Todas
+                </option>
               </select>
-              <label for="floatingSelect">Selecciona una categoría</label>
+              <label for="floatingSelect">Filtra por categoría</label>
             </div>
           </ng-container>
         </ng-container>

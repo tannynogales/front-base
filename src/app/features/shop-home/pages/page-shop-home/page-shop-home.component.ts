@@ -7,7 +7,11 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { CategoriesService, ParentCategoriesService } from '@core/services';
+import {
+  CategoriesService,
+  ParentCategoriesService,
+  SelectedParentCategoryService,
+} from '@core/services';
 import { Category, CategoryObject, ParentCategoryObject } from '@core/models';
 import { Observable } from 'rxjs';
 
@@ -33,7 +37,8 @@ export class PageShopHomeComponent implements OnInit, AfterViewInit {
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
     private categoriesService: CategoriesService,
-    private parentCategoriesService: ParentCategoriesService
+    private parentCategoriesService: ParentCategoriesService,
+    private selectedParentCategoryService: SelectedParentCategoryService
   ) {
     this.categories$ = this.categoriesService.categories$;
     this.parentCategories$ = this.parentCategoriesService.parentCategories$;
@@ -49,6 +54,8 @@ export class PageShopHomeComponent implements OnInit, AfterViewInit {
   // productList: any;
   ngOnInit(): void {
     this.categoriesService.filterReset();
+    this.selectedParentCategoryService.setSelectedParentCategory('all');
+
     // this.parentCategoriesService.fetch();
     // this.productsService.fetch();
     // this.productsService.getTest$().subscribe((data) => {
