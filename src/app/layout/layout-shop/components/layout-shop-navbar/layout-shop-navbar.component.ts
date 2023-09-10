@@ -35,4 +35,9 @@ export class LayoutShopNavbarComponent {
     let openedCanvas = bootstrap.Offcanvas.getInstance(myOffcanvas);
     openedCanvas.hide();
   }
+
+  changeParentCategory(event: any) {
+    if (event.target.value == 'all') this.categoriesService.filterReset();
+    else this.categoriesService.filterByParent(event.target.value);
+  }
 }

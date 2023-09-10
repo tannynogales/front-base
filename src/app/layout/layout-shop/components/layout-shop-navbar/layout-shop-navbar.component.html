@@ -99,16 +99,21 @@
                 class="form-select"
                 id="floatingSelect"
                 aria-label="Floating label select example"
+                (change)="changeParentCategory($event)"
               >
                 <option
                   *ngFor="let parentCategory of parentCategories.data"
                   [selected]="
                     parentCategory.slug == (selectedParentCategory$ | async)
                   "
+                  [value]="parentCategory.slug"
                 >
                   {{ parentCategory.name }}
                 </option>
-                <option [selected]="'all' == (selectedParentCategory$ | async)">
+                <option
+                  [selected]="'all' == (selectedParentCategory$ | async)"
+                  value="all"
+                >
                   Todas
                 </option>
               </select>

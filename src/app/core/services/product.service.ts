@@ -72,7 +72,7 @@ export class ProductService {
       .subscribe((data) => {
         this.productObject.data = data;
         this.productObject.loading = false;
-        console.log(this.productObject);
+        // console.log(this.productObject);
         this._product.next(this.productObject);
       });
   }
