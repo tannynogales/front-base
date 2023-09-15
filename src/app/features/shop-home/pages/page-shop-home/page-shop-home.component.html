@@ -46,8 +46,19 @@
     <div class="col-12 col-lg-9">
       <div #miDiv>
         <section class="mb-4">
-          <app-carousel></app-carousel>
+          <ng-container
+            *ngIf="bannersHome$ | async as bannersHome; else loadingBannersHome"
+          >
+            <ng-container *ngIf="!bannersHome.loading; else loadingBannersHome">
+              <app-carousel [items]="bannersHome.data"></app-carousel>
+            </ng-container>
+          </ng-container>
+
+          <ng-template #loadingBannersHome>
+            <app-carousel [loading]="true"></app-carousel>
+          </ng-template>
         </section>
+
         <h5 class="mb-3">Productos destacados</h5>
         <section class="d-flex justify-content-between scroll-custom gap-3">
           <app-card

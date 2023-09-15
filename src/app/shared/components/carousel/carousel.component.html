@@ -1,41 +1,37 @@
 <div
+  #carouselExampleIndicators
   id="carouselExampleIndicators"
   class="carousel slide py-3"
   data-bs-ride="carousel"
   data-bs-touch="true"
 >
-  <div class="carousel-indicators d-none d-md-flex">
+  <div *ngIf="items.length > 1" class="carousel-indicators d-none d-md-flex">
     <button
+      *ngFor="let item of items; let first = first; let index = index"
       type="button"
       data-bs-target="#carouselExampleIndicators"
-      data-bs-slide-to="0"
-      class="active"
-      aria-current="true"
-      aria-label="Slide 1"
-    ></button>
-    <button
-      type="button"
-      data-bs-target="#carouselExampleIndicators"
-      data-bs-slide-to="1"
-      aria-label="Slide 2"
-    ></button>
-    <button
-      type="button"
-      data-bs-target="#carouselExampleIndicators"
-      data-bs-slide-to="2"
-      aria-label="Slide 3"
+      [attr.data-bs-slide-to]="index"
+      [ngClass]="first ? 'active' : ''"
+      [attr.aria-current]="first ? true : false"
+      [attr.aria-label]="'Slide ' + (index + 1)"
     ></button>
   </div>
   <div class="carousel-inner">
-    <div class="carousel-item active">
-      <app-slide class="d-block w-100"></app-slide>
-    </div>
-    <div class="carousel-item">
-      <app-slide class="d-block w-100"></app-slide>
-    </div>
-    <div class="carousel-item">
-      <app-slide class="d-block w-100"></app-slide>
-      <!-- <app-placeholder-img class="d-block w-100"></app-placeholder-img> -->
+    <div
+      *ngFor="let item of items; let first = first; let index = index"
+      class="carousel-item"
+      [ngClass]="first ? 'active' : ''"
+    >
+      <app-slide
+        [loading]="loading"
+        [title]="item.title"
+        [description]="item.description"
+        [price]="item.price"
+        [image]="item.image"
+        [callToActionLabel]="item.callToActionLabel"
+        [callToActionUrl]="item.callToActionUrl"
+        class="d-block w-100"
+      ></app-slide>
     </div>
   </div>
   <button

@@ -3,6 +3,7 @@ import { CategoriesService } from './categories.service';
 import { ParentCategoriesService } from './parent-categories.service';
 import { SelectedParentCategoryService } from './selected-parent-category.service';
 import { ProductService } from './product.service';
+import { BannerHomeService } from './banner-home.service';
 
 export const services = [
   ProductService,
@@ -10,6 +11,7 @@ export const services = [
   ParentCategoriesService,
   CategoriesService,
   SelectedParentCategoryService,
+  BannerHomeService,
 ];
 
 export * from './products.service';
@@ -17,3 +19,4 @@ export * from './product.service';
 export * from './categories.service';
 export * from './parent-categories.service';
 export * from './selected-parent-category.service';
+export * from './banner-home.service';
