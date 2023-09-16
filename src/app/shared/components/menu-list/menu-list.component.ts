@@ -176,6 +176,7 @@ export class MenuListComponent {
           id: product.id,
           name: product.name,
           slug: product.slug,
+          highlighted: false,
         },
       };
     });

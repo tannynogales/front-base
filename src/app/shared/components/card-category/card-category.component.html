@@ -1,0 +1,19 @@
+<a [routerLink]="['/home', item.slug]" *ngIf="item">
+  <div
+    class="border bg-primary-subtle rounded p-3 text-center"
+    style="height: 100%; max-width: 200px"
+  >
+    <div
+      class="mx-auto"
+      style="
+        width: 170px;
+        height: 150px;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+      "
+      [ngStyle]="{ 'background-image': 'url(' + item.image + ')' }"
+    ></div>
+    <p class="mt-3 mb-0 mx-0 p-0 texto-limitado">{{ item.name }}</p>
+  </div>
+</a>

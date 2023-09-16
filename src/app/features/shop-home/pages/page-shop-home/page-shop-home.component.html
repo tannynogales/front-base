@@ -60,12 +60,30 @@
         </section>
 
         <h5 class="mb-3">Productos destacados</h5>
-        <section class="d-flex justify-content-between scroll-custom gap-3">
-          <app-card
-            *ngFor="let hotProduct of hotProducts"
-            [item]="hotProduct"
-            [button]="false"
-          ></app-card>
+        <section class="d-flex scroll-custom gap-3">
+          <ng-container
+            *ngIf="
+              categories$ | async as categories;
+              else loadinghigHlightedCategories
+            "
+          >
+            <ng-container
+              *ngIf="!categories.loading; else loadinghigHlightedCategories"
+            >
+              <app-card-category
+                *ngFor="let hotProduct of hotProducts"
+                [item]="hotProduct"
+                [button]="false"
+              ></app-card-category>
+            </ng-container>
+          </ng-container>
+          <ng-template #loadinghigHlightedCategories>
+            <app-card-category-loading></app-card-category-loading>
+            <app-card-category-loading></app-card-category-loading>
+            <app-card-category-loading></app-card-category-loading>
+            <app-card-category-loading></app-card-category-loading>
+            <app-card-category-loading></app-card-category-loading>
+          </ng-template>
         </section>
       </div>
     </div>
@@ -73,12 +91,12 @@
   <div class="row py-5">
     <h3>Ofertas</h3>
     <section class="d-flex justify-content-between scroll-custom d-grid gap-3">
-      <app-card></app-card>
-      <app-card></app-card>
-      <app-card></app-card>
-      <app-card></app-card>
-      <app-card></app-card>
-      <app-card></app-card>
+      <app-card-item-loading></app-card-item-loading>
+      <app-card-item-loading></app-card-item-loading>
+      <app-card-item-loading></app-card-item-loading>
+      <app-card-item-loading></app-card-item-loading>
+      <app-card-item-loading></app-card-item-loading>
+      <app-card-item-loading></app-card-item-loading>
     </section>
   </div>
 </div>
@@ -90,11 +108,11 @@
 <div class="container py-4">
   <h3>Descubre más oportunidades</h3>
   <section class="d-flex justify-content-between scroll-custom d-grid gap-3">
-    <app-card></app-card>
-    <app-card></app-card>
-    <app-card></app-card>
-    <app-card></app-card>
-    <app-card></app-card>
-    <app-card></app-card>
+    <app-card-item-loading></app-card-item-loading>
+    <app-card-item-loading></app-card-item-loading>
+    <app-card-item-loading></app-card-item-loading>
+    <app-card-item-loading></app-card-item-loading>
+    <app-card-item-loading></app-card-item-loading>
+    <app-card-item-loading></app-card-item-loading>
   </section>
 </div>

@@ -6,7 +6,7 @@ import {
   Input,
   ViewChild,
 } from '@angular/core';
-import { Category } from '@core/models';
+import { ParentCategory } from '@core/models';
 
 @Component({
   selector: 'app-menu-top',
@@ -15,12 +15,12 @@ import { Category } from '@core/models';
 })
 export class MenuTopComponent implements AfterViewInit {
   @Input() selected: string = '';
-  @Input() items: Category[] = [
+  @Input() items: ParentCategory[] = [
     {
       id: 1,
       name: 'Home',
       slug: 'home',
-      parent_categories: [],
+      //parent_categories: [],
     },
   ];
 

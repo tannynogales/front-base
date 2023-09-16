@@ -32,7 +32,7 @@ export class CategoriesService {
     this._categories.next(this.categoryObject);
     const url =
       this.baseUrl +
-      `/categories?filters[site][id][$eq]=${this.siteID}&sort=name&populate[parent_categories]=*`;
+      `/categories?filters[site][id][$eq]=${this.siteID}&sort=name&populate[parent_categories]=*&populate[image]=*&pagination[pageSize]=100`;
     // console.log(url);
 
     this.httpClient
@@ -42,10 +42,15 @@ export class CategoriesService {
           return response.data.map((element: any): Category => {
             // if (element.attributes.slug == 'embutidoras-y-churreras')
             // console.log(element.attributes.parent_categories.data);
+
             return {
               id: element.id,
               name: element.attributes.name,
               slug: element.attributes.slug,
+              highlighted: element.attributes?.highlighted ? true : false,
+              image: element.attributes?.image?.data
+                ? element.attributes.image.data.attributes?.formats?.small?.url
+                : '',
               parent_categories:
                 element.attributes.parent_categories?.data.length > 0
                   ? element.attributes.parent_categories.data.map(
@@ -72,6 +77,12 @@ export class CategoriesService {
       ),
       loading: false,
     });
+  }
+
+  get highlightedCategories(): Category[] {
+    return this.categoryObject.data.filter(
+      (category) => category.highlighted === true
+    );
   }
 
   filterReset() {

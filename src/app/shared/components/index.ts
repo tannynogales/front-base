@@ -12,6 +12,8 @@ import { HorizontalStepperComponent } from './horizontal-stepper/horizontal-step
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { CardItemComponent } from './card-item/card-item.component';
 import { CardItemLoadingComponent } from './card-item-loading/card-item-loading.component';
+import { CardCategoryComponent } from './card-category/card-category.component';
+import { CardCategoryLoadingComponent } from './card-category-loading/card-category-loading.component';
 
 export const components = [
   CardComponent,
@@ -28,6 +30,8 @@ export const components = [
   BreadcrumbComponent,
   CardItemComponent,
   CardItemLoadingComponent,
+  CardCategoryComponent,
+  CardCategoryLoadingComponent,
 ];
 
 export * from './card/card.component';
@@ -44,3 +48,5 @@ export * from './horizontal-stepper/horizontal-stepper.component';
 export * from './breadcrumb/breadcrumb.component';
 export * from './card-item-loading/card-item-loading.component';
 export * from './card-item/card-item.component';
+export * from './card-category/card-category.component';
+export * from './card-category-loading/card-category-loading.component';

@@ -74,57 +74,9 @@ export class PageShopHomeComponent implements OnInit, AfterViewInit {
     // this.alturaDiv = this.miDiv.nativeElement.offsetHeight;
     // console.log('ngOnInit', this.alturaDiv);
   }
-
-  hotProducts: Category[] = [
-    {
-      id: 1,
-      name: 'Motores Eléctricos',
-      slug: 'motores-electricos',
-      image: './../../assets/motor.png',
-    },
-    {
-      id: 1,
-      name: 'Picadora de Papas Fritas y Cebollas',
-      slug: 'picadora-de-papas',
-      image: './../../assets/picadora-papas.png',
-    },
-    {
-      id: 1,
-      name: 'Canastillo para Freidoras',
-      slug: 'canastillo',
-      image: './../../assets/canastillo.png',
-    },
-    {
-      id: 1,
-      name: 'Deposito Gastronomico de Acero',
-      slug: 'deposito-gastronomico',
-      image: './../../assets/tachos.png',
-    },
-    {
-      id: 1,
-      name: 'Termómetro',
-      slug: 'termometro',
-      image: './../../assets/termometro.png',
-    },
-
-    {
-      id: 1,
-      name: 'Moledora de Carne',
-      slug: 'moledora',
-      image: './../../assets/moledora.png',
-    },
-
-    {
-      id: 1,
-      name: 'Embutidoras de longanizas',
-      slug: 'embutidoras',
-      image: './../../assets/churros.png',
-    },
-    {
-      id: 1,
-      name: 'Batidoras',
-      slug: 'batidoras',
-      image: './../../assets/batidora.png',
-    },
-  ];
+  get hotProducts(): Category[] {
+    let hotProducts: Category[] = [];
+    hotProducts = this.categoriesService.highlightedCategories;
+    return hotProducts;
+  }
 }

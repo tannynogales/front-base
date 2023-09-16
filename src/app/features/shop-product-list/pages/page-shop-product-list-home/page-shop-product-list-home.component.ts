@@ -6,7 +6,12 @@ import {
   ViewChild,
 } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { Category, CategoryObject, ItemsObject } from '@core/models';
+import {
+  Category,
+  CategoryObject,
+  ItemsObject,
+  ParentCategory,
+} from '@core/models';
 import { CategoriesService, ProductsService } from '@core/services';
 import { Observable } from 'rxjs';
 
@@ -20,7 +25,7 @@ export class PageShopProductListHomeComponent implements OnInit, OnDestroy {
   @ViewChild('offcanvasFilters') offcanvasFilters!: ElementRef;
 
   Arr = Array;
-  menu: Category[] = [
+  menu: ParentCategory[] = [
     {
       id: 1,
       name: 'Panadería y Pastelería',

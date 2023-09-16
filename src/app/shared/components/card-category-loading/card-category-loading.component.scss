@@ -1,0 +1,24 @@
+@import "/src/assets/scss/core";
+
+// Import Bootstrap variables for use within theme
+@import "bootstrap/scss/functions.scss";
+@import "bootstrap/scss/variables.scss";
+@import "bootstrap/scss/mixins.scss";
+
+.texto-limitado {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.5; /* Ajusta la altura de línea según tus necesidades */
+  max-height: 3em; /* Ajusta el valor según el número de líneas deseadas (2 líneas x altura de línea) */
+  -webkit-line-clamp: 2; /* Número máximo de líneas a mostrar */
+  text-overflow: ellipsis;
+}
+
+.placeholder-image {
+  width: 80%;
+  height: 80%;
+  // background-color: $primary;
+  background-color: black;
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+}

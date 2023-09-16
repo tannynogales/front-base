@@ -2,12 +2,11 @@ import { Component, Input } from '@angular/core';
 import { Category } from '@core/models';
 
 @Component({
-  selector: 'app-card',
-  templateUrl: './card.component.html',
-  styleUrls: ['./card.component.scss'],
+  selector: 'app-card-category',
+  templateUrl: './card-category.component.html',
+  styleUrls: ['./card-category.component.scss'],
 })
-export class CardComponent {
-  @Input() loading: boolean = true;
+export class CardCategoryComponent {
   @Input() item: Category = {
     id: 1,
     name: '',
