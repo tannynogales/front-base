@@ -35,6 +35,7 @@
     </div>
   </div>
   <button
+    *ngIf="items.length > 1"
     class="carousel-control-prev"
     type="button"
     data-bs-target="#carouselExampleIndicators"
@@ -48,6 +49,7 @@
     <span class="visually-hidden">Previous</span>
   </button>
   <button
+    *ngIf="items.length > 1"
     class="carousel-control-next"
     type="button"
     data-bs-target="#carouselExampleIndicators"

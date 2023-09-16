@@ -13,12 +13,12 @@ export class CarouselComponent {
     {
       slug: '',
       id: 1,
-      title: '',
-      description: '',
+      title: 'some title',
+      description: 'some log description',
       image: '',
       callToActionLabel: '',
       callToActionUrl: '',
-      price: 0,
+      price: 99.99,
     },
   ];
 }

@@ -38,3 +38,13 @@
     background-size: 80%;
   }
 }
+
+.slide {
+  height: 430px;
+}
+
+@include media-breakpoint-up(md) {
+  .slide {
+    height: auto;
+  }
+}
