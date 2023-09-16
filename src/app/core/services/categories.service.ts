@@ -49,7 +49,8 @@ export class CategoriesService {
               slug: element.attributes.slug,
               highlighted: element.attributes?.highlighted ? true : false,
               image: element.attributes?.image?.data
-                ? element.attributes.image.data.attributes?.formats?.small?.url
+                ? element.attributes.image.data.attributes?.formats?.thumbnail
+                    ?.url
                 : '',
               parent_categories:
                 element.attributes.parent_categories?.data.length > 0
