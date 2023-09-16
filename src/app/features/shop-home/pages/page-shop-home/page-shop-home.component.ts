@@ -10,6 +10,7 @@ import {
 import {
   BannerHomeService,
   CategoriesService,
+  HighlightedHomeProductsService,
   ParentCategoriesService,
   SelectedParentCategoryService,
 } from '@core/services';
@@ -17,6 +18,7 @@ import {
   BannerHomeObject,
   Category,
   CategoryObject,
+  ItemsObject,
   ParentCategoryObject,
 } from '@core/models';
 import { Observable } from 'rxjs';
@@ -41,16 +43,20 @@ export class PageShopHomeComponent implements OnInit, AfterViewInit {
   categories$: Observable<CategoryObject>;
   parentCategories$: Observable<ParentCategoryObject>;
   bannersHome$: Observable<BannerHomeObject>;
+  highlightedHomeProducts$: Observable<ItemsObject>;
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
     private categoriesService: CategoriesService,
     private parentCategoriesService: ParentCategoriesService,
     private selectedParentCategoryService: SelectedParentCategoryService,
-    private bannerHomeService: BannerHomeService
+    private bannerHomeService: BannerHomeService,
+    private highlightedHomeProductsService: HighlightedHomeProductsService
   ) {
     this.categories$ = this.categoriesService.categories$;
     this.parentCategories$ = this.parentCategoriesService.parentCategories$;
     this.bannersHome$ = this.bannerHomeService.bannersHome$;
+    this.highlightedHomeProducts$ =
+      this.highlightedHomeProductsService.highlightedHomeProducts$;
   }
 
   ngAfterViewInit(): void {
@@ -65,6 +71,7 @@ export class PageShopHomeComponent implements OnInit, AfterViewInit {
     this.categoriesService.filterReset();
     this.selectedParentCategoryService.setSelectedParentCategory('all');
     this.bannerHomeService.fetch();
+    this.highlightedHomeProductsService.fetch();
     // this.parentCategoriesService.fetch();
     // this.productsService.fetch();
     // this.productsService.getTest$().subscribe((data) => {

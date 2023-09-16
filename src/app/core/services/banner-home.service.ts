@@ -44,8 +44,8 @@ export class BannerHomeService {
               image: element.attributes?.image?.data
                 ? element.attributes.image.data.attributes?.formats?.small?.url
                 : '',
-              callToActionLabel: element.attributes.callToActionLabel,
-              callToActionUrl: element.attributes.callToActionUrl,
+              callToActionLabel: element.attributes.call_to_action_label,
+              callToActionUrl: element.attributes.call_to_action_url,
               price: parseInt(element.attributes.price),
             };
           });

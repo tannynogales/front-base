@@ -78,11 +78,9 @@
             </ng-container>
           </ng-container>
           <ng-template #loadingHighlightedCategories>
-            <app-card-category-loading></app-card-category-loading>
-            <app-card-category-loading></app-card-category-loading>
-            <app-card-category-loading></app-card-category-loading>
-            <app-card-category-loading></app-card-category-loading>
-            <app-card-category-loading></app-card-category-loading>
+            <app-card-category-loading
+              *ngFor="let i of [1, 2, 3, 4, 5, 6]"
+            ></app-card-category-loading>
           </ng-template>
         </section>
       </div>
@@ -91,12 +89,30 @@
   <div class="row py-5">
     <h3>Ofertas</h3>
     <section class="d-flex justify-content-between scroll-custom d-grid gap-3">
-      <app-card-item-loading></app-card-item-loading>
-      <app-card-item-loading></app-card-item-loading>
-      <app-card-item-loading></app-card-item-loading>
-      <app-card-item-loading></app-card-item-loading>
-      <app-card-item-loading></app-card-item-loading>
-      <app-card-item-loading></app-card-item-loading>
+      <ng-container
+        *ngIf="
+          highlightedHomeProducts$ | async as highlightedHomeProducts;
+          else loadingHighlightedHomeProductsA
+        "
+      >
+        <ng-container
+          *ngIf="
+            !highlightedHomeProducts.loading;
+            else loadingHighlightedHomeProductsA
+          "
+        >
+          <app-card-item
+            *ngFor="let item of highlightedHomeProducts.data.slice(0, 6)"
+            [item]="item"
+            [buttonLabel]="'Comprar'"
+          ></app-card-item>
+        </ng-container>
+      </ng-container>
+      <ng-template #loadingHighlightedHomeProductsA>
+        <app-card-item-loading
+          *ngFor="let i of [1, 2, 3, 4, 5, 6]"
+        ></app-card-item-loading>
+      </ng-template>
     </section>
   </div>
 </div>
@@ -108,11 +124,32 @@
 <div class="container py-4">
   <h3>Descubre más oportunidades</h3>
   <section class="d-flex justify-content-between scroll-custom d-grid gap-3">
-    <app-card-item-loading></app-card-item-loading>
-    <app-card-item-loading></app-card-item-loading>
-    <app-card-item-loading></app-card-item-loading>
-    <app-card-item-loading></app-card-item-loading>
-    <app-card-item-loading></app-card-item-loading>
-    <app-card-item-loading></app-card-item-loading>
+    <ng-container
+      *ngIf="
+        highlightedHomeProducts$ | async as highlightedHomeProducts;
+        else loadingHighlightedHomeProductsA
+      "
+    >
+      <ng-container
+        *ngIf="
+          !highlightedHomeProducts.loading;
+          else loadingHighlightedHomeProductsA
+        "
+      >
+        <app-card-item
+          *ngFor="let item of highlightedHomeProducts.data.slice(6, 12)"
+          [item]="item"
+          [buttonLabel]="'Comprar'"
+        ></app-card-item>
+      </ng-container>
+    </ng-container>
+    <ng-template #loadingHighlightedHomeProductsA>
+      <app-card-item-loading></app-card-item-loading>
+      <app-card-item-loading></app-card-item-loading>
+      <app-card-item-loading></app-card-item-loading>
+      <app-card-item-loading></app-card-item-loading>
+      <app-card-item-loading></app-card-item-loading>
+      <app-card-item-loading></app-card-item-loading>
+    </ng-template>
   </section>
 </div>
