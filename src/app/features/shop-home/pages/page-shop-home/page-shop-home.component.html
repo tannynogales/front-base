@@ -64,11 +64,11 @@
           <ng-container
             *ngIf="
               categories$ | async as categories;
-              else loadinghigHlightedCategories
+              else loadingHighlightedCategories
             "
           >
             <ng-container
-              *ngIf="!categories.loading; else loadinghigHlightedCategories"
+              *ngIf="!categories.loading; else loadingHighlightedCategories"
             >
               <app-card-category
                 *ngFor="let hotProduct of hotProducts"
@@ -77,7 +77,7 @@
               ></app-card-category>
             </ng-container>
           </ng-container>
-          <ng-template #loadinghigHlightedCategories>
+          <ng-template #loadingHighlightedCategories>
             <app-card-category-loading></app-card-category-loading>
             <app-card-category-loading></app-card-category-loading>
             <app-card-category-loading></app-card-category-loading>
