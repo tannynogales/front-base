@@ -1,17 +1,36 @@
-<app-breadcrumb [items]="breadcrumbItems"></app-breadcrumb>
+<!-- <app-breadcrumb
+  [items]="[
+{
+  title: categoryId,
+  url: '/home/'+categoryId,
+},
+{
+  title: productId,
+  url: '',
+},
+]"
+></app-breadcrumb> -->
 
 <section class="py-0 py-md-4">
   <div class="container">
     <div class="row">
       <ng-container *ngIf="product$ | async as product">
         <ng-container *ngIf="!product.loading">
-          <div class="col-lg-6 mb-4 mb-lg-0">
-            <app-shop-product-detail-slider
-              [slides]="
-                getImages(product.data?.primary_image, product.data?.images)
-              "
-            ></app-shop-product-detail-slider>
-          </div>
+          <ng-container
+            *ngIf="
+              getImages(product.data?.primary_image, product.data?.images)
+                .length > 0
+            "
+          >
+            <div class="col-lg-6 mb-4 mb-lg-0">
+              <app-shop-product-detail-slider
+                [slides]="
+                  getImages(product.data?.primary_image, product.data?.images)
+                "
+              ></app-shop-product-detail-slider>
+            </div>
+          </ng-container>
+
           <!-- Item info-->
           <div class="col-lg-6">
             <!-- <div class="badge bg-info small rounded-0 mb-2">Trending</div> -->
@@ -80,14 +99,21 @@
   </div>
 </section>
 
-<div class="container py-5">
-  <h3>¿Quieres ver más?</h3>
-  <section class="d-flex justify-content-between scroll-custom d-grid gap-3">
-    <app-card-item-loading></app-card-item-loading>
-    <app-card-item-loading></app-card-item-loading>
-    <app-card-item-loading></app-card-item-loading>
-    <app-card-item-loading></app-card-item-loading>
-    <app-card-item-loading></app-card-item-loading>
-    <app-card-item-loading></app-card-item-loading>
-  </section>
-</div>
+<ng-container *ngIf="products$ | async as products">
+  <ng-container *ngIf="!products.loading">
+    <div class="container py-5">
+      <h3>¿Quieres ver más?</h3>
+      <section
+        class="d-flex justify-content-between scroll-custom d-grid gap-3"
+      >
+        <app-card-item
+          *ngFor="let product of products.data.slice(0, 5)"
+          [item]="product"
+          [buttonLink]="'/home/' + categoryId + '/' + product.id"
+          [buttonLabel]="'Comprar'"
+        ></app-card-item>
+        <app-card-see-more [url]="'/home/' + categoryId"></app-card-see-more>
+      </section>
+    </div>
+  </ng-container>
+</ng-container>

@@ -14,6 +14,7 @@ import { CardItemLoadingComponent } from './card-item-loading/card-item-loading.
 import { CardCategoryComponent } from './card-category/card-category.component';
 import { CardCategoryLoadingComponent } from './card-category-loading/card-category-loading.component';
 import { PaginationComponent } from './pagination/pagination.component';
+import { CardSeeMoreComponent } from './card-see-more/card-see-more.component';
 
 export const components = [
   CarouselComponent,
@@ -32,6 +33,7 @@ export const components = [
   CardCategoryComponent,
   CardCategoryLoadingComponent,
   PaginationComponent,
+  CardSeeMoreComponent,
 ];
 
 export * from './carousel/carousel.component';
@@ -50,3 +52,4 @@ export * from './card-item/card-item.component';
 export * from './card-category/card-category.component';
 export * from './card-category-loading/card-category-loading.component';
 export * from './pagination/pagination.component';
+export * from './card-see-more/card-see-more.component';

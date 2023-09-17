@@ -52,10 +52,11 @@
                 *ngFor="let product of products.data"
               >
                 <div class="d-flex justify-content-center m-0 p-0">
+                  <!-- TODO use selectedMenuItem instead product.category[0] in order to track where the user came from -->
                   <app-card-item
                     [item]="product"
                     [buttonLink]="
-                      '/home/' + selectedMenuItem + '/' + product.id
+                      '/home/' + product.category[0] + '/' + product.id
                     "
                     [buttonLabel]="'Comprar'"
                   ></app-card-item>

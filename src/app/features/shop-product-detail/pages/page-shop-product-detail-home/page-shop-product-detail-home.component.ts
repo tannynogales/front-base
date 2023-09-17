@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { ItemObject } from '@core/models';
-import { ProductService } from '@core/services';
+import { ItemObject, ItemsObject } from '@core/models';
+import { ProductService, ProductsService } from '@core/services';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -13,25 +13,18 @@ export class PageShopProductDetailHomeComponent {
   public href: string = '';
   isShareEnable = false;
   productId: string = '';
+  categoryId: string = '';
   product$: Observable<ItemObject>;
-
-  breadcrumbItems = [
-    {
-      title: 'Revolvedora',
-      url: '/home/revolvedora-de-masas',
-    },
-    {
-      title: 'Resolvedora de 15 kilos',
-      url: '/home/revolvedora-de-masas/resolvedora-15-kilos',
-    },
-  ];
+  products$: Observable<ItemsObject>;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    public productService: ProductService
+    public productService: ProductService,
+    private productsService: ProductsService
   ) {
     this.product$ = this.productService.products$;
+    this.products$ = this.productsService.products$;
   }
 
   ngOnInit() {
@@ -41,10 +34,13 @@ export class PageShopProductDetailHomeComponent {
 
     // TODO unsuscribe
     this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
+      const categoryId = params.get('categoryId');
       const productId = params.get('productId');
-      if (productId !== null) {
+      if (productId !== null && categoryId !== null) {
         this.productId = productId;
+        this.categoryId = categoryId;
         this.productService.fetch(productId);
+        this.productsService.fetch(categoryId); // TODO dont use categoryId and get the category from the product it self, in order to use selectedMenuItem instead product.category[0] in app-shop-parent-category-home
       }
     });
   }
