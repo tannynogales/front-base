@@ -1,4 +1,3 @@
-import { CardComponent } from './card/card.component';
 import { CarouselComponent } from './carousel/carousel.component';
 import { MenuListComponent } from './menu-list/menu-list.component';
 import { MenuTopComponent } from './menu-top/menu-top.component';
@@ -14,9 +13,9 @@ import { CardItemComponent } from './card-item/card-item.component';
 import { CardItemLoadingComponent } from './card-item-loading/card-item-loading.component';
 import { CardCategoryComponent } from './card-category/card-category.component';
 import { CardCategoryLoadingComponent } from './card-category-loading/card-category-loading.component';
+import { PaginationComponent } from './pagination/pagination.component';
 
 export const components = [
-  CardComponent,
   CarouselComponent,
   MenuListComponent,
   MenuTopComponent,
@@ -32,9 +31,9 @@ export const components = [
   CardItemLoadingComponent,
   CardCategoryComponent,
   CardCategoryLoadingComponent,
+  PaginationComponent,
 ];
 
-export * from './card/card.component';
 export * from './carousel/carousel.component';
 export * from './menu-list/menu-list.component';
 export * from './menu-top/menu-top.component';
@@ -50,3 +49,4 @@ export * from './card-item-loading/card-item-loading.component';
 export * from './card-item/card-item.component';
 export * from './card-category/card-category.component';
 export * from './card-category-loading/card-category-loading.component';
+export * from './pagination/pagination.component';

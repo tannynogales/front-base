@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment.development';
 @Injectable({
   providedIn: 'root',
 })
-export class ProductsService {
+export class ParentCategoryProductsService {
   baseUrl = environment.strapi + '/api';
   siteID = environment.strapiSiteID;
 
@@ -31,7 +31,7 @@ export class ProductsService {
 
   constructor(private httpClient: HttpClient) {}
 
-  get products$(): Observable<ItemsObject> {
+  get parentCategoryProducts$(): Observable<ItemsObject> {
     return this._products.asObservable();
   }
 
@@ -45,12 +45,12 @@ export class ProductsService {
     return this._order;
   }
 
-  fetch(categorySlug: string, page: number = 1) {
+  fetch(parentCategorySlug: string, page: number = 1) {
     this.productsObject.loading = true;
     this._products.next(this.productsObject);
     const url =
       this.baseUrl +
-      `/products?filters[categories][slug][$eq]=${categorySlug}&[categories][site][id][$eq]=${this.siteID}&populate[primary_image]=*&populate[categories]=*&populate[product_attribute_values]=*&pagination[pageSize]=12&pagination[page]=${page}&sort=price:${this.order}`;
+      `/products?filters[categories][parent_categories][slug][$eq]=${parentCategorySlug}&[categories][site][id][$eq]=${this.siteID}&populate[primary_image]=*&populate[categories]=*&populate[product_attribute_values]=*&pagination[pageSize]=12&pagination[page]=${page}&sort=price:${this.order}`;
     // console.log(url);
     this.httpClient
       .get<Response>(url)
@@ -101,18 +101,4 @@ export class ProductsService {
         this._products.next(this.productsObject);
       });
   }
-
-  // getTest$(): Observable<CategoryData> {
-  //   return of({
-  //     data: [
-  //       {
-  //         id: 1,
-  //         name: 'Product 1',
-  //         slug: 'product-1',
-  //         image: 'https://via.placeholder.com/150',
-  //       },
-  //     ],
-  //     loading: true,
-  //   });
-  // }
 }

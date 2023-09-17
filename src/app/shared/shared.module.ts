@@ -8,17 +8,11 @@ import { NouisliderModule } from 'ng2-nouislider';
 import * as sharedComponents from './components';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { CardItemLoadingComponent } from './components/card-item-loading/card-item-loading.component';
-import { CardItemComponent } from './components/card-item/card-item.component';
 
 import { MarkdownModule } from 'ngx-markdown';
 
 @NgModule({
-  declarations: [
-    ...sharedComponents.components,
-    CardItemLoadingComponent,
-    CardItemComponent,
-  ],
+  declarations: [...sharedComponents.components],
   imports: [
     NgOptimizedImage,
     CommonModule,

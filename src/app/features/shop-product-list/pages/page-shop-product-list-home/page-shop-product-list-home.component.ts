@@ -24,7 +24,6 @@ import { Observable } from 'rxjs';
 export class PageShopProductListHomeComponent implements OnInit, OnDestroy {
   @ViewChild('offcanvasFilters') offcanvasFilters!: ElementRef;
 
-  Arr = Array;
   menu: ParentCategory[] = [
     {
       id: 1,

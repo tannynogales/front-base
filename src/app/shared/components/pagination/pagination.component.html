@@ -1,0 +1,26 @@
+<nav *ngIf="pagination.pageCount > 1" aria-label="Page navigation example">
+  <ul class="pagination justify-content-end">
+    <li
+      *ngFor="let item of Arr(pagination.pageCount); let index = index"
+      class="page-item"
+      [ngClass]="{
+        active: index + 1 == pagination.page
+      }"
+    >
+      <ng-container *ngIf="index + 1 == pagination.page; else link">
+        <span class="page-link">{{ index + 1 }}</span>
+      </ng-container>
+      <ng-template #link
+        ><a
+          style="cursor: pointer"
+          class="page-link"
+          (click)="clickOnPagination(index + 1)"
+          >{{ index + 1 }}</a
+        >
+      </ng-template>
+    </li>
+    <!-- <li class="page-item">
+    <a class="page-link" href="#">Siguiente</a>
+  </li> -->
+  </ul>
+</nav>

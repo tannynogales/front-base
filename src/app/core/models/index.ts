@@ -4,3 +4,4 @@ export * from './parent-category.model';
 export * from './attribute.model';
 export * from './response.model';
 export * from './banner-home.model';
+export * from './pagination.model';

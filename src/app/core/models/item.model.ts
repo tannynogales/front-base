@@ -1,3 +1,5 @@
+import { Pagination } from './pagination.model';
+
 export interface Item {
   //[key: string]: string | number;
   slug: string;
@@ -17,12 +19,7 @@ export interface ItemsObject {
   data: Item[];
   loading: boolean;
   meta: {
-    pagination: {
-      page: number;
-      pageCount: number;
-      pageSize: number;
-      total: number;
-    };
+    pagination: Pagination;
   };
 }
 export interface ItemObject {
