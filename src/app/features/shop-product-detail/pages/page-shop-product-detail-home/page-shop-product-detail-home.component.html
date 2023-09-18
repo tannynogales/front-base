@@ -65,7 +65,7 @@
             <div class="d-flex align-items-center mb-4">
               <a
                 class="btn btn-primary btn-sm py-2 border-bottom-0 px-5 me-3"
-                href="cart.html"
+                (click)="addProduct(product)"
               >
                 <i class="fas fa-shopping-bag py-1 me-2"></i>Agregar al carro</a
               ><a class="p-0 reset-anchor d-inline-block mx-2" href="#"
@@ -103,16 +103,24 @@
   <ng-container *ngIf="!products.loading">
     <div class="container py-5">
       <h3>¿Quieres ver más?</h3>
-      <section
-        class="d-flex justify-content-between scroll-custom d-grid gap-3"
-      >
-        <app-card-item
-          *ngFor="let product of products.data.slice(0, 5)"
-          [item]="product"
-          [buttonLink]="'/home/' + categoryId + '/' + product.id"
-          [buttonLabel]="'Comprar'"
-        ></app-card-item>
-        <app-card-see-more [url]="'/home/' + categoryId"></app-card-see-more>
+      <section class="d-flex justify-content-start scroll-custom d-grid gap-3">
+        <ng-container
+          *ngFor="let product of filterProducts(products.data).slice(0, 5)"
+        >
+          <ng-container *ngIf="product.id != productId; else repeated">
+            <app-card-item
+              [item]="product"
+              [buttonLink]="'/home/' + categoryId + '/' + product.id"
+              [buttonLabel]="'Comprar'"
+            ></app-card-item>
+          </ng-container>
+          <ng-template #repeated> </ng-template>
+        </ng-container>
+
+        <app-card-see-more
+          *ngIf="filterProducts(products.data).length > 5"
+          [url]="'/home/' + categoryId"
+        ></app-card-see-more>
       </section>
     </div>
   </ng-container>

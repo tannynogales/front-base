@@ -143,78 +143,73 @@
           ></button>
         </div>
         <div class="offcanvas-body">
-          <div
-            *ngFor="let product of products; let last = last"
-            [ngClass]="{ 'border-bottom': !last }"
-            class="row d-flex align-items-center py-2 border-bottom"
-          >
-            <div class="col-auto">
-              <div
-                style="
-                  height: 80px;
-                  width: 80px;
-                  background-color: blanchedalmond;
-                "
-              ></div>
-            </div>
-            <div class="col">
-              <p class="fs-6 lh-sm">
-                Revolvedora de masas para 15 [Kg], sin tapas laterales<br />
-                <span class="text-muted">$ 279.690 CLP</span>
-              </p>
-            </div>
-            <div class="col-auto">
-              <div
-                class="d-flex flex-column border border-light-subtle rounded-top rounded-bottom"
-              >
-                <button
-                  class="btn btn-light btn-sm p-0 rounded-bottom-0"
-                  aria-label="Increase product quantity"
-                >
-                  <i class="fa-thin fa-angle-up"></i>
-                </button>
+          <ng-container *ngIf="shoppingCart$ | async as shoppingCart">
+            <div
+              *ngFor="let product of shoppingCart.products; let last = last"
+              [ngClass]="{ 'border-bottom': !last }"
+              class="row d-flex align-items-center py-2 border-bottom"
+            >
+              <div class="col-auto">
                 <div
-                  class="text-center bg-light border-0 py-1 fs-6 fw-lighter lh-sm"
-                  style="width: 30px"
-                >
-                  1
-                </div>
-                <!-- <input
-                  class="text-center border-0 my-1 fs-6 fw-lighter lh-sm"
-                  value="1"
-                  type="number"
-                  style="width: 30px"
-                /> -->
-                <button
-                  class="btn btn-light btn-sm p-0 rounded-top-0"
-                  aria-label="Decrease product quantity"
-                >
-                  <i class="fa-thin fa-angle-down"></i>
-                </button>
+                  class="rounded border"
+                  style="
+                    height: 80px;
+                    width: 80px;
+                    background-position: center center;
+                    background-repeat: no-repeat;
+                    background-size: contain;
+                  "
+                  [ngStyle]="{
+                    'background-image': 'url(' + product.primary_image + ')'
+                  }"
+                ></div>
               </div>
-            </div>
-            <!-- <div class="col-auto">
+              <div class="col">
+                <p class="fs-6 lh-sm">
+                  {{ product.name }}<br />
+                  <span class="text-muted">$ {{ product.price }} CLP</span>
+                </p>
+              </div>
+              <div class="col-auto">
+                <app-vertical-counter
+                  [quantity]="product.quantity"
+                  (increase$)="increaseQuantity($event, product.id)"
+                  (decrease$)="
+                    decreaseQuantity($event, product.id, product.quantity)
+                  "
+                ></app-vertical-counter>
+              </div>
+              <!-- <div class="col-auto">
                 <i class="fa-sharp fa-regular fa-trash"></i>
               </div> -->
-          </div>
-
-          <br />
-          <div class="small">
-            <div class="row px-3 py-2 mb-1 bg-light text-muted">
-              <div class="col text-uppercase">
-                <strong>Total Bruto</strong>
+            </div>
+            <p *ngIf="shoppingCart.products.length == 0">No hay productos</p>
+            <br />
+            <div *ngIf="shoppingCart.products.length > 0" class="small">
+              <div class="row px-3 py-2 mb-1 bg-light text-muted">
+                <div class="col text-uppercase">
+                  <strong>Total Bruto</strong>
+                </div>
+                <div class="col-auto">
+                  $ {{ shoppingCart.totalBruto | currency : "CLP" }}
+                </div>
               </div>
-              <div class="col-auto">$ 20.001</div>
+              <div class="row px-3 py-2 mb-1 bg-light text-muted">
+                <div class="col text-uppercase"><strong>IVA</strong></div>
+                <div class="col-auto">
+                  $ {{ shoppingCart.IVA | currency : "CLP" }}
+                </div>
+              </div>
+              <div class="row px-3 py-2 mb-1 bg-light text-dark">
+                <div class="col text-uppercase">
+                  <strong>Total Neto</strong>
+                </div>
+                <div class="col-auto">
+                  $ {{ shoppingCart.totalNeto | currency : "CLP" }}
+                </div>
+              </div>
             </div>
-            <div class="row px-3 py-2 mb-1 bg-light text-muted">
-              <div class="col text-uppercase"><strong>IVA</strong></div>
-              <div class="col-auto">$ 5.001</div>
-            </div>
-            <div class="row px-3 py-2 mb-1 bg-light text-dark">
-              <div class="col text-uppercase"><strong>Total Neto</strong></div>
-              <div class="col-auto">$ 20.001</div>
-            </div>
-          </div>
+          </ng-container>
         </div>
         <div
           class="d-grid p-3 border-top"

@@ -1,3 +1,4 @@
+import { ShoppingCartService } from './shopping-cart.service';
 import { ProductsService } from './products.service';
 import { CategoriesService } from './categories.service';
 import { ParentCategoriesService } from './parent-categories.service';
@@ -8,6 +9,7 @@ import { HighlightedHomeProductsService } from './highlighted-home-products.serv
 import { ParentCategoryProductsService } from './parent-category-products.service';
 
 export const services = [
+  ShoppingCartService,
   ProductService,
   ProductsService,
   ParentCategoriesService,
@@ -18,6 +20,7 @@ export const services = [
   ParentCategoryProductsService,
 ];
 
+export * from './shopping-cart.service';
 export * from './products.service';
 export * from './product.service';
 export * from './categories.service';

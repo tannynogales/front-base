@@ -1,7 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ɵsetAlternateWeakRefImpl } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { ItemObject, ItemsObject } from '@core/models';
-import { ProductService, ProductsService } from '@core/services';
+import { ItemObject, ItemsObject, Item } from '@core/models';
+import {
+  ProductService,
+  ProductsService,
+  ShoppingCartService,
+} from '@core/services';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -12,7 +16,7 @@ import { Observable } from 'rxjs';
 export class PageShopProductDetailHomeComponent {
   public href: string = '';
   isShareEnable = false;
-  productId: string = '';
+  productId!: number;
   categoryId: string = '';
   product$: Observable<ItemObject>;
   products$: Observable<ItemsObject>;
@@ -21,7 +25,8 @@ export class PageShopProductDetailHomeComponent {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     public productService: ProductService,
-    private productsService: ProductsService
+    private productsService: ProductsService,
+    private shoppingCartService: ShoppingCartService
   ) {
     this.product$ = this.productService.products$;
     this.products$ = this.productsService.products$;
@@ -37,7 +42,7 @@ export class PageShopProductDetailHomeComponent {
       const categoryId = params.get('categoryId');
       const productId = params.get('productId');
       if (productId !== null && categoryId !== null) {
-        this.productId = productId;
+        this.productId = parseInt(productId);
         this.categoryId = categoryId;
         this.productService.fetch(productId);
         this.productsService.fetch(categoryId); // TODO dont use categoryId and get the category from the product it self, in order to use selectedMenuItem instead product.category[0] in app-shop-parent-category-home
@@ -56,6 +61,7 @@ export class PageShopProductDetailHomeComponent {
       .catch((error) => console.error('Error al compartir:', error));
   }
 
+  // Une en un sólo arreglo imagePrimary y imagesSecundary[]
   getImages(
     imagePrimary: string | undefined,
     imagesSecundary: Array<string> | undefined
@@ -71,5 +77,22 @@ export class PageShopProductDetailHomeComponent {
     }
 
     return images;
+  }
+
+  addProduct(product: ItemObject) {
+    if (product.data)
+      this.shoppingCartService.addProduct({
+        id: this.productId,
+        url: `/home/${this.categoryId}/${this.productId}`,
+        name: product.data.name,
+        price: product.data.price,
+        primary_image: product.data.primary_image,
+        quantity: 1,
+      });
+    alert('Producto añadido al carro');
+  }
+
+  filterProducts(products: Item[]): Item[] {
+    return products.filter((item) => item.id != this.productId);
   }
 }

@@ -1,0 +1,30 @@
+<div
+  class="d-flex flex-column border border-light-subtle rounded-top rounded-bottom"
+>
+  <button
+    class="btn btn-light btn-sm p-0 rounded-bottom-0"
+    aria-label="Increase product quantity"
+    (click)="increase()"
+  >
+    <i class="fa-thin fa-angle-up"></i>
+  </button>
+  <div
+    class="text-center bg-light border-0 py-1 fs-6 fw-lighter lh-sm"
+    style="width: 30px"
+  >
+    {{ quantity }}
+  </div>
+  <!-- <input
+class="text-center border-0 my-1 fs-6 fw-lighter lh-sm"
+value="1"
+type="number"
+style="width: 30px"
+/> -->
+  <button
+    class="btn btn-light btn-sm p-0 rounded-top-0"
+    aria-label="Decrease product quantity"
+    (click)="decrease()"
+  >
+    <i class="fa-thin fa-angle-down"></i>
+  </button>
+</div>
