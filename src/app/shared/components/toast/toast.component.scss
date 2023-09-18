@@ -1,1 +1,22 @@
 @import "/src/assets/scss/core";
+
+// Import Bootstrap variables for use within theme
+@import "bootstrap/scss/functions.scss";
+@import "bootstrap/scss/variables.scss";
+@import "bootstrap/scss/mixins.scss";
+
+.toast-container {
+  bottom: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+// Mobile first, luego se manejan estilos para otras resoluciones
+@include media-breakpoint-up(sm) {
+  .toast-container {
+    bottom: 0px;
+    left: auto;
+    right: 5px;
+    transform: translateX(0%);
+  }
+}
