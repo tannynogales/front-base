@@ -1,4 +1,4 @@
-import { Component, ɵsetAlternateWeakRefImpl } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { ItemObject, ItemsObject, Item } from '@core/models';
 import {
@@ -7,7 +7,7 @@ import {
   ShoppingCartService,
 } from '@core/services';
 import { Observable } from 'rxjs';
-
+import { ToastService } from '@shared/components/toast/toast.service';
 @Component({
   selector: 'app-page-shop-product-detail-home',
   templateUrl: './page-shop-product-detail-home.component.html',
@@ -26,7 +26,8 @@ export class PageShopProductDetailHomeComponent {
     private router: Router,
     public productService: ProductService,
     private productsService: ProductsService,
-    private shoppingCartService: ShoppingCartService
+    private shoppingCartService: ShoppingCartService,
+    private toastService: ToastService
   ) {
     this.product$ = this.productService.products$;
     this.products$ = this.productsService.products$;
@@ -89,7 +90,12 @@ export class PageShopProductDetailHomeComponent {
         primary_image: product.data.primary_image,
         quantity: 1,
       });
-    alert('Producto añadido al carro');
+    // alert('Producto añadido al carro');
+    this.toastService.addToast({
+      title: 'Éxito !',
+      message: 'Producto añadido al carro',
+      state: 'primary',
+    });
   }
 
   filterProducts(products: Item[]): Item[] {

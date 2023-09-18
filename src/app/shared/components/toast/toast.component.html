@@ -1,0 +1,29 @@
+<div
+  class="position-fixed top-0 end-0 p-3"
+  style="z-index: 1000000000000000000000000"
+>
+  <ng-container *ngFor="let toast of toasts; let i = index">
+    <div
+      #singleToast
+      role="alert"
+      aria-live="assertive"
+      aria-atomic="true"
+      class="toast fade mb-2"
+      data-bs-autohide="false"
+    >
+      <div class="toast-header">
+        <strong class="me-auto">{{ toast.title || "Mensaje" }}</strong>
+        <small>{{ toast.date | date : "hh:mm:ss" }}</small>
+        <!-- <small>{{toastDate | date:'hh:mm:ss dd-MM-yyyy'}}</small> -->
+        <button
+          (click)="deleteToast(i, this)"
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="toast"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="toast-body" [innerHTML]="toast.message"></div>
+    </div>
+  </ng-container>
+</div>
