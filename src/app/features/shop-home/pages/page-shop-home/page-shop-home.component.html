@@ -105,6 +105,7 @@
             *ngFor="let item of highlightedHomeProducts.data.slice(0, 6)"
             [item]="item"
             [buttonLabel]="'Comprar'"
+            [buttonLink]="'/home/' + item.category[0] + '/' + item.id"
           ></app-card-item>
         </ng-container>
       </ng-container>
@@ -140,6 +141,7 @@
           *ngFor="let item of highlightedHomeProducts.data.slice(6, 20)"
           [item]="item"
           [buttonLabel]="'Comprar'"
+          [buttonLink]="'/home/' + item.category[0] + '/' + item.id"
         ></app-card-item>
       </ng-container>
     </ng-container>
