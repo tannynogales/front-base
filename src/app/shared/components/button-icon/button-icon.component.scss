@@ -1,0 +1,28 @@
+// Import Bootstrap variables for use within theme
+
+@import "/src/assets/scss/core";
+// @import "bootstrap/scss/functions.scss";
+// @import "bootstrap/scss/variables.scss";
+// @import "bootstrap/scss/mixins.scss";
+
+g path,
+rect {
+  transition: all 0.5s ease;
+}
+
+.icon {
+  cursor: pointer;
+  border: $primary 0.5px solid;
+
+  rect {
+    &:hover {
+      fill: $primary;
+    }
+  }
+
+  &:hover {
+    g path {
+      stroke: white;
+    }
+  }
+}

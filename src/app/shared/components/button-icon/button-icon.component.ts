@@ -6,7 +6,8 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./button-icon.component.scss'],
 })
 export class ButtonIconComponent {
-  @Input() icon: 'cart-shopping' | 'user' | 'bell' = 'bell';
-  @Input() badge!: number;
-  style = 'fa-regular fa-';
+  @Input() icon: 'cart-shopping' | 'search' = 'search';
+  @Input() badge: number = 0;
+  size = '40';
+  strokeWidth = 0.8399999999999999;
 }
