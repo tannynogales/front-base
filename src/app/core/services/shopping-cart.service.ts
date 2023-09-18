@@ -55,7 +55,7 @@ export class ShoppingCartService {
       return item;
     });
 
-    console.log(doExist, product.id);
+    // console.log(doExist, product.id);
     if (!doExist) {
       nuevosProductos.push({
         ...product,

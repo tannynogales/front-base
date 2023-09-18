@@ -92,9 +92,9 @@ export class PageShopProductDetailHomeComponent {
       });
     // alert('Producto añadido al carro');
     this.toastService.addToast({
-      title: 'Éxito !',
+      // title: 'Éxito !',
       message: 'Producto añadido al carro',
-      state: 'primary',
+      // state: 'primary',
     });
   }
 

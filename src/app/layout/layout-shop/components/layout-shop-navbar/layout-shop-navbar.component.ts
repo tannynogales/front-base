@@ -10,6 +10,7 @@ import {
   SelectedParentCategoryService,
   ShoppingCartService,
 } from '@core/services';
+import { ToastService } from '@shared/components/toast/toast.service';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -29,7 +30,8 @@ export class LayoutShopNavbarComponent {
     private categoriesService: CategoriesService,
     private parentCategoriesService: ParentCategoriesService,
     private selectedParentCategoryService: SelectedParentCategoryService,
-    private shoppingCartService: ShoppingCartService
+    private shoppingCartService: ShoppingCartService,
+    private toastService: ToastService
   ) {
     this.categories$ = this.categoriesService.categories$;
     this.parentCategories$ = this.parentCategoriesService.parentCategories$;
@@ -67,9 +69,14 @@ export class LayoutShopNavbarComponent {
     const quantityDecreased = quantity - 1;
     if (quantityDecreased <= 0) {
       const confirm = window.confirm('¿Seguro que desea eliminar el producto?');
-      if (confirm) this.shoppingCartService.removeProduct(productID);
+      if (confirm) {
+        this.shoppingCartService.removeProduct(productID);
+        this.toastService.addToast({
+          message: 'Producto eliminado del carro',
+        });
+      }
     } else {
-      console.log(quantityDecreased, quantity);
+      // console.log(quantityDecreased, quantity);
       this.shoppingCartService.addProduct(
         {
           id: productID,
