@@ -12,4 +12,5 @@ export interface ShoppingCartObject {
   totalBruto: number;
   IVA: number;
   totalNeto: number;
+  totalProducts: number;
 }

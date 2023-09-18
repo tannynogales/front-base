@@ -12,6 +12,7 @@ export class ShoppingCartService {
     totalBruto: 0,
     IVA: 0,
     totalNeto: 0,
+    totalProducts: 0,
   };
 
   private _shoppingCart: BehaviorSubject<ShoppingCartObject> =
@@ -25,17 +26,23 @@ export class ShoppingCartService {
 
   private calculateTotalValues() {
     const IVA: number = 0.19;
-    const initialValue: number = 0;
+    const totalBrutoInitialValue: number = 0;
     const { products } = this.shoppingCartObject;
 
     const totalBruto = products.reduce(
       (accumulator, product) => accumulator + product.price * product.quantity,
-      initialValue
+      totalBrutoInitialValue
+    );
+
+    const totalProducts = products.reduce(
+      (accumulator, product) => accumulator + product.quantity,
+      0
     );
 
     this.shoppingCartObject.totalBruto = totalBruto;
     this.shoppingCartObject.IVA = totalBruto * IVA;
     this.shoppingCartObject.totalNeto = totalBruto * (1 + IVA);
+    this.shoppingCartObject.totalProducts = totalProducts;
   }
 
   addProduct(product: ShoppingCartItem, quantity: number = 1) {
