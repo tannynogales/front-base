@@ -51,11 +51,10 @@ export class PageShopProductDetailHomeComponent {
     });
   }
 
-  share() {
+  share(title: string | undefined) {
     navigator
       .share({
-        title: 'Título del contenido compartido',
-        text: 'Texto del contenido compartido',
+        text: title,
         url: this.href,
       })
       // .then(() => {})

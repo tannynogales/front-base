@@ -73,7 +73,7 @@
               ><a
                 *ngIf="isShareEnable"
                 class="p-0 reset-anchor d-inline-block mx-2"
-                (click)="share()"
+                (click)="share(product.data?.name)"
                 ><i class="fas fa-share-alt"></i
               ></a>
             </div>
