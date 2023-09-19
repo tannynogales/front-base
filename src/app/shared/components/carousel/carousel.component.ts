@@ -1,4 +1,10 @@
-import { Component, Input } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Input,
+  ViewChild,
+} from '@angular/core';
 import { BannerHome } from '@core/models';
 
 @Component({
@@ -6,8 +12,9 @@ import { BannerHome } from '@core/models';
   templateUrl: './carousel.component.html',
   styleUrls: ['./carousel.component.scss'],
 })
-export class CarouselComponent {
+export class CarouselComponent implements AfterViewInit {
   @Input() loading: boolean = false;
+  @ViewChild('carouselHome') carousel!: ElementRef;
 
   @Input() items: BannerHome[] = [
     {
@@ -21,4 +28,17 @@ export class CarouselComponent {
       price: 99.99,
     },
   ];
+
+  ngAfterViewInit(): void {
+    const myCarousel = this.carousel.nativeElement;
+
+    // let carouselInstance = bootstrap.Carousel.getOrCreateInstance(myCarousel);
+    const carousel = new bootstrap.Carousel(myCarousel, {
+      ride: 'carousel',
+      interval: 3000,
+      touch: true,
+    });
+  }
+
+  // TODO on destroy carrousel
 }
