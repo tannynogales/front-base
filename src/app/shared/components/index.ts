@@ -17,6 +17,7 @@ import { PaginationComponent } from './pagination/pagination.component';
 import { CardSeeMoreComponent } from './card-see-more/card-see-more.component';
 import { VerticalCounterComponent } from './vertical-counter/vertical-counter.component';
 import { ToastComponent } from './toast/toast.component';
+import { BlobComponent } from './blob/blob.component';
 
 export const components = [
   CarouselComponent,
@@ -38,6 +39,7 @@ export const components = [
   CardSeeMoreComponent,
   VerticalCounterComponent,
   ToastComponent,
+  BlobComponent,
 ];
 
 export * from './carousel/carousel.component';
@@ -59,3 +61,4 @@ export * from './pagination/pagination.component';
 export * from './card-see-more/card-see-more.component';
 export * from './vertical-counter/vertical-counter.component';
 export * from './toast/toast.component';
+export * from './blob/blob.component';

@@ -164,7 +164,9 @@
               <div class="col">
                 <p class="fs-6 lh-sm">
                   {{ product.name }}<br />
-                  <span class="text-muted">$ {{ product.price }} CLP</span>
+                  <span class="text-muted">
+                    {{ product.price | currency : "$ " : "symbol" : "1.0-0" }}
+                  </span>
                 </p>
               </div>
               <div class="col-auto">
@@ -188,13 +190,16 @@
                   <strong>Total Bruto</strong>
                 </div>
                 <div class="col-auto">
-                  $ {{ shoppingCart.totalBruto | currency : "CLP" }}
+                  {{
+                    shoppingCart.totalBruto
+                      | currency : "$ " : "symbol" : "1.0-0"
+                  }}
                 </div>
               </div>
               <div class="row px-3 py-2 mb-1 bg-light text-muted">
                 <div class="col text-uppercase"><strong>IVA</strong></div>
                 <div class="col-auto">
-                  $ {{ shoppingCart.IVA | currency : "CLP" }}
+                  {{ shoppingCart.IVA | currency : "$ " : "symbol" : "1.0-0" }}
                 </div>
               </div>
               <div class="row px-3 py-2 mb-1 bg-light text-dark">
@@ -202,7 +207,10 @@
                   <strong>Total Neto</strong>
                 </div>
                 <div class="col-auto">
-                  $ {{ shoppingCart.totalNeto | currency : "CLP" }}
+                  {{
+                    shoppingCart.totalNeto
+                      | currency : "$ " : "symbol" : "1.0-0"
+                  }}
                 </div>
               </div>
             </div>

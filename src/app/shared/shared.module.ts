@@ -28,6 +28,7 @@ import { MarkdownModule } from 'ngx-markdown';
     FormsModule,
     HttpClientModule,
     MarkdownModule,
+    NgOptimizedImage,
   ],
 })
 export class SharedModule {}
