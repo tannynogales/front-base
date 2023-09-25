@@ -6,3 +6,4 @@ export * from './response.model';
 export * from './banner-home.model';
 export * from './pagination.model';
 export * from './shopping-cart.model';
+export * from './user.model';
