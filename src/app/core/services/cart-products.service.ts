@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { ShoppingCartItem, ShoppingCartObject } from '@core/models';
 import { BehaviorSubject, Observable } from 'rxjs';
-
+// TODO pendiente refactorizar klas funciones apra que seqan mas entendibles y reutilizables y con una soal responsabilidad
 @Injectable({
   providedIn: 'root',
 })
-export class ShoppingCartService {
+export class CartProductsService {
   // Initialize data
   private shoppingCartObject: ShoppingCartObject = {
     products: [],

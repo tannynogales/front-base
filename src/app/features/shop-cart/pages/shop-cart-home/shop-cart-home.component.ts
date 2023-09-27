@@ -1,10 +1,6 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { Component } from '@angular/core';
+import { CartUserService } from '@core/services';
+import { CartUserObject } from '@core/models';
 
 @Component({
   selector: 'app-shop-cart-home',
@@ -12,16 +8,21 @@ import {
   styleUrls: ['./shop-cart-home.component.scss'],
 })
 export class ShopCartHomeComponent {
-  deviceorientation = '';
+  name!: string;
+  email!: string;
 
-  constructor() {
-    // window.addEventListener('deviceorientation', (event) => {
-    //   // Obtener los valores de inclinación (en grados) en los ejes X e Y
-    //   const beta = event.beta; // Inclinación hacia adelante/atrás (eje X)
-    //   const gamma = event.gamma; // Inclinación hacia los lados (eje Y)
-    //   this.deviceorientation = `translate(${gamma}px, ${beta}px)`;
-    //   // Ajusta la transformación CSS en función de los valores del giroscopio
-    //   // background.style.transform = `translate(${gamma}px, ${beta}px)`;
-    // });
+  constructor(private cartUserService: CartUserService) {
+    // TODO: unsubscribe
+    this.cartUserService.cartUser$.subscribe((user) => {
+      this.name = user.name;
+      this.email = user.email;
+    });
+  }
+
+  setCartUser(user: CartUserObject) {
+    this.cartUserService.set({
+      email: user.email,
+      name: user.name,
+    });
   }
 }

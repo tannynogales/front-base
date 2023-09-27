@@ -4,7 +4,7 @@ import { ItemObject, ItemsObject, Item } from '@core/models';
 import {
   ProductService,
   ProductsService,
-  ShoppingCartService,
+  CartProductsService,
 } from '@core/services';
 import { Observable } from 'rxjs';
 import { ToastService } from '@shared/components/toast/toast.service';
@@ -26,7 +26,7 @@ export class PageShopProductDetailHomeComponent {
     private router: Router,
     public productService: ProductService,
     private productsService: ProductsService,
-    private shoppingCartService: ShoppingCartService,
+    private cartProductsService: CartProductsService,
     private toastService: ToastService
   ) {
     this.product$ = this.productService.products$;
@@ -81,7 +81,7 @@ export class PageShopProductDetailHomeComponent {
 
   addProduct(product: ItemObject) {
     if (product.data)
-      this.shoppingCartService.addProduct({
+      this.cartProductsService.addProduct({
         id: this.productId,
         url: `/home/${this.categoryId}/${this.productId}`,
         name: product.data.name,

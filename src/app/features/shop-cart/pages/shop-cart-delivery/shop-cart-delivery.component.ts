@@ -1,11 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { NavigationStart, Router } from '@angular/router';
+import {
+  CartDeliveryObject,
+  Comuna,
+  Region,
+  RegionesObject,
+} from '@core/models';
+import {
+  CartDeliveryService,
+  UtilitiesChileRegionesService,
+} from '@core/services';
+import { Observable, filter } from 'rxjs';
 
 @Component({
   selector: 'app-shop-cart-delivery',
   templateUrl: './shop-cart-delivery.component.html',
   styleUrls: ['./shop-cart-delivery.component.scss'],
 })
-export class ShopCartDeliveryComponent {
+export class ShopCartDeliveryComponent implements OnInit {
+  cartDelivery!: CartDeliveryObject;
+
   breadcrumbItems = [
     {
       title: 'Carrito de Compras',
@@ -14,18 +28,22 @@ export class ShopCartDeliveryComponent {
   ];
   despachoRadioItems = [
     {
-      id: 1,
+      id: '1',
       title: 'Retiro en tienda',
       description:
-        'Avenida Recoleta #2504, Comuna de Recoleta, Santiago, Chile',
+        'Avenida Recoleta #2504, Comuna de Recoleta, Santiago, Chile.',
     },
     {
-      id: 2,
-      title: 'Despacho por chilexpress',
-      description: 'Los Mirlos #181, Viña del Mar, Chile',
+      id: '2',
+      title: 'Despacho',
+      description:
+        'Despacho dentro de Santiago o Envío a regiones por pagar a través de Litcargo.',
     },
   ];
-  selectedDespachoOption: number = 1;
+
+  // selectedDespachoOption: number = 1;
+  // selectedRegionOption: string = '14'; // Metropolitana
+  // selectedComunaOption?: number;
 
   steps = [
     {
@@ -43,4 +61,34 @@ export class ShopCartDeliveryComponent {
   ];
 
   activeStep = 1;
+
+  regiones$: Observable<RegionesObject>;
+  constructor(
+    private router: Router,
+    private utilitiesChileRegionesService: UtilitiesChileRegionesService,
+    private cartDeliveryService: CartDeliveryService
+  ) {
+    this.regiones$ = this.utilitiesChileRegionesService.regiones$;
+    this.cartDeliveryService.cartDelivery$.subscribe((delivery) => {
+      this.cartDelivery = delivery;
+    });
+  }
+
+  ngOnInit(): void {
+    this.utilitiesChileRegionesService.fetch();
+  }
+
+  getComunasByRegion(regiones: Region[], regionId: string): Comuna[] {
+    const region = regiones.find((element) => element.id == regionId);
+
+    const comunas = region?.comunas;
+
+    if (comunas) {
+      return comunas;
+    } else return [];
+  }
+
+  setCartDelivery() {
+    this.cartDeliveryService.set(this.cartDelivery);
+  }
 }

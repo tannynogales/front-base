@@ -1,5 +1,5 @@
 import { UserService } from './user.service';
-import { ShoppingCartService } from './shopping-cart.service';
+import { CartProductsService } from './cart-products.service';
 import { ProductsService } from './products.service';
 import { CategoriesService } from './categories.service';
 import { ParentCategoriesService } from './parent-categories.service';
@@ -10,9 +10,11 @@ import { HighlightedHomeProductsService } from './highlighted-home-products.serv
 import { ParentCategoryProductsService } from './parent-category-products.service';
 import { RememberMeService } from './remember-me.service';
 import { AuthService } from './auth.service';
+import { CartUserService } from './cart-user.service';
+import { UtilitiesChileRegionesService } from './utilities-chile-regiones.service';
+import { CartDeliveryService } from './cart-delivery.service';
 
 export const services = [
-  ShoppingCartService,
   ProductService,
   ProductsService,
   ParentCategoriesService,
@@ -24,9 +26,13 @@ export const services = [
   UserService,
   RememberMeService,
   AuthService,
+  CartUserService,
+  CartProductsService,
+  CartDeliveryService,
+  UtilitiesChileRegionesService,
 ];
 
-export * from './shopping-cart.service';
+export * from './cart-products.service';
 export * from './products.service';
 export * from './product.service';
 export * from './categories.service';
@@ -38,3 +44,6 @@ export * from './parent-category-products.service';
 export * from './user.service';
 export * from './remember-me.service';
 export * from './auth.service';
+export * from './cart-user.service';
+export * from './utilities-chile-regiones.service';
+export * from './cart-delivery.service';

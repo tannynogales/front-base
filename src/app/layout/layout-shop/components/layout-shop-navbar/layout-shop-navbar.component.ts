@@ -8,7 +8,7 @@ import {
   CategoriesService,
   ParentCategoriesService,
   SelectedParentCategoryService,
-  ShoppingCartService,
+  CartProductsService,
 } from '@core/services';
 import { ToastService } from '@shared/components/toast/toast.service';
 import { Observable } from 'rxjs';
@@ -30,14 +30,14 @@ export class LayoutShopNavbarComponent {
     private categoriesService: CategoriesService,
     private parentCategoriesService: ParentCategoriesService,
     private selectedParentCategoryService: SelectedParentCategoryService,
-    private shoppingCartService: ShoppingCartService,
+    private cartProductsService: CartProductsService,
     private toastService: ToastService
   ) {
     this.categories$ = this.categoriesService.categories$;
     this.parentCategories$ = this.parentCategoriesService.parentCategories$;
     this.selectedParentCategory$ =
       this.selectedParentCategoryService.selectedParentCategory$;
-    this.shoppingCart$ = this.shoppingCartService.shoppingCart$;
+    this.shoppingCart$ = this.cartProductsService.shoppingCart$;
   }
 
   closeOffcanvasNavbar() {
@@ -55,7 +55,7 @@ export class LayoutShopNavbarComponent {
   }
 
   increaseQuantity($event: boolean, productID: number) {
-    this.shoppingCartService.addProduct({
+    this.cartProductsService.addProduct({
       id: productID,
       url: '',
       name: '',
@@ -70,14 +70,14 @@ export class LayoutShopNavbarComponent {
     if (quantityDecreased <= 0) {
       const confirm = window.confirm('¿Seguro que desea eliminar el producto?');
       if (confirm) {
-        this.shoppingCartService.removeProduct(productID);
+        this.cartProductsService.removeProduct(productID);
         this.toastService.addToast({
           message: 'Producto eliminado del carro',
         });
       }
     } else {
       // console.log(quantityDecreased, quantity);
-      this.shoppingCartService.addProduct(
+      this.cartProductsService.addProduct(
         {
           id: productID,
           url: '',

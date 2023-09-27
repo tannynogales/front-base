@@ -19,7 +19,7 @@
       <div
         *ngFor="let despachoRadioItem of despachoRadioItems"
         [ngClass]="
-          despachoRadioItem.id == selectedDespachoOption
+          despachoRadioItem.id == cartDelivery.deliveryOption
             ? 'bg-primary-subtle text-primary '
             : 'bg-body-tertiary '
         "
@@ -32,7 +32,7 @@
             name="flexRadioDespacho"
             [id]="'radio-' + despachoRadioItem.id"
             [value]="despachoRadioItem.id"
-            [(ngModel)]="selectedDespachoOption"
+            [(ngModel)]="cartDelivery.deliveryOption"
           />
           <label
             class="form-check-label w-100"
@@ -46,12 +46,16 @@
         </div>
       </div>
     </div>
-
+    <section *ngIf="cartDelivery.deliveryOption == '2'">
+      <p>Dirección de Despacho:</p>
+      <ng-template [ngTemplateOutlet]="deliveryForm"></ng-template>
+    </section>
     <div class="text-center">
       <button
         [routerLink]="['/cart-shopping/billing']"
         type="button"
         class="btn btn-primary mb-2"
+        (click)="setCartDelivery()"
       >
         Continuar
       </button>
@@ -63,3 +67,87 @@
     </div>
   </form>
 </div>
+
+<ng-template #deliveryForm>
+  <form class="form-floating">
+    <div class="form-floating mb-3">
+      <select
+        [(ngModel)]="cartDelivery.regionId"
+        class="form-select"
+        id="region"
+        name="region"
+        aria-label="Región"
+      >
+        <option selected>Selecciona una región</option>
+        <ng-container *ngIf="regiones$ | async as regiones">
+          <option *ngFor="let region of regiones.data" [value]="region.id">
+            {{ region.name }}
+          </option>
+        </ng-container>
+      </select>
+      <label for="region">Región</label>
+    </div>
+    <div class="form-floating">
+      <select
+        class="form-select mb-3"
+        [(ngModel)]="cartDelivery.comunaId"
+        name="comuna"
+        id="comuna"
+        aria-label="Comuna"
+      >
+        <option selected>Selecciona una comuna</option>
+        <ng-container *ngIf="regiones$ | async as regiones">
+          <ng-container *ngIf="regiones.data.length > 0"></ng-container>
+          <option
+            *ngFor="
+              let comuna of getComunasByRegion(
+                regiones.data,
+                cartDelivery.regionId
+              )
+            "
+            [value]="comuna.id"
+          >
+            {{ comuna.name }}
+          </option>
+        </ng-container>
+      </select>
+      <label for="comuna">Comuna</label>
+    </div>
+
+    <div class="form-floating mb-3">
+      <input
+        [(ngModel)]="cartDelivery.streetName"
+        type="text"
+        class="form-control"
+        id="streetName"
+        name="streetName"
+        placeholder="Calle"
+      />
+      <label for="streetName">Nombre de la Calle</label>
+    </div>
+
+    <div class="form-floating mb-3">
+      <input
+        [(ngModel)]="cartDelivery.streetNumber"
+        type="text"
+        class="form-control"
+        id="streetNumber"
+        name="streetNumber"
+        placeholder="streetNumber"
+      />
+      <label for="streetNumber">Número de la Calle</label>
+    </div>
+
+    <div class="form-floating mb-3">
+      <input
+        [(ngModel)]="cartDelivery.department"
+        type="text"
+        class="form-control"
+        id="department"
+        name="department"
+        placeholder="Departamento"
+      />
+      <label for="department">Número de departamento</label>
+    </div>
+  </form>
+</ng-template>

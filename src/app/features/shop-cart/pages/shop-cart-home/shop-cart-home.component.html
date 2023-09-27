@@ -1,23 +1,40 @@
 <div class="container mt-4">
-  <form class="form-floating border p-4 rounded">
+  <form *ngIf="name" class="form-floating">
     <div class="form-floating mb-3">
       <input
+        [(ngModel)]="email"
         type="email"
         class="form-control"
-        id="floatingInput"
+        id="email"
+        name="email"
         placeholder="name@example.com"
       />
       <label for="floatingInput">Email address</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input
+        [(ngModel)]="name"
+        type="text"
+        class="form-control"
+        id="name"
+        name="name"
+        placeholder="José Miguel"
+      />
+      <label for="floatingInput">Nombre</label>
     </div>
     <button
       type="button"
       [routerLink]="['/cart-shopping/delivery']"
       class="btn btn-primary mt-3"
+      (click)="setCartUser({ email: email, name: name })"
     >
       Continuar
     </button>
   </form>
 </div>
+<!--
+  TODO: Manejar caso de quiebres de stock, sugerir eliminar productos sin estock
+-->
 <!--
 <div class="container mt-4">
   <h2>Facturación</h2>
