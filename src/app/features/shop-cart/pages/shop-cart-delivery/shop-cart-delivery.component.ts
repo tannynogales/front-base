@@ -75,6 +75,7 @@ export class ShopCartDeliveryComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    //TODO: I should call this service in the layout. In this point, I will call the service every time that I visit the page.
     this.utilitiesChileRegionesService.fetch();
   }
 

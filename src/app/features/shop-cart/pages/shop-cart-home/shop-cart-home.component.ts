@@ -20,6 +20,7 @@ export class ShopCartHomeComponent {
   }
 
   setCartUser(user: CartUserObject) {
+    //TODO: implement ngModel, like i did in cart-delivery
     this.cartUserService.set({
       email: user.email,
       name: user.name,
