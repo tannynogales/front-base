@@ -8,6 +8,13 @@ import { CartUserObject } from '@core/models';
   styleUrls: ['./shop-cart-home.component.scss'],
 })
 export class ShopCartHomeComponent {
+  breadcrumbItems = [
+    {
+      title: 'Carrito de Compras',
+      url: '/home',
+    },
+  ];
+
   name!: string;
   email!: string;
 
