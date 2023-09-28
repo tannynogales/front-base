@@ -15,7 +15,7 @@
   ></app-circular-stepper>
 </div>
 
-<div class="container mt-4">
+<div *ngIf="false" class="container mt-4">
   <form class="form-floating">
     <div class="container my-4" style="max-width: 992px">
       <div class="row border-bottom mb-2">
@@ -45,19 +45,169 @@
         <div class="col ms-2 ms-md-0 text-break">tanny.nogales@gmail.com</div>
       </div>
     </div>
-    <div class="text-center">
-      <button
-        [routerLink]="['/cart-shopping/payment']"
-        type="button"
-        class="btn btn-primary mb-2"
-      >
-        Continuar
-      </button>
-      <p>
-        <a [routerLink]="['/cart-shopping/delivery']" class="d-none d-md-inline"
-          >Volver</a
-        >
-      </p>
-    </div>
   </form>
+</div>
+
+<div class="container">
+  <div class="container my-4" style="max-width: 992px">
+    <form class="form-floating">
+      <div class="form-floating mb-3">
+        <input
+          [(ngModel)]="cartBilling.nombre"
+          type="text"
+          class="form-control"
+          id="name"
+          name="name"
+          placeholder="Nombre / Razón Social"
+        />
+        <label for="name">Nombre / Razón Social</label>
+      </div>
+
+      <div class="form-floating mb-3">
+        <input
+          [(ngModel)]="cartBilling.rut"
+          type="text"
+          class="form-control"
+          id="rut"
+          name="rut"
+          placeholder="RUT"
+        />
+        <label for="rut">RUT</label>
+      </div>
+
+      <div class="form-floating mb-3">
+        <input
+          [(ngModel)]="cartBilling.giro"
+          type="text"
+          class="form-control"
+          id="giro"
+          name="giro"
+          placeholder="Giro"
+        />
+        <label for="giro">Giro</label>
+      </div>
+
+      <div class="form-floating mb-3">
+        <input
+          [(ngModel)]="cartBilling.correo"
+          type="email"
+          class="form-control"
+          id="email"
+          name="email"
+          placeholder="Correo"
+        />
+        <label for="email">Correo</label>
+      </div>
+
+      <div class="form-floating mb-3">
+        <input
+          [(ngModel)]="cartBilling.telefono"
+          type="number"
+          class="form-control"
+          id="telefono"
+          name="telefono"
+          placeholder="telefono"
+        />
+        <label for="telefono">Teléfono</label>
+      </div>
+
+      <div class="form-floating mb-3">
+        <select
+          [(ngModel)]="cartBilling.regionId"
+          class="form-select"
+          id="region"
+          name="region"
+          aria-label="Región"
+        >
+          <option selected>Selecciona una región</option>
+          <ng-container *ngIf="regiones$ | async as regiones">
+            <option *ngFor="let region of regiones.data" [value]="region.id">
+              {{ region.name }}
+            </option>
+          </ng-container>
+        </select>
+        <label for="region">Región</label>
+      </div>
+      <div class="form-floating">
+        <select
+          class="form-select mb-3"
+          [(ngModel)]="cartBilling.comunaId"
+          name="comuna"
+          id="comuna"
+          aria-label="Comuna"
+        >
+          <option selected>Selecciona una comuna</option>
+          <ng-container *ngIf="regiones$ | async as regiones">
+            <ng-container *ngIf="regiones.data.length > 0"></ng-container>
+            <option
+              *ngFor="
+                let comuna of getComunasByRegion(
+                  regiones.data,
+                  cartBilling.regionId
+                )
+              "
+              [value]="comuna.id"
+            >
+              {{ comuna.name }}
+            </option>
+          </ng-container>
+        </select>
+        <label for="comuna">Comuna</label>
+      </div>
+
+      <div class="form-floating mb-3">
+        <input
+          [(ngModel)]="cartBilling.streetName"
+          type="text"
+          class="form-control"
+          id="streetName"
+          name="streetName"
+          placeholder="Calle"
+        />
+        <label for="streetName">Nombre de la Calle</label>
+      </div>
+
+      <div class="form-floating mb-3">
+        <input
+          [(ngModel)]="cartBilling.streetNumber"
+          type="text"
+          class="form-control"
+          id="streetNumber"
+          name="streetNumber"
+          placeholder="streetNumber"
+        />
+        <label for="streetNumber">Número de la Calle</label>
+      </div>
+
+      <div class="form-floating mb-3">
+        <input
+          [(ngModel)]="cartBilling.department"
+          type="text"
+          class="form-control"
+          id="department"
+          name="department"
+          placeholder="Departamento"
+        />
+        <label for="department">Número de departamento</label>
+      </div>
+
+      <div class="text-center">
+        <button
+          [routerLink]="['/cart-shopping/payment']"
+          type="button"
+          class="btn btn-primary mb-2"
+          (click)="setCartBilling()"
+        >
+          Continuar
+        </button>
+        <p>
+          <a
+            [routerLink]="['/cart-shopping/delivery']"
+            class="d-none d-md-inline"
+            >Volver</a
+          >
+        </p>
+      </div>
+    </form>
+  </div>
 </div>

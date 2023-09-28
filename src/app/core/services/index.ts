@@ -11,6 +11,7 @@ import { ParentCategoryProductsService } from './parent-category-products.servic
 import { RememberMeService } from './remember-me.service';
 import { AuthService } from './auth.service';
 import { CartUserService } from './cart-user.service';
+import { CartBillingService } from './cart-billing.service';
 import { UtilitiesChileRegionesService } from './utilities-chile-regiones.service';
 import { CartDeliveryService } from './cart-delivery.service';
 
@@ -29,6 +30,7 @@ export const services = [
   CartUserService,
   CartProductsService,
   CartDeliveryService,
+  CartBillingService,
   UtilitiesChileRegionesService,
 ];
 
@@ -47,3 +49,4 @@ export * from './auth.service';
 export * from './cart-user.service';
 export * from './utilities-chile-regiones.service';
 export * from './cart-delivery.service';
+export * from './cart-billing.service';

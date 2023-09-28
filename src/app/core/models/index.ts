@@ -10,3 +10,4 @@ export * from './user.model';
 export * from './cart-user.model';
 export * from './cart-delivery.model';
 export * from './utilities.model';
+export * from './cart-billing.model';
