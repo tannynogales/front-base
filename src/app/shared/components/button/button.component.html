@@ -1,0 +1,6 @@
+<!-- <button [routerLink]="routerLink ? [routerLink] : []" class="{{ class }}" type="submit" [disabled]="disabled || loading" -->
+<button class="{{ class }}" type="submit" [disabled]="disabled || loading" (click)="buttonClick()">
+  <ng-content></ng-content>
+  <i *ngIf="!loading && icon" class="fa-regular fa-{{ icon }}"></i>
+  <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+</button>

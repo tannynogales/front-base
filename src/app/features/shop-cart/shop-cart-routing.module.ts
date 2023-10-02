@@ -5,10 +5,13 @@ import { ShopCartDeliveryComponent } from './pages/shop-cart-delivery/shop-cart-
 import { ShopCartBillingComponent } from './pages/shop-cart-billing/shop-cart-billing.component';
 import { ShopCartPaymentComponent } from './pages/shop-cart-payment/shop-cart-payment.component';
 
+import { SessionGuard } from '@core/guards';
+
 const routes: Routes = [
   {
     path: '',
     component: ShopCartHomeComponent,
+    canActivate: [SessionGuard],
   },
   {
     path: 'delivery',

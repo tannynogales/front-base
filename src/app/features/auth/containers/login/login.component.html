@@ -1,0 +1,85 @@
+<section class="py-4">
+  <div class="container py-3">
+    <div class="row">
+      <div class="col-lg-5">
+        <h1 class="hero-heading mb-5">Login</h1>
+        <p class="text-muted">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-6">
+        <h2 class="h4 mb-4">Returning user</h2>
+        <form
+          class="mb-5"
+          (ngSubmit)="sendLogin()"
+          [formGroup]="formLogin"
+          autocomplete="off"
+        >
+          <div class="row">
+            <div class="form-group col-lg-6 mb-3">
+              <label class="form-label">Email address</label>
+              <input
+                formControlName="email"
+                name="email"
+                type="text"
+                placeholder="Email address"
+                class="form-control"
+              />
+            </div>
+            <div class="form-group col-lg-6 mb-3">
+              <label class="form-label">Password</label>
+              <input
+                formControlName="password"
+                type="password"
+                placeholder="Contraseña"
+                class="form-control"
+              />
+            </div>
+            <div class="form-group col-12 mb-3">
+              <div class="form-check">
+                <input
+                  formControlName="rememberMe"
+                  (change)="changeRememberMe()"
+                  class="form-check-input"
+                  id="flexCheckDefault"
+                  type="checkbox"
+                />
+                <label
+                  class="form-check-label text-muted"
+                  for="flexCheckDefault"
+                  >Remember me for next time</label
+                >
+              </div>
+            </div>
+            <div class="form-group col-12">
+              <app-button
+                [loading]="isLoading"
+                [icon]="'arrow-right-to-arc'"
+                [disabled]="formLogin.invalid"
+                >Login
+              </app-button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="col-lg-5 ms-auto">
+        <h2 class="h4 mb-4">New customer</h2>
+        <p class="text-muted">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </p>
+        <app-button
+          [outline]="true"
+          [style]="'secondary'"
+          [routerLink]="'/auth/signup'"
+          queryParamsHandling="merge"
+        >
+          Crear una cuenta
+        </app-button>
+      </div>
+    </div>
+  </div>
+</section>

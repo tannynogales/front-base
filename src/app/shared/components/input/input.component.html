@@ -1,0 +1,54 @@
+<div class="form-group mb-2">
+  <!-- {{this.formField?.valid }} && ( {{this.formField?.touched }} || {{this.formField?.dirty}} ) &&
+    {{this.validationsErrors.length === 0}}__ -->
+  <label *ngIf="label" class="form-label" [for]="fieldName">{{ label }}</label>
+  <input
+    [value]="value"
+    [id]="fieldName"
+    [name]="fieldName"
+    (input)="onChange($event)"
+    [disabled]="isDisabled"
+    (blur)="touched()"
+    [type]="type"
+    class="form-control"
+  />
+  <ng-container *ngIf="!isValid">
+    <app-input-error
+      [fieldName]="fieldName"
+      [hasError]="formField.hasError('required')"
+    >
+      Este campo es requerido
+    </app-input-error>
+
+    <app-input-error
+      [fieldName]="fieldName"
+      [hasError]="formField.hasError('minlength')"
+    >
+      El largo mínimo no es válido
+    </app-input-error>
+
+    <app-input-error
+      [fieldName]="fieldName"
+      [hasError]="formField.hasError('maxlength')"
+    >
+      El largo máximo no es válido
+    </app-input-error>
+
+    <app-input-error
+      [fieldName]="fieldName"
+      [hasError]="formField.hasError('email')"
+    >
+      El correo no es válido
+    </app-input-error>
+
+    <ng-container *ngIf="this.formField?.valid">
+      <app-input-error
+        *ngFor="let validationError of validationsErrors; index as i"
+        [fieldName]="fieldName"
+        [hasError]="true"
+      >
+        {{ validationError }}
+      </app-input-error>
+    </ng-container>
+  </ng-container>
+</div>

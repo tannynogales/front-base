@@ -18,6 +18,9 @@ import { CardSeeMoreComponent } from './card-see-more/card-see-more.component';
 import { VerticalCounterComponent } from './vertical-counter/vertical-counter.component';
 import { ToastComponent } from './toast/toast.component';
 import { BlobComponent } from './blob/blob.component';
+import { ButtonComponent } from './button/button.component';
+import { InputComponent } from './input/input.component';
+import { InputErrorComponent } from './input-error/input-error.component';
 
 export const components = [
   CarouselComponent,
@@ -40,6 +43,9 @@ export const components = [
   VerticalCounterComponent,
   ToastComponent,
   BlobComponent,
+  ButtonComponent,
+  InputComponent,
+  InputErrorComponent,
 ];
 
 export * from './carousel/carousel.component';
@@ -62,3 +68,6 @@ export * from './card-see-more/card-see-more.component';
 export * from './vertical-counter/vertical-counter.component';
 export * from './toast/toast.component';
 export * from './blob/blob.component';
+export * from './button/button.component';
+export * from './input/input.component';
+export * from './input-error/input-error.component';

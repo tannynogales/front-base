@@ -8,18 +8,29 @@
   <form class="form-floating">
     <div class="form-floating mb-3">
       <input
-        [(ngModel)]="email"
+        [(ngModel)]="cartUser.email"
         type="email"
         class="form-control"
         id="email"
         name="email"
         placeholder="name@example.com"
       />
-      <label for="floatingInput">Email address</label>
+      <label for="email">Email address</label>
     </div>
     <div class="form-floating mb-3">
       <input
-        [(ngModel)]="name"
+        [(ngModel)]="cartUser.cellphone"
+        type="number"
+        class="form-control"
+        id="cellphone"
+        name="cellphone"
+        placeholder="912345678"
+      />
+      <label for="cellphone">Celular</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input
+        [(ngModel)]="cartUser.name"
         type="text"
         class="form-control"
         id="name"
@@ -32,7 +43,7 @@
       type="button"
       [routerLink]="['/cart-shopping/delivery']"
       class="btn btn-primary mt-3"
-      (click)="setCartUser({ email: email, name: name })"
+      (click)="setCartUser()"
     >
       Continuar
     </button>

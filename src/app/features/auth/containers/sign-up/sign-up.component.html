@@ -1,0 +1,93 @@
+<section class="py-4">
+  <div class="container py-3">
+    <div class="row">
+      <div class="col-lg-5 mb-5">
+        <h1 class="hero-heading">Registro</h1>
+        <p class="text-muted">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-6">
+        <form
+          class="mb-5"
+          (ngSubmit)="signup()"
+          [formGroup]="formSignUp"
+          autocomplete="off"
+        >
+          <h2 class="h4 mb-4">Personal information</h2>
+
+          <div class="row">
+            <!-- <div class="form-group col-lg-6 mb-3">
+                                <app-input class="app-input" [parentForm]="formSignUp" formControlName="name"
+                                    label="Nombre" [isDisabled]="isLoading"></app-input>
+                                <label class="form-label">Nombre</label>
+                                <input formControlName="password" type="password" placeholder="Contraseña"
+                                    class="form-control">
+                            </div> -->
+            <div class="form-group col-lg-6 mb-3">
+              <app-input
+                [parentForm]="formSignUp"
+                formControlName="email"
+                label="Correo"
+                [isDisabled]="isLoading"
+                [validations]="[emailAlreadyTaken]"
+                (change)="this.emailAlreadyTaken = null"
+              >
+              </app-input>
+            </div>
+          </div>
+
+          <h2 class="h4 mb-4">Your password</h2>
+
+          <div class="row">
+            <div class="form-group col-lg-6 mb-3">
+              <app-input
+                [parentForm]="formSignUp"
+                formControlName="password"
+                label="Contraseña"
+                type="password"
+                [isDisabled]="isLoading"
+              >
+              </app-input>
+            </div>
+            <div class="form-group col-lg-6 mb-3">
+              <app-input
+                [parentForm]="formSignUp"
+                formControlName="passwordRepeat"
+                label="Repite tu Contraseña"
+                type="password"
+                [validations]="[formSignUp.getError('passwordMatch')]"
+                [isDisabled]="isLoading"
+              >
+              </app-input>
+            </div>
+
+            <div class="form-group col-12">
+              <app-button [loading]="isLoading" icon="user-plus"
+                >Crear cuenta</app-button
+              >
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="col-lg-5 ms-auto">
+        <h2 class="h4 mb-4">Returning user</h2>
+        <p class="text-muted">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </p>
+        <app-button
+          [outline]="true"
+          [style]="'secondary'"
+          [routerLink]="'/auth/login'"
+          queryParamsHandling="merge"
+        >
+          Login
+        </app-button>
+      </div>
+    </div>
+  </div>
+</section>

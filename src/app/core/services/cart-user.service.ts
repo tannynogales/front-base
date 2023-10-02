@@ -10,6 +10,7 @@ export class CartUserService {
   private cartUserObject: CartUserObject = {
     email: '',
     name: '',
+    cellphone: '',
   };
 
   // Inicializo con el valor que tiene el localStorage

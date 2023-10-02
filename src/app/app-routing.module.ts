@@ -21,6 +21,11 @@ const routes: Routes = [
     component: ErrorComponent,
   },
   {
+    path: 'auth',
+    loadChildren: () =>
+      import('./features/auth/auth.module').then((m) => m.AuthModule),
+  },
+  {
     path: '',
     component: LayoutShopComponent,
     loadChildren: () =>
