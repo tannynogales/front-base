@@ -24,11 +24,11 @@ export class ButtonComponent implements OnInit {
     if (this.outline) return `btn btn-outline-${this.style}`;
     else return `btn btn-${this.style}`;
   }
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   buttonClick() {
-    console.log('buttonClick');
+    // console.log('buttonClick');
   }
 }

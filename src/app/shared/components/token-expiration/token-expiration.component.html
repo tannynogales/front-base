@@ -1,0 +1,22 @@
+<div #tokenExpiration class="modal fade" id="tokenExpiration" tabindex="-1" aria-labelledby="tokenExpirationlLabel"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="tokenExpirationLabel">Su sesión está próxima a expirar</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Su sesión expirará en <span *ngIf="minutesToExpire>0">{{minutesToExpire}} minuto<span
+              *ngIf="minutesToExpire>1">s</span> con</span>
+          {{secondsToExpire}} segundos.</p>
+        <p>¿Desea mantener su sesión abierta?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="logOut()">Cerrar
+          sesión</button>
+        <button type="button" class="btn btn-primary" (click)="keepLoggedIn()">Si, continuar</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -24,23 +24,22 @@ export class SessionGuard implements CanActivate {
   constructor(
     private router: Router,
     private userService: UserService,
-    public authService: AuthService // private privatePagesService: PrivatePagesService
+    public authService: AuthService,
+    private privatePagesService: PrivatePagesService
   ) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean | UrlTree> {
-    console.log('session guard', route, state);
-    // this.privatePagesService.privatePagesObservableData = route.url[0].path;
+    this.privatePagesService.privatePagesObservableData = state.url;
     return this.userService.isLoggedIn().pipe(
       map((isLoggedIn: boolean) => {
         if (isLoggedIn) {
           return true;
         } else {
-          // console.log('no session');
           this.router.navigate(['/auth/login'], {
-            queryParams: { from: window.location.pathname },
+            queryParams: { from: state.url },
             // queryParamsHandling: 'preserve'
           });
           return true;

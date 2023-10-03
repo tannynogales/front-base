@@ -60,6 +60,7 @@ export class AuthService {
   public create(
     email: string,
     password: string,
+    // TODO: passwordRepeat
     passwordRepeat: string
   ): Observable<User> {
     return this.http.post<User>(`${this.baseUrl}/api/auth/local/register`, {

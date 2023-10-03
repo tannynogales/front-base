@@ -5,5 +5,5 @@ export const environment = {
   paypalCurrency: 'EUR', //USD
   strapi: 'https://roble-strapi.rj.r.appspot.com',
   strapiSiteID: 1,
-  sessionExpirationTime: 15, // minutes
+  sessionExpirationTime: 5, // minutes
 };

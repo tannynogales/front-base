@@ -21,6 +21,7 @@ import { BlobComponent } from './blob/blob.component';
 import { ButtonComponent } from './button/button.component';
 import { InputComponent } from './input/input.component';
 import { InputErrorComponent } from './input-error/input-error.component';
+import { TokenExpirationComponent } from './token-expiration/token-expiration.component';
 
 export const components = [
   CarouselComponent,
@@ -46,6 +47,7 @@ export const components = [
   ButtonComponent,
   InputComponent,
   InputErrorComponent,
+  TokenExpirationComponent,
 ];
 
 export * from './carousel/carousel.component';
@@ -71,3 +73,4 @@ export * from './blob/blob.component';
 export * from './button/button.component';
 export * from './input/input.component';
 export * from './input-error/input-error.component';
+export * from './token-expiration/token-expiration.component';

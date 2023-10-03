@@ -2,7 +2,12 @@ import { BehaviorSubject } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
-// TDOO revisar para que estoy usando esto y eliminarlo (hoy no se usa en el session guard)
+/*
+El objetivo de este servicio es gestionar las rutas privadas que se ponen en el navegador
+Las rutas privadas se setean en el session guard y luego se leen en el componenete token-expiration
+con el objeto de hacer logout() solo si el usuario no esta logueado y si la ruta es privada
+*/
+
 @Injectable({
   providedIn: 'root',
 })
@@ -22,7 +27,7 @@ export class PrivatePagesService {
   }
 
   get isThisPagePrivate(): boolean {
-    let currentPage = this.router.url.split('/')[1];
+    let currentPage = '/' + this.router.url.split('/')[1];
     return this.pages.indexOf(currentPage) !== -1;
   }
 
@@ -36,8 +41,9 @@ export class PrivatePagesService {
   }
 
   constructor(private router: Router) {
-    this.privatePagesObservable.subscribe(
-      (newUrl: string[]) => (this.pages = newUrl)
-    );
+    // TODO: no se para que se usa esta suscripcion
+    // this.privatePagesObservable.subscribe(
+    //   (newUrl: string[]) => (this.pages = newUrl)
+    // );
   }
 }
