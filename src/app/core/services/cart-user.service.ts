@@ -1,3 +1,4 @@
+import { UserService } from '@core/services/user.service';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { CartUserObject } from '@core/models';
@@ -18,7 +19,10 @@ export class CartUserService {
     this.getFromLocalStorage()
   );
 
-  constructor() {}
+  constructor(private userService: UserService) {
+    const user = userService.getUser();
+    console.log(user);
+  }
 
   get cartUser$(): Observable<CartUserObject> {
     return this._cartUser.asObservable();
