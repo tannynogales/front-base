@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { SessionGuard } from '@core/guards';
+// import { SessionGuard } from '@core/guards';
 import { PrivatePagesService } from '@core/services/private-pages.service';
 import { UserService } from '@core/services/user.service';
 import { RememberMeService } from '@core/services/remember-me.service';
@@ -36,7 +36,7 @@ export class TokenExpirationComponent implements AfterViewInit, OnDestroy {
 
   constructor(
     public userService: UserService,
-    public sessionGuard: SessionGuard,
+    // public sessionGuard: SessionGuard,
     private privatePagesService: PrivatePagesService,
     private router: Router
   ) {
