@@ -1,6 +1,6 @@
 import { RememberMeService } from './../../../../core/services/remember-me.service';
 import { Component, OnInit, ElementRef } from '@angular/core';
-import { AuthService } from './../../services/auth.service';
+import { AuthService } from '@core/services/auth.service';
 import { UserService } from '@core/services/user.service';
 
 import {
