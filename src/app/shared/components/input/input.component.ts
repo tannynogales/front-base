@@ -23,7 +23,8 @@ export class InputComponent implements ControlValueAccessor {
   @Input('formControlName') public fieldName!: string;
 
   @Input() public label!: string;
-  @Input() public type: 'text' | 'password' | 'date' | 'file' = 'text';
+  @Input() public type: 'text' | 'password' | 'date' | 'file' | 'number' =
+    'text';
 
   @Input() public validations: Array<any> = [];
 
@@ -31,12 +32,18 @@ export class InputComponent implements ControlValueAccessor {
 
   public value!: string;
 
-  public get isValid(): boolean {
-    return (
-      this.formField?.valid &&
-      (this.formField?.touched || this.formField?.dirty) &&
-      this.validationsErrors.length === 0
-    );
+  // Defines when the error message should be displayed below the input
+  public get showError(): boolean {
+    // If I did not touch the input, then I don't show the error yet
+    if (!this.formField?.touched) return false;
+
+    // Dirty: true if the user changes the original value of the field
+    // this.formField?.dirty
+
+    // If I have some errors, then I show the error
+    if (!this.formField?.valid || this.validationsErrors.length > 0)
+      return true;
+    else return false;
   }
 
   public get validationsErrors() {

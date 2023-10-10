@@ -98,7 +98,7 @@ export class SignUpComponent implements OnInit {
     );
   }
 
-  signup(): void {
+  signUp(): void {
     if (this.formSignUp.valid) {
       this.try2createUser();
     } else {

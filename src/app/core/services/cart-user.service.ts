@@ -19,10 +19,7 @@ export class CartUserService {
     this.getFromLocalStorage()
   );
 
-  constructor(private userService: UserService) {
-    const user = userService.getUser();
-    console.log(user);
-  }
+  constructor(private userService: UserService) {}
 
   get cartUser$(): Observable<CartUserObject> {
     return this._cartUser.asObservable();
@@ -40,7 +37,19 @@ export class CartUserService {
 
   getFromLocalStorage(): CartUserObject {
     const carritoData = localStorage.getItem('cart-user');
-    if (carritoData) return JSON.parse(carritoData);
-    else return this.cartUserObject;
+    if (carritoData) {
+      const data: CartUserObject = JSON.parse(carritoData);
+
+      if (data.email != '' && data.name != '') {
+        return data;
+      }
+    }
+    if (this.userService.checkUser()) {
+      const user = this.userService.getUser();
+      this.cartUserObject.email = user.email;
+      this.cartUserObject.name = user.name;
+    }
+
+    return this.cartUserObject;
   }
 }

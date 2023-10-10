@@ -12,7 +12,7 @@
     [type]="type"
     class="form-control"
   />
-  <ng-container *ngIf="!isValid">
+  <ng-container *ngIf="showError">
     <app-input-error
       [fieldName]="fieldName"
       [hasError]="formField.hasError('required')"
