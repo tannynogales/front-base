@@ -23,6 +23,6 @@ export interface ItemsObject {
   };
 }
 export interface ItemObject {
-  data?: Item;
+  data: Item;
   loading: boolean;
 }

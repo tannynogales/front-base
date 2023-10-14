@@ -13,7 +13,19 @@ export class ProductService {
 
   // Initialize data
   private productObject: ItemObject = {
-    data: undefined,
+    data: {
+      id: 0,
+      slug: '',
+      code: '',
+      name: '',
+      price: 0,
+      primary_image: '',
+      tag: '',
+      category: [],
+      images: [],
+      attributes: [],
+      description: '',
+    },
     loading: true,
   };
 

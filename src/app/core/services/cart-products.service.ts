@@ -1,7 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ShoppingCartItem, ShoppingCartObject } from '@core/models';
 import { BehaviorSubject, Observable } from 'rxjs';
-// TODO pendiente refactorizar klas funciones apra que seqan mas entendibles y reutilizables y con una soal responsabilidad
+import { environment } from 'src/environments/environment.development';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -18,7 +20,7 @@ export class CartProductsService {
   private _shoppingCart: BehaviorSubject<ShoppingCartObject> =
     new BehaviorSubject(this.getFromLocalStorage());
 
-  constructor() {}
+  constructor(private httpClient: HttpClient) {}
 
   get shoppingCart$(): Observable<ShoppingCartObject> {
     return this._shoppingCart.asObservable();
@@ -45,75 +47,115 @@ export class CartProductsService {
     this.shoppingCartObject.totalProducts = totalProducts;
   }
 
-  addProduct(product: ShoppingCartItem, quantity: number = 1) {
-    this.shoppingCartObject = this.getFromLocalStorage();
-
-    let doExist: boolean = false;
-    const nuevosProductos = this.shoppingCartObject.products.map((item) => {
-      if (item.id === product.id) {
-        doExist = true;
-        // Si encontramos el elemento con el id deseado, incrementamos la cantidad (quantity) en 1
-        return {
-          ...item,
-          quantity: item.quantity + quantity,
-        };
-      }
-      // Si no es el elemento que estamos buscando, simplemente lo dejamos sin cambios
-      return item;
-    });
-
-    // console.log(doExist, product.id);
-    if (!doExist) {
-      nuevosProductos.push({
-        ...product,
-        quantity: 1,
-      });
+  increaseProductQuantity(productID: number) {
+    let { products } = this.getFromLocalStorage();
+    let productIndex = products.findIndex((item) => item.id === productID);
+    if (productIndex) {
+      products[productIndex] = {
+        ...products[productIndex],
+        quantity: products[productIndex].quantity + 1,
+      };
+      this.products = products;
     }
+  }
 
-    this.shoppingCartObject.products = nuevosProductos;
+  decreaseProductQuantity(productID: number) {
+    let { products } = this.getFromLocalStorage();
+    let productIndex = products.findIndex((item) => item.id === productID);
+    if (productIndex) {
+      products[productIndex] = {
+        ...products[productIndex],
+        quantity: products[productIndex].quantity - 1,
+      };
+      this.products = products;
+    }
+  }
+
+  // Agrega un elemento nuevo al carrito
+  private createProduct(newProduct: ShoppingCartItem) {
+    let { products } = this.getFromLocalStorage();
+
+    // products.push({...newProduct, quantity: 1,});
+    products.push(newProduct);
+
+    this.products = products;
+  }
+
+  // Actualiza el atributo "products" de la clase y gatilla eventos asociados
+  private set products(products: ShoppingCartItem[]) {
+    this.shoppingCartObject.products = products;
     this.calculateTotalValues();
     this.saveInLocalStorage();
     this._shoppingCart.next(this.shoppingCartObject);
   }
 
-  removeProduct(productID: number) {
-    this.shoppingCartObject = this.getFromLocalStorage();
-    this.shoppingCartObject.products = this.shoppingCartObject.products.filter(
-      (item) => item.id !== productID
-    );
-    this.calculateTotalValues();
-    this.saveInLocalStorage();
-    this._shoppingCart.next(this.shoppingCartObject);
+  private doesExist(productID: number): boolean {
+    let doesExist = false;
+    const { products } = this.getFromLocalStorage();
+    const product = products.find((item) => {
+      if (item.id === productID) {
+        doesExist = true;
+      }
+    });
+    return doesExist;
   }
 
-  saveInLocalStorage() {
+  /*
+  This function can add or subtract element, depending of the quantity
+  */
+  addProduct(product: ShoppingCartItem) {
+    const doesExist = this.doesExist(product.id);
+
+    if (!doesExist) {
+      this.createProduct(product);
+      console.log('add');
+      this.createProductDB(product.price, product.id, 14).subscribe(
+        (response) => {
+          console.log('createProductDB', response);
+        }
+      );
+    } else {
+      this.increaseProductQuantity(product.id);
+    }
+  }
+
+  deleteProduct(productID: number) {
+    let { products } = this.getFromLocalStorage();
+    products = products.filter((item) => item.id !== productID);
+    this.products = products;
+  }
+
+  private saveInLocalStorage() {
     localStorage.setItem(
       'shopping-cart',
       JSON.stringify(this.shoppingCartObject)
     );
   }
 
-  getFromLocalStorage(): ShoppingCartObject {
+  private getFromLocalStorage(): ShoppingCartObject {
     const carritoData = localStorage.getItem('shopping-cart');
     if (carritoData) return JSON.parse(carritoData);
     else return this.shoppingCartObject;
   }
 
-  // estas funciones crean un nuevo objeto, por ende no me sirven
-  // addProduct(product: ShoppingCartItem) {
-  //   const newCartObject = { ...this.shoppingCartObject };
-  //   newCartObject.products = [...newCartObject.products, product];
-  //   this.calculateTotalValues();
-  //   this._shoppingCart.next(newCartObject);
-  // }
+  baseUrl = environment.strapi + '/api';
 
-  // estas funciones crean un nuevo objeto, por ende no me sirven
-  // removeProduct(product: ShoppingCartItem) {
-  //   const newCartObject = { ...this.shoppingCartObject };
-  //   newCartObject.products = newCartObject.products.filter(
-  //     (item) => item.id !== product.id
-  //   );
-  //   this.calculateTotalValues();
-  //   this._shoppingCart.next(newCartObject);
-  // }
+  public createProductDB(
+    price: number,
+    productID: number,
+    ShoppingCartID: number
+  ): Observable<Response> {
+    const data = {
+      data: {
+        price: price,
+        product: productID,
+        shopping_cart: ShoppingCartID,
+      },
+    };
+    console.log(data);
+    return this.httpClient.post<Response>(
+      `${this.baseUrl}/shopping-cart-products`,
+      data
+    );
+  }
 }

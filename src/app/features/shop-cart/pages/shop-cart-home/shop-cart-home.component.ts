@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { CartUserService } from '@core/services';
-import { CartUserObject } from '@core/models';
+import { CartUserObject, Response } from '@core/models';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -33,6 +33,7 @@ export class ShopCartHomeComponent implements OnInit {
   ) {
     // TODO: unsubscribe
     this.cartUserService.cartUser$.subscribe((user) => {
+      this.cartUser.cartId = user.cartId;
       this.cartUser.name = user.name;
       this.cartUser.email = user.email;
       this.cartUser.cellphone = user.cellphone;
@@ -48,15 +49,6 @@ export class ShopCartHomeComponent implements OnInit {
       cellphone: new FormControl<string>(this.cartUser.cellphone, [
         Validators.required,
       ]),
-    });
-  }
-
-  setCartUser(email: string, name: string, cellphone: string) {
-    //TODO: implement ngModel, like i did in cart-delivery
-    this.cartUserService.set({
-      email: email,
-      name: name,
-      cellphone: cellphone,
     });
   }
 
@@ -78,12 +70,40 @@ export class ShopCartHomeComponent implements OnInit {
     }
   }
 
-  onSubmit() {
+  onSubmit(): boolean {
     // this.isLoading = true;
     const { email, name, cellphone } = this.form.value;
-    this.setCartUser(email, name, cellphone);
 
     const isTheFormValid = this.isTheFormValid(this.form);
+
+    if (!isTheFormValid) return false;
+
+    // this.setCartUser(email, name, cellphone);
+    const cartId = this.cartUser?.cartId;
+
+    this.cartUserService.set({ cartId, email, name, cellphone });
+
+    if (cartId) {
+      this.cartUserService
+        .updateCart(cartId, name, email, cellphone)
+        .subscribe((response) => {
+          console.log('update', response.data.id);
+        });
+      return true;
+    } else {
+      this.cartUserService
+        .createCart(name, email, cellphone)
+        .subscribe((response) => {
+          this.cartUserService.set({
+            cartId: response.data.id,
+            name: name,
+            email: email,
+            cellphone: cellphone,
+          });
+          console.log('create', response.data.id);
+        });
+      return true;
+    }
 
     if (isTheFormValid) {
       this.router.navigate(

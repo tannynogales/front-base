@@ -55,14 +55,7 @@ export class LayoutShopNavbarComponent {
   }
 
   increaseQuantity($event: boolean, productID: number) {
-    this.cartProductsService.addProduct({
-      id: productID,
-      url: '',
-      name: '',
-      price: 0,
-      primary_image: '',
-      quantity: 1,
-    });
+    this.cartProductsService.increaseProductQuantity(productID);
   }
 
   decreaseQuantity($event: boolean, productID: number, quantity: number) {
@@ -70,24 +63,14 @@ export class LayoutShopNavbarComponent {
     if (quantityDecreased <= 0) {
       const confirm = window.confirm('¿Seguro que desea eliminar el producto?');
       if (confirm) {
-        this.cartProductsService.removeProduct(productID);
+        this.cartProductsService.deleteProduct(productID);
         this.toastService.addToast({
           message: 'Producto eliminado del carro',
         });
       }
     } else {
       // console.log(quantityDecreased, quantity);
-      this.cartProductsService.addProduct(
-        {
-          id: productID,
-          url: '',
-          name: '',
-          price: 0,
-          primary_image: '',
-          quantity: 1,
-        },
-        -1
-      );
+      this.cartProductsService.decreaseProductQuantity(productID);
     }
   }
 }

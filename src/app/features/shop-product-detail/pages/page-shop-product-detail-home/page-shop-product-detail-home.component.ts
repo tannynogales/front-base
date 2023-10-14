@@ -80,15 +80,15 @@ export class PageShopProductDetailHomeComponent {
   }
 
   addProduct(product: ItemObject) {
-    if (product.data)
-      this.cartProductsService.addProduct({
-        id: this.productId,
-        url: `/home/${this.categoryId}/${this.productId}`,
-        name: product.data.name,
-        price: product.data.price,
-        primary_image: product.data.primary_image,
-        quantity: 1,
-      });
+    // if (product.data)
+    this.cartProductsService.addProduct({
+      id: this.productId,
+      url: `/home/${this.categoryId}/${this.productId}`,
+      name: product.data.name,
+      price: product.data.price,
+      primary_image: product.data.primary_image,
+      quantity: 1,
+    });
     // alert('Producto añadido al carro');
     this.toastService.addToast({
       // title: 'Éxito !',

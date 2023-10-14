@@ -30,7 +30,7 @@ export class BannerHomeService {
   fetch() {
     this.bannersHomeObject.loading = true;
     this._bannersHome.next(this.bannersHomeObject);
-    const url = this.baseUrl + `/banners-home?populate[image]=*`;
+    const url = this.baseUrl + `/banners-home?populate[image]=*&sort=orderasc:`;
     this.httpClient
       .get<Response>(url)
       .pipe(
