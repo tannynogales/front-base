@@ -19,6 +19,7 @@ export class UserService {
 
   checkUser(): boolean {
     return (
+      this.cookieService.check('userID') &&
       this.cookieService.check('userName') &&
       this.cookieService.check('userEmail') &&
       this.cookieService.check('userJWT')
@@ -30,6 +31,7 @@ export class UserService {
 
     // if (user) {
     const _user = {
+      id: this.cookieService.get('userID'),
       name: this.cookieService.get('userName'),
       email: this.cookieService.get('userEmail'),
       jwt: this.cookieService.get('userJWT'),
@@ -43,6 +45,7 @@ export class UserService {
   }
 
   deleteUser(): void {
+    this.cookieService.delete('userID', '/');
     this.cookieService.delete('userName', '/');
     this.cookieService.delete('userEmail', '/');
     this.cookieService.delete('userJWT', '/');
@@ -57,6 +60,7 @@ export class UserService {
         : undefined,
     };
 
+    this.cookieService.set('userID', user.id, cookieOptions);
     this.cookieService.set('userName', user.name, cookieOptions);
     this.cookieService.set('userEmail', user.email, cookieOptions);
     this.cookieService.set('userJWT', user.jwt, cookieOptions);
@@ -76,6 +80,7 @@ export class UserService {
       map((response: any) => {
         if (response?.confirmed == true && response?.blocked == false) {
           this.setUser({
+            id: user.id,
             name: user.name,
             email: user.email,
             jwt: user.jwt,
@@ -97,6 +102,7 @@ export class UserService {
   public keepLoggedIn() {
     const user: User = this.getUser();
     this.setUser({
+      id: user.id,
       name: user.name,
       email: user.email,
       jwt: user.jwt,

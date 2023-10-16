@@ -27,6 +27,7 @@ export class AuthService {
       .pipe(
         map((response: any): User => {
           return {
+            id: response.user?.id,
             name: response.user?.username,
             email: response.user?.email,
             jwt: response?.jwt,

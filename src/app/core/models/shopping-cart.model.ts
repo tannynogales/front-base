@@ -1,5 +1,6 @@
 export interface ShoppingCartItem {
-  id: number;
+  id?: number; // Backend ID, used for update
+  productId: number;
   url: string;
   name: string;
   price: number;

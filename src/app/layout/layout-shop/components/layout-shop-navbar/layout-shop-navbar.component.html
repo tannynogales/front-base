@@ -172,9 +172,13 @@
               <div class="col-auto">
                 <app-vertical-counter
                   [quantity]="product.quantity"
-                  (increase$)="increaseQuantity($event, product.id)"
+                  (increase$)="increaseQuantity($event, product.productId)"
                   (decrease$)="
-                    decreaseQuantity($event, product.id, product.quantity)
+                    decreaseQuantity(
+                      $event,
+                      product.productId,
+                      product.quantity
+                    )
                   "
                 ></app-vertical-counter>
               </div>

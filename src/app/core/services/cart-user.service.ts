@@ -61,6 +61,7 @@ export class CartUserService {
   }
 
   public createCart(
+    user_id: string,
     user_name: string,
     user_email: string,
     userCellphone: string
@@ -70,7 +71,7 @@ export class CartUserService {
         user_name: user_name,
         user_email: user_email,
         user_cellphone: userCellphone,
-        user: 1,
+        user: user_id,
       },
     };
 
@@ -81,7 +82,8 @@ export class CartUserService {
   }
 
   public updateCart(
-    id: string,
+    id: number,
+    user_id: string,
     user_name: string,
     user_email: string,
     userCellphone: string
@@ -91,7 +93,7 @@ export class CartUserService {
         user_name: user_name,
         // user_email: user_email,
         user_cellphone: userCellphone,
-        user: 1,
+        user: user_id,
       },
     };
 
@@ -108,6 +110,6 @@ export interface Response {
 }
 
 export interface Data {
-  id: string;
+  id: number;
   attributes: any;
 }

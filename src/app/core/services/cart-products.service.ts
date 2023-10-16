@@ -1,8 +1,10 @@
+import { CartUserService } from './cart-user.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ShoppingCartItem, ShoppingCartObject } from '@core/models';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
+import { Response } from '@core/models';
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +22,10 @@ export class CartProductsService {
   private _shoppingCart: BehaviorSubject<ShoppingCartObject> =
     new BehaviorSubject(this.getFromLocalStorage());
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(
+    private httpClient: HttpClient,
+    private cartUserService: CartUserService
+  ) {}
 
   get shoppingCart$(): Observable<ShoppingCartObject> {
     return this._shoppingCart.asObservable();
@@ -49,36 +54,123 @@ export class CartProductsService {
 
   increaseProductQuantity(productID: number) {
     let { products } = this.getFromLocalStorage();
-    let productIndex = products.findIndex((item) => item.id === productID);
-    if (productIndex) {
+    let productIndex = products.findIndex(
+      (item) => item.productId === productID
+    );
+
+    let quantity!: number;
+    if (productIndex !== -1) {
+      quantity = products[productIndex].quantity + 1;
       products[productIndex] = {
         ...products[productIndex],
-        quantity: products[productIndex].quantity + 1,
+        quantity: quantity,
       };
       this.products = products;
+    }
+
+    const shoppingCartProductsId = products[productIndex]?.id;
+    if (shoppingCartProductsId && productIndex) {
+      const cart = this.cartUserService.getFromLocalStorage();
+
+      if (cart.cartId)
+        this.updateProductDB(
+          shoppingCartProductsId, // ID del item shopping-cart-products
+          products[productIndex].price,
+          products[productIndex].productId,
+          cart.cartId,
+          quantity
+        ).subscribe((response) => {
+          console.log('updateProductDB', shoppingCartProductsId, response);
+        });
+    } else {
+      const cart = this.cartUserService.getFromLocalStorage();
+      if (cart.cartId) this.__create(products[productIndex], cart.cartId);
     }
   }
 
   decreaseProductQuantity(productID: number) {
+    console.log('decreaseProductQuantity', productID);
     let { products } = this.getFromLocalStorage();
-    let productIndex = products.findIndex((item) => item.id === productID);
+    let productIndex = products.findIndex(
+      (item) => item.productId === productID
+    );
+    let quantity!: number;
     if (productIndex) {
+      quantity = products[productIndex].quantity - 1;
       products[productIndex] = {
         ...products[productIndex],
-        quantity: products[productIndex].quantity - 1,
+        quantity: quantity,
       };
       this.products = products;
+    }
+
+    const shoppingCartProductsId = products[productIndex]?.id;
+    if (shoppingCartProductsId && productIndex) {
+      const cart = this.cartUserService.getFromLocalStorage();
+
+      if (cart.cartId)
+        this.updateProductDB(
+          shoppingCartProductsId, // ID del item shopping-cart-products
+          products[productIndex].price,
+          products[productIndex].productId,
+          cart.cartId,
+          quantity
+        ).subscribe((response) => {
+          console.log('updateProductDB', shoppingCartProductsId, response);
+        });
+    } else {
+      const cart = this.cartUserService.getFromLocalStorage();
+      if (cart.cartId) this.__create(products[productIndex], cart.cartId);
     }
   }
 
   // Agrega un elemento nuevo al carrito
-  private createProduct(newProduct: ShoppingCartItem) {
+  private createProduct(product: ShoppingCartItem) {
     let { products } = this.getFromLocalStorage();
 
-    // products.push({...newProduct, quantity: 1,});
-    products.push(newProduct);
+    const cart = this.cartUserService.getFromLocalStorage();
+    if (cart.cartId) {
+      this.__create(product, cart.cartId);
+    }
+    // Si no existe, entonces guardo localmente el producto
+    else {
+      // products.push({...newProduct, quantity: 1,});
+      products.push(product);
+      this.products = products;
+    }
+  }
+  private __create(product: ShoppingCartItem, cartId: number) {
+    // ¿Existe un carrito creado?
+    // Si existe, creamos el producto en la BD
+    this.createProductDB(
+      product.price,
+      product.productId,
+      cartId,
+      product.quantity
+    ).subscribe((response) => {
+      const shoppingCartProductId = response?.data?.id;
+      console.log('createProductDB', shoppingCartProductId);
 
-    this.products = products;
+      if (shoppingCartProductId) {
+        // Actualizar
+        let { products } = this.getFromLocalStorage();
+        const updatedProducts = products.map((product) => {
+          if (product.productId === product.productId) {
+            // Clonar el objeto y actualizar el valor
+            return { ...product, id: shoppingCartProductId };
+          }
+          // Mantener los otros elementos sin cambios
+          return product;
+        });
+
+        this.products = updatedProducts;
+      } else {
+        console.log(
+          'createProductDB ERROR, cant get response.data[0].id',
+          response
+        );
+      }
+    });
   }
 
   // Actualiza el atributo "products" de la clase y gatilla eventos asociados
@@ -93,7 +185,7 @@ export class CartProductsService {
     let doesExist = false;
     const { products } = this.getFromLocalStorage();
     const product = products.find((item) => {
-      if (item.id === productID) {
+      if (item.productId === productID) {
         doesExist = true;
       }
     });
@@ -104,24 +196,31 @@ export class CartProductsService {
   This function can add or subtract element, depending of the quantity
   */
   addProduct(product: ShoppingCartItem) {
-    const doesExist = this.doesExist(product.id);
+    const doesExist = this.doesExist(product.productId);
 
     if (!doesExist) {
       this.createProduct(product);
-      console.log('add');
-      this.createProductDB(product.price, product.id, 14).subscribe(
-        (response) => {
-          console.log('createProductDB', response);
-        }
-      );
     } else {
-      this.increaseProductQuantity(product.id);
+      this.increaseProductQuantity(product.productId);
     }
   }
 
   deleteProduct(productID: number) {
     let { products } = this.getFromLocalStorage();
-    products = products.filter((item) => item.id !== productID);
+
+    let productIndex = products.findIndex(
+      (item) => item.productId === productID
+    );
+    if (productIndex !== -1) {
+      const shoppingCartProductsId = products[productIndex]?.id;
+      if (shoppingCartProductsId) {
+        this.deleteProductDB(shoppingCartProductsId).subscribe((response) => {
+          console.log('deleteProductDB', shoppingCartProductsId, response);
+        });
+      }
+    }
+
+    products = products.filter((item) => item.productId !== productID);
     this.products = products;
   }
 
@@ -140,22 +239,50 @@ export class CartProductsService {
 
   baseUrl = environment.strapi + '/api';
 
-  public createProductDB(
+  private createProductDB(
     price: number,
     productID: number,
-    ShoppingCartID: number
+    ShoppingCartID: number,
+    quantity: number
+  ): Observable<any> {
+    //TODO cambiar any por responce, pero explota porque el model usar un array que no tiene sentido
+    const data = {
+      data: {
+        price: price,
+        product: productID,
+        shopping_cart: ShoppingCartID,
+        quantity: quantity,
+      },
+    };
+    return this.httpClient.post<Response>(
+      `${this.baseUrl}/shopping-cart-products`,
+      data
+    );
+  }
+  private updateProductDB(
+    id: number,
+    price: number,
+    productID: number,
+    ShoppingCartID: number,
+    quantity: number
   ): Observable<Response> {
     const data = {
       data: {
         price: price,
         product: productID,
         shopping_cart: ShoppingCartID,
+        quantity: quantity,
       },
     };
     console.log(data);
-    return this.httpClient.post<Response>(
-      `${this.baseUrl}/shopping-cart-products`,
+    return this.httpClient.put<Response>(
+      `${this.baseUrl}/shopping-cart-products/${id}`,
       data
+    );
+  }
+  private deleteProductDB(id: number): Observable<Response> {
+    return this.httpClient.delete<Response>(
+      `${this.baseUrl}/shopping-cart-products/${id}`
     );
   }
 }

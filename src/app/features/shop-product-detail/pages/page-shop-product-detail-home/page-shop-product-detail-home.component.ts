@@ -82,7 +82,7 @@ export class PageShopProductDetailHomeComponent {
   addProduct(product: ItemObject) {
     // if (product.data)
     this.cartProductsService.addProduct({
-      id: this.productId,
+      productId: this.productId,
       url: `/home/${this.categoryId}/${this.productId}`,
       name: product.data.name,
       price: product.data.price,

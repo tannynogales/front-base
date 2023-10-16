@@ -12,3 +12,11 @@ export interface Response {
     };
   };
 }
+
+/*
+Cambié el "data", estaba sde esta formatCurrency, pero no entiendo porqué tenía un array
+data: Array<{
+  id: number;
+  attributes: unknown;
+}>;
+*/
