@@ -96,7 +96,7 @@ export class CartProductsService {
       (item) => item.productId === productID
     );
     let quantity!: number;
-    if (productIndex) {
+    if (productIndex !== -1) {
       quantity = products[productIndex].quantity - 1;
       products[productIndex] = {
         ...products[productIndex],
