@@ -69,23 +69,24 @@ export class CartProductsService {
     }
 
     const shoppingCartProductsId = products[productIndex]?.id;
-    if (shoppingCartProductsId && productIndex) {
-      const cart = this.cartUserService.getFromLocalStorage();
+    if (productIndex)
+      if (shoppingCartProductsId) {
+        const cart = this.cartUserService.getFromLocalStorage();
 
-      if (cart.cartId)
-        this.updateProductDB(
-          shoppingCartProductsId, // ID del item shopping-cart-products
-          products[productIndex].price,
-          products[productIndex].productId,
-          cart.cartId,
-          quantity
-        ).subscribe((response) => {
-          console.log('updateProductDB', shoppingCartProductsId, response);
-        });
-    } else {
-      const cart = this.cartUserService.getFromLocalStorage();
-      if (cart.cartId) this.__create(products[productIndex], cart.cartId);
-    }
+        if (cart.cartId)
+          this.updateProductDB(
+            shoppingCartProductsId, // ID del item shopping-cart-products
+            products[productIndex].price,
+            products[productIndex].productId,
+            cart.cartId,
+            quantity
+          ).subscribe((response) => {
+            console.log('updateProductDB', shoppingCartProductsId, response);
+          });
+      } else {
+        const cart = this.cartUserService.getFromLocalStorage();
+        if (cart.cartId) this.__create(products[productIndex], cart.cartId);
+      }
   }
 
   decreaseProductQuantity(productID: number) {
@@ -105,23 +106,24 @@ export class CartProductsService {
     }
 
     const shoppingCartProductsId = products[productIndex]?.id;
-    if (shoppingCartProductsId && productIndex) {
-      const cart = this.cartUserService.getFromLocalStorage();
+    if (productIndex)
+      if (shoppingCartProductsId) {
+        const cart = this.cartUserService.getFromLocalStorage();
 
-      if (cart.cartId)
-        this.updateProductDB(
-          shoppingCartProductsId, // ID del item shopping-cart-products
-          products[productIndex].price,
-          products[productIndex].productId,
-          cart.cartId,
-          quantity
-        ).subscribe((response) => {
-          console.log('updateProductDB', shoppingCartProductsId, response);
-        });
-    } else {
-      const cart = this.cartUserService.getFromLocalStorage();
-      if (cart.cartId) this.__create(products[productIndex], cart.cartId);
-    }
+        if (cart.cartId)
+          this.updateProductDB(
+            shoppingCartProductsId, // ID del item shopping-cart-products
+            products[productIndex].price,
+            products[productIndex].productId,
+            cart.cartId,
+            quantity
+          ).subscribe((response) => {
+            console.log('updateProductDB', shoppingCartProductsId, response);
+          });
+      } else {
+        const cart = this.cartUserService.getFromLocalStorage();
+        if (cart.cartId) this.__create(products[productIndex], cart.cartId);
+      }
   }
 
   // Agrega un elemento nuevo al carrito
