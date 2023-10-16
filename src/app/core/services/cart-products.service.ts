@@ -127,16 +127,13 @@ export class CartProductsService {
   // Agrega un elemento nuevo al carrito
   private createProduct(product: ShoppingCartItem) {
     let { products } = this.getFromLocalStorage();
+    // products.push({...newProduct, quantity: 1,});
+    products.push(product);
+    this.products = products;
 
     const cart = this.cartUserService.getFromLocalStorage();
     if (cart.cartId) {
       this.__create(product, cart.cartId);
-    }
-    // Si no existe, entonces guardo localmente el producto
-    else {
-      // products.push({...newProduct, quantity: 1,});
-      products.push(product);
-      this.products = products;
     }
   }
   private __create(product: ShoppingCartItem, cartId: number) {
