@@ -2,14 +2,17 @@
   aria-label="Chat on WhatsApp"
   target="_blank"
   href="https://wa.me/56976901120"
-  ><div class="whatsapp">
+  ><div
+    class="whatsapp"
+    [ngStyle]="{ width: containerWidth + 'px', height: containerWidth + 'px' }"
+  >
     <!-- <i class="fab fa-whatsapp"></i> -->
     <!-- <i class="fa-brands fa-whatsapp"></i> -->
 
     <svg
       fill="#ffffff"
-      width="48px"
-      height="48px"
+      [attr.width]="svgWidth"
+      [attr.height]="svgWidth"
       viewBox="0 0 16 16"
       xmlns="http://www.w3.org/2000/svg"
       stroke="#ffffff"

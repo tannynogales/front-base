@@ -68,33 +68,15 @@ export class CartProductsService {
       this.products = products;
     }
 
-    const shoppingCartProductsId = products[productIndex]?.id;
-    if (productIndex)
-      if (shoppingCartProductsId) {
-        const cart = this.cartUserService.getFromLocalStorage();
-
-        if (cart.cartId)
-          this.updateProductDB(
-            shoppingCartProductsId, // ID del item shopping-cart-products
-            products[productIndex].price,
-            products[productIndex].productId,
-            cart.cartId,
-            quantity
-          ).subscribe((response) => {
-            console.log('updateProductDB', shoppingCartProductsId, response);
-          });
-      } else {
-        const cart = this.cartUserService.getFromLocalStorage();
-        if (cart.cartId) this.__create(products[productIndex], cart.cartId);
-      }
+    if (productIndex !== -1) this._createOrUpdate(products[productIndex]);
   }
 
   decreaseProductQuantity(productID: number) {
-    console.log('decreaseProductQuantity', productID);
     let { products } = this.getFromLocalStorage();
     let productIndex = products.findIndex(
       (item) => item.productId === productID
     );
+
     let quantity!: number;
     if (productIndex !== -1) {
       quantity = products[productIndex].quantity - 1;
@@ -105,25 +87,29 @@ export class CartProductsService {
       this.products = products;
     }
 
-    const shoppingCartProductsId = products[productIndex]?.id;
-    if (productIndex)
-      if (shoppingCartProductsId) {
-        const cart = this.cartUserService.getFromLocalStorage();
+    if (productIndex !== -1) this._createOrUpdate(products[productIndex]);
+  }
 
-        if (cart.cartId)
-          this.updateProductDB(
-            shoppingCartProductsId, // ID del item shopping-cart-products
-            products[productIndex].price,
-            products[productIndex].productId,
-            cart.cartId,
-            quantity
-          ).subscribe((response) => {
-            console.log('updateProductDB', shoppingCartProductsId, response);
-          });
-      } else {
-        const cart = this.cartUserService.getFromLocalStorage();
-        if (cart.cartId) this.__create(products[productIndex], cart.cartId);
-      }
+  _createOrUpdate(product: ShoppingCartItem) {
+    const shoppingCartProductsId = product?.id;
+    if (shoppingCartProductsId) {
+      const cart = this.cartUserService.getFromLocalStorage();
+
+      if (cart.cartId)
+        this.updateProductDB(
+          shoppingCartProductsId, // ID del item shopping-cart-products
+          product.price,
+          product.productId,
+          cart.cartId,
+          product.quantity
+        ).subscribe((response) => {
+          console.log('updateProductDB', shoppingCartProductsId, response);
+          return 1;
+        });
+    } else {
+      const cart = this.cartUserService.getFromLocalStorage();
+      if (cart.cartId) this.__create(product, cart.cartId);
+    }
   }
 
   // Agrega un elemento nuevo al carrito
@@ -134,19 +120,16 @@ export class CartProductsService {
     this.products = products;
 
     const cart = this.cartUserService.getFromLocalStorage();
-    if (cart.cartId) {
-      this.__create(product, cart.cartId);
-    }
+    if (cart.cartId) this.__create(product, cart.cartId);
   }
   private __create(product: ShoppingCartItem, cartId: number) {
-    // ¿Existe un carrito creado?
-    // Si existe, creamos el producto en la BD
     this.createProductDB(
       product.price,
       product.productId,
       cartId,
       product.quantity
     ).subscribe((response) => {
+      const productId = product.productId;
       const shoppingCartProductId = response?.data?.id;
       console.log('createProductDB', shoppingCartProductId);
 
@@ -154,7 +137,7 @@ export class CartProductsService {
         // Actualizar
         let { products } = this.getFromLocalStorage();
         const updatedProducts = products.map((product) => {
-          if (product.productId === product.productId) {
+          if (product.productId === productId) {
             // Clonar el objeto y actualizar el valor
             return { ...product, id: shoppingCartProductId };
           }
@@ -230,7 +213,7 @@ export class CartProductsService {
     );
   }
 
-  private getFromLocalStorage(): ShoppingCartObject {
+  getFromLocalStorage(): ShoppingCartObject {
     const carritoData = localStorage.getItem('shopping-cart');
     if (carritoData) return JSON.parse(carritoData);
     else return this.shoppingCartObject;
@@ -238,7 +221,7 @@ export class CartProductsService {
 
   baseUrl = environment.strapi + '/api';
 
-  private createProductDB(
+  createProductDB(
     price: number,
     productID: number,
     ShoppingCartID: number,
@@ -279,9 +262,29 @@ export class CartProductsService {
       data
     );
   }
+
   private deleteProductDB(id: number): Observable<Response> {
     return this.httpClient.delete<Response>(
       `${this.baseUrl}/shopping-cart-products/${id}`
     );
+  }
+
+  setShoppingCartProductId(productId: number, shoppingCartProductId: number) {
+    let { products } = this.getFromLocalStorage();
+
+    let productIndex = products.findIndex(
+      (product) => product.productId === productId
+    );
+    // console.log(productIndex);
+    if (productIndex !== -1) {
+      products[productIndex] = {
+        ...products[productIndex],
+        id: shoppingCartProductId,
+      };
+
+      // console.log(products);
+
+      this.products = products;
+    }
   }
 }

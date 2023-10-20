@@ -1,6 +1,10 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
-import { CartUserService, UserService } from '@core/services';
-import { CartUserObject, Response } from '@core/models';
+import {
+  CartProductsService,
+  CartUserService,
+  UserService,
+} from '@core/services';
+import { CartUserObject, Response, ShoppingCartItem } from '@core/models';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -30,7 +34,8 @@ export class ShopCartHomeComponent implements OnInit {
     private cartUserService: CartUserService,
     private userService: UserService,
     private elementRef: ElementRef,
-    private router: Router
+    private router: Router,
+    private cartProductsService: CartProductsService
   ) {
     // TODO: unsubscribe
     this.cartUserService.cartUser$.subscribe((user) => {
@@ -72,7 +77,7 @@ export class ShopCartHomeComponent implements OnInit {
   }
 
   onSubmit(): boolean {
-    // this.isLoading = true;
+    this.isLoading = true;
     const { email, name, cellphone } = this.form.value;
 
     const isTheFormValid = this.isTheFormValid(this.form);
@@ -90,33 +95,28 @@ export class ShopCartHomeComponent implements OnInit {
         this.cartUserService
           .updateCart(cartId, user.id, name, email, cellphone)
           .subscribe((response) => {
-            console.log('update', response.data.id);
+            const cartId = response?.data?.id;
+            console.log('update', cartId);
+            this.goToNextStep(cartId);
           });
         return true;
       } else {
         this.cartUserService
           .createCart(user.id, name, email, cellphone)
           .subscribe((response) => {
+            const cartId = response?.data?.id;
             this.cartUserService.set({
-              cartId: response.data.id,
+              cartId: cartId,
               name: name,
               email: email,
               cellphone: cellphone,
             });
-            console.log('create', response.data.id);
+            console.log('create', cartId);
+            this.goToNextStep(cartId);
           });
         return true;
       }
     else return false;
-
-    if (isTheFormValid) {
-      this.router.navigate(
-        ['/cart-shopping/delivery']
-        // , {
-        //   queryParams: { from: state.url },
-        // }
-      );
-    }
 
     // console.log(email, name, cellphone);
     // this.authService.logIn(email, password).subscribe({
@@ -134,5 +134,49 @@ export class ShopCartHomeComponent implements OnInit {
     //     this.isLoading = false;
     //   },
     // });
+  }
+
+  newProductsCreated: number = 0;
+  goToNextStep(cartId: number) {
+    // console.log('goToNextStep', cartId);
+    const { products } = this.cartProductsService.getFromLocalStorage();
+    // console.log(products);
+
+    const newProducts = products.filter((product) => {
+      // console.log(product?.id, Number.isInteger(product?.id));
+      return !Number.isInteger(product?.id);
+    });
+    // console.log(newProducts);
+
+    newProducts.forEach((product) => {
+      // console.log(product);
+
+      this.cartProductsService
+        .createProductDB(
+          product.price,
+          product.productId,
+          cartId,
+          product.quantity
+        )
+        .subscribe((response) => {
+          // TODO update product id
+          const shoppingCartProductId = response?.data?.id;
+          // console.log(shoppingCartProductId);
+          if (product.productId && shoppingCartProductId) {
+            // console.log('if', product.productId, shoppingCartProductId);
+            this.cartProductsService.setShoppingCartProductId(
+              product.productId,
+              shoppingCartProductId
+            );
+          }
+          // else console.log('else', product?.id, shoppingCartProductId);
+          this.newProductsCreated++;
+
+          if (this.newProductsCreated === newProducts.length) {
+            this.isLoading = false;
+            this.router.navigate(['/cart-shopping/delivery']);
+          }
+        });
+    });
   }
 }
