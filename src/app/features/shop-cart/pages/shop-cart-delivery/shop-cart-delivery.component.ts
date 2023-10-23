@@ -25,6 +25,7 @@ export class ShopCartDeliveryComponent implements OnInit {
   cartDelivery!: CartDeliveryObject;
   regiones!: regionesOptions[];
   comunas!: comunasOptions[];
+  cartId = this.cartUserService.getFromLocalStorage()?.cartId;
 
   form: FormGroup = new FormGroup({});
   isLoading: boolean = false;
@@ -80,6 +81,11 @@ export class ShopCartDeliveryComponent implements OnInit {
     private cartUserService: CartUserService,
     private elementRef: ElementRef
   ) {
+    if (!this.cartId) {
+      console.log('cartId not found');
+      this.router.navigate(['/cart-shopping']);
+    }
+
     this.utilitiesChileRegionesService.regiones$.subscribe((regiones) => {
       this.regiones = this.regionToOptions(regiones.data);
       if (this.cartDelivery?.regionId)
@@ -194,8 +200,6 @@ export class ShopCartDeliveryComponent implements OnInit {
 
     this.cartDeliveryService.set(values);
 
-    const cartId = this.cartUserService.getFromLocalStorage()?.cartId;
-
     if (deliveryOption == '2') {
       const isTheFormValid = this.isTheFormValid(this.form);
       if (!isTheFormValid) {
@@ -205,11 +209,11 @@ export class ShopCartDeliveryComponent implements OnInit {
 
     this.isLoading = true;
 
-    if (cartId) {
+    if (this.cartId) {
       console.log('cartId found');
       this.cartDeliveryService
         .updateCart(
-          cartId,
+          this.cartId,
           deliveryOption,
           region,
           comuna,

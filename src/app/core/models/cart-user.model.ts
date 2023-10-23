@@ -3,4 +3,5 @@ export interface CartUserObject {
   name: string;
   cellphone: string;
   cartId?: number;
+  cartState?: number;
 }

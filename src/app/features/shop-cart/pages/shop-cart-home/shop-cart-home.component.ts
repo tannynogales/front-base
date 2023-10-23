@@ -101,14 +101,18 @@ export class ShopCartHomeComponent implements OnInit {
 
     // this.setCartUser(email, name, cellphone);
     const cartId = this.cartUser?.cartId;
+    const cartState = this.cartUser?.cartState;
 
     const user = this.userService.getUser();
 
     this.cartUserService.set({ cartId, email, name, cellphone });
     if (user?.id)
       if (cartId) {
+        let state = 1;
+        if (cartState) if (cartState >= 1) state = cartState;
+
         this.cartUserService
-          .updateCart(cartId, user.id, name, email, cellphone)
+          .updateCart(cartId, user.id, name, email, cellphone, state)
           .subscribe((response) => {
             const cartId = response?.data?.id;
             console.log('update', cartId);
@@ -122,6 +126,7 @@ export class ShopCartHomeComponent implements OnInit {
             const cartId = response?.data?.id;
             this.cartUserService.set({
               cartId: cartId,
+              cartState: 1,
               name: name,
               email: email,
               cellphone: cellphone,

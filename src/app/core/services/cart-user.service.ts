@@ -72,6 +72,7 @@ export class CartUserService {
         user_email: user_email,
         user_cellphone: userCellphone,
         user: user_id,
+        state: 1,
       },
     };
 
@@ -86,7 +87,8 @@ export class CartUserService {
     user_id: string,
     user_name: string,
     user_email: string,
-    userCellphone: string
+    userCellphone: string,
+    state: number
   ): Observable<Response> {
     const data = {
       data: {
@@ -94,6 +96,7 @@ export class CartUserService {
         // user_email: user_email,
         user_cellphone: userCellphone,
         user: user_id,
+        state: state,
       },
     };
 

@@ -16,14 +16,17 @@ const routes: Routes = [
   {
     path: 'delivery',
     component: ShopCartDeliveryComponent,
+    canActivate: [SessionGuard],
   },
   {
     path: 'billing',
     component: ShopCartBillingComponent,
+    canActivate: [SessionGuard],
   },
   {
     path: 'payment',
     component: ShopCartPaymentComponent,
+    canActivate: [SessionGuard],
   },
 ];
 
