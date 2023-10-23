@@ -23,6 +23,7 @@ import { InputComponent } from './input/input.component';
 import { InputErrorComponent } from './input-error/input-error.component';
 import { TokenExpirationComponent } from './token-expiration/token-expiration.component';
 import { WhatsappButtonComponent } from './whatsapp-button/whatsapp-button.component';
+import { SelectComponent } from './select/select.component';
 
 export const components = [
   CarouselComponent,
@@ -50,6 +51,7 @@ export const components = [
   InputErrorComponent,
   TokenExpirationComponent,
   WhatsappButtonComponent,
+  SelectComponent,
 ];
 
 export * from './carousel/carousel.component';
@@ -77,3 +79,4 @@ export * from './input/input.component';
 export * from './input-error/input-error.component';
 export * from './token-expiration/token-expiration.component';
 export * from './whatsapp-button/whatsapp-button.component';
+export * from './select/select.component';

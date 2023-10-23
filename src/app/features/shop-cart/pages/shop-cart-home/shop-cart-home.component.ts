@@ -4,9 +4,15 @@ import {
   CartUserService,
   UserService,
 } from '@core/services';
-import { CartUserObject, Response, ShoppingCartItem } from '@core/models';
+import {
+  CartUserObject,
+  Response,
+  ShoppingCartItem,
+  ShoppingCartObject,
+} from '@core/models';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-shop-cart-home',
@@ -30,6 +36,7 @@ export class ShopCartHomeComponent implements OnInit {
 
   form: FormGroup = new FormGroup({});
 
+  shoppingCart$: Observable<ShoppingCartObject>;
   constructor(
     private cartUserService: CartUserService,
     private userService: UserService,
@@ -44,7 +51,11 @@ export class ShopCartHomeComponent implements OnInit {
       this.cartUser.email = user.email;
       this.cartUser.cellphone = user.cellphone;
     });
+    this.shoppingCart$ = this.cartProductsService.shoppingCart$;
   }
+
+  // @ViewChild('miDiv', { static: true }) miDiv!: ElementRef;
+
   ngOnInit(): void {
     this.form = new FormGroup({
       name: new FormControl<string>(this.cartUser.name, [Validators.required]),
@@ -54,10 +65,13 @@ export class ShopCartHomeComponent implements OnInit {
       ]),
       cellphone: new FormControl<string>(this.cartUser.cellphone, [
         Validators.required,
+        Validators.minLength(9),
+        Validators.maxLength(9),
       ]),
     });
   }
 
+  // TODO: make a common service
   isTheFormValid(form: FormGroup): boolean {
     if (form.valid) {
       return true;
@@ -77,12 +91,12 @@ export class ShopCartHomeComponent implements OnInit {
   }
 
   onSubmit(): boolean {
-    this.isLoading = true;
-    const { email, name, cellphone } = this.form.value;
-
     const isTheFormValid = this.isTheFormValid(this.form);
 
     if (!isTheFormValid) return false;
+
+    this.isLoading = true;
+    const { email, name, cellphone } = this.form.value;
 
     // this.setCartUser(email, name, cellphone);
     const cartId = this.cartUser?.cartId;
@@ -97,7 +111,7 @@ export class ShopCartHomeComponent implements OnInit {
           .subscribe((response) => {
             const cartId = response?.data?.id;
             console.log('update', cartId);
-            this.goToNextStep(cartId);
+            this.createProducts(cartId);
           });
         return true;
       } else {
@@ -112,7 +126,7 @@ export class ShopCartHomeComponent implements OnInit {
               cellphone: cellphone,
             });
             console.log('create', cartId);
-            this.goToNextStep(cartId);
+            this.createProducts(cartId);
           });
         return true;
       }
@@ -137,7 +151,7 @@ export class ShopCartHomeComponent implements OnInit {
   }
 
   newProductsCreated: number = 0;
-  goToNextStep(cartId: number) {
+  createProducts(cartId: number) {
     // console.log('goToNextStep', cartId);
     const { products } = this.cartProductsService.getFromLocalStorage();
     // console.log(products);
@@ -147,36 +161,44 @@ export class ShopCartHomeComponent implements OnInit {
       return !Number.isInteger(product?.id);
     });
     // console.log(newProducts);
+    if (newProducts.length > 0) {
+      newProducts.forEach((product) => {
+        // console.log(product);
 
-    newProducts.forEach((product) => {
-      // console.log(product);
+        this.cartProductsService
+          .createProductDB(
+            product.price,
+            product.productId,
+            cartId,
+            product.quantity
+          )
+          .subscribe((response) => {
+            // TODO update product id
+            const shoppingCartProductId = response?.data?.id;
+            // console.log(shoppingCartProductId);
+            if (product.productId && shoppingCartProductId) {
+              // console.log('if', product.productId, shoppingCartProductId);
+              this.cartProductsService.setShoppingCartProductId(
+                product.productId,
+                shoppingCartProductId
+              );
+            }
+            // else console.log('else', product?.id, shoppingCartProductId);
+            this.newProductsCreated++;
 
-      this.cartProductsService
-        .createProductDB(
-          product.price,
-          product.productId,
-          cartId,
-          product.quantity
-        )
-        .subscribe((response) => {
-          // TODO update product id
-          const shoppingCartProductId = response?.data?.id;
-          // console.log(shoppingCartProductId);
-          if (product.productId && shoppingCartProductId) {
-            // console.log('if', product.productId, shoppingCartProductId);
-            this.cartProductsService.setShoppingCartProductId(
-              product.productId,
-              shoppingCartProductId
-            );
-          }
-          // else console.log('else', product?.id, shoppingCartProductId);
-          this.newProductsCreated++;
+            if (this.newProductsCreated === newProducts.length) {
+              this.goToNextStep();
+            }
+          });
+      });
+    } else {
+      console.log('else, no products to create');
+      this.goToNextStep();
+    }
+  }
 
-          if (this.newProductsCreated === newProducts.length) {
-            this.isLoading = false;
-            this.router.navigate(['/cart-shopping/delivery']);
-          }
-        });
-    });
+  goToNextStep() {
+    this.isLoading = false;
+    this.router.navigate(['/cart-shopping/delivery']);
   }
 }

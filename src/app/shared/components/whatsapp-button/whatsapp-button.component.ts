@@ -14,8 +14,8 @@ export class WhatsappButtonComponent implements OnInit {
 
   ngOnInit(): void {
     setTimeout(() => {
-      this.svgWidth = this.svgWidth / 2;
-      this.containerWidth = this.containerWidth / 2;
+      this.svgWidth = this.svgWidth / 1.5;
+      this.containerWidth = this.containerWidth / 1.5;
     }, 3000);
   }
 }

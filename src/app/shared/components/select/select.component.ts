@@ -1,33 +1,42 @@
 import {
   AfterViewInit,
   Component,
+  ElementRef,
   EventEmitter,
   Input,
   OnInit,
   Output,
+  ViewChild,
 } from '@angular/core';
 import {
   ControlValueAccessor,
-  UntypedFormControl,
-  UntypedFormGroup,
-  NG_VALUE_ACCESSOR,
   FormControl,
   FormGroup,
+  NG_VALUE_ACCESSOR,
+  UntypedFormGroup,
 } from '@angular/forms';
 
+// TODO llevar este modelo a commons
+interface Options {
+  value: string;
+  label: string;
+}
+
+declare let Choices: any;
+
 @Component({
-  selector: 'app-input',
-  templateUrl: './input.component.html',
-  styleUrls: ['./input.component.scss'],
+  selector: 'app-select',
+  templateUrl: './select.component.html',
+  styleUrls: ['./select.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
       multi: true,
-      useExisting: InputComponent,
+      useExisting: SelectComponent,
     },
   ],
 })
-export class InputComponent
+export class SelectComponent
   implements ControlValueAccessor, OnInit, AfterViewInit
 {
   @Input() public parentForm!: FormGroup;
@@ -36,8 +45,7 @@ export class InputComponent
   @Input() tooltip: string = '';
 
   @Input() public label!: string;
-  @Input() public type: 'text' | 'password' | 'date' | 'file' | 'number' =
-    'text';
+  @Input() options: Options[] = [{ value: '1', label: 'some option' }];
 
   @Input() public validations: Array<any> = [];
 

@@ -104,6 +104,7 @@ export class CartUserService {
   }
 }
 
+// TODO: llevar a model's
 export interface Response {
   data: Data;
   meta: any;

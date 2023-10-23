@@ -6,6 +6,6 @@ export interface CartDeliveryObject {
   streetNumber: string;
   // postalCode: string;
   department: string;
-  packagingCost: number | false;
-  shippingCost: number | false;
+  packagingCost?: number | false; // TODO: delete this attribute
+  shippingCost?: number | false; // TODO: delete this attribute
 }

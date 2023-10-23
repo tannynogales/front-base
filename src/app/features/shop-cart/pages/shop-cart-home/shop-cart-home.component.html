@@ -4,9 +4,16 @@
   [items]="breadcrumbItems"
 ></app-breadcrumb>
 
+<ng-container *ngIf="shoppingCart$ | async as shoppingCart">
+  <div class="container" *ngIf="shoppingCart.products.length <= 0">
+    <div class="alert alert-primary" role="alert">
+      No tienes ningún producto en el carrito
+    </div>
+  </div>
+</ng-container>
+
 <div class="container mt-4">
   <p>Ingresa tus datos para continuar con la compra.</p>
-
   <form
     (ngSubmit)="onSubmit()"
     class="mb-5"
@@ -42,6 +49,7 @@
           label="Celular"
           type="number"
           [isDisabled]="isLoading"
+          [tooltip]="'El celular debe tener 9 digitos'"
         >
         </app-input>
       </div>
