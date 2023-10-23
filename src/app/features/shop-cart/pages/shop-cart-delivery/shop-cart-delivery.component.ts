@@ -210,6 +210,10 @@ export class ShopCartDeliveryComponent implements OnInit {
     this.isLoading = true;
 
     if (this.cartId) {
+      const cartState = this.cartUserService.getFromLocalStorage()?.cartState;
+      let state = 1;
+      if (cartState) if (cartState >= 1) state = cartState;
+
       console.log('cartId found');
       this.cartDeliveryService
         .updateCart(
@@ -219,7 +223,8 @@ export class ShopCartDeliveryComponent implements OnInit {
           comuna,
           streetName,
           streetNumber,
-          department
+          department,
+          state
         )
         .subscribe((response) => {
           this.isLoading = false;

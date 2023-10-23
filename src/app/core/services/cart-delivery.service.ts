@@ -58,7 +58,8 @@ export class CartDeliveryService {
     comunaId: string,
     streetName: string,
     streetNumber: string,
-    department: string
+    department: string,
+    state: number
   ): Observable<Response> {
     const data = {
       data: {
@@ -68,6 +69,7 @@ export class CartDeliveryService {
         delivery_street_name: streetName,
         delivery_street_number: streetNumber,
         delivery_department: department,
+        state: state,
       },
     };
     console.log(`/shopping-carts/${id}`, data);
