@@ -163,6 +163,10 @@ export class CartProductsService {
     this._shoppingCart.next(this.shoppingCartObject);
   }
 
+  unSet() {
+    this.products = [];
+  }
+
   private doesExist(productID: number): boolean {
     let doesExist = false;
     const { products } = this.getFromLocalStorage();

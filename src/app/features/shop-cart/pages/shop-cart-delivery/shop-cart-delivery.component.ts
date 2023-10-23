@@ -11,7 +11,6 @@ import {
   CartDeliveryService,
   CartProductsService,
   CartUserService,
-  UserService,
   UtilitiesChileRegionesService,
 } from '@core/services';
 import { Observable } from 'rxjs';
@@ -229,7 +228,9 @@ export class ShopCartDeliveryComponent implements OnInit {
         .subscribe((response) => {
           this.isLoading = false;
           console.log(response);
-          this.router.navigate(['/cart-shopping/billing']);
+          this.cartUserService.unSet();
+          this.cartProductsService.unSet();
+          this.router.navigate(['/cart-shopping/success']);
         });
     } else console.log('cartId not found');
 

@@ -6,6 +6,7 @@ import { ShopCartBillingComponent } from './pages/shop-cart-billing/shop-cart-bi
 import { ShopCartPaymentComponent } from './pages/shop-cart-payment/shop-cart-payment.component';
 
 import { SessionGuard } from '@core/guards';
+import { ShopCartSuccessComponent } from './pages/shop-cart-success/shop-cart-success.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,11 @@ const routes: Routes = [
   {
     path: 'payment',
     component: ShopCartPaymentComponent,
+    canActivate: [SessionGuard],
+  },
+  {
+    path: 'success',
+    component: ShopCartSuccessComponent,
     canActivate: [SessionGuard],
   },
 ];

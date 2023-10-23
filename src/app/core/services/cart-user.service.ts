@@ -38,6 +38,16 @@ export class CartUserService {
     this._cartUser.next(this.cartUserObject);
   }
 
+  unSet() {
+    this.cartUserObject = {
+      email: '',
+      name: '',
+      cellphone: '',
+    };
+    this.saveInLocalStorage();
+    this._cartUser.next(this.cartUserObject);
+  }
+
   saveInLocalStorage() {
     localStorage.setItem('cart-user', JSON.stringify(this.cartUserObject));
   }

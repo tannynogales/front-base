@@ -8,6 +8,7 @@ import { ShopCartDeliveryComponent } from './pages/shop-cart-delivery/shop-cart-
 import { ShopCartPaymentComponent } from './pages/shop-cart-payment/shop-cart-payment.component';
 import { ShopCartBillingComponent } from './pages/shop-cart-billing/shop-cart-billing.component';
 import { NgxPayPalModule } from 'ngx-paypal';
+import { ShopCartSuccessComponent } from './pages/shop-cart-success/shop-cart-success.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { NgxPayPalModule } from 'ngx-paypal';
     ShopCartDeliveryComponent,
     ShopCartPaymentComponent,
     ShopCartBillingComponent,
+    ShopCartSuccessComponent,
   ],
   imports: [CommonModule, ShopCartRoutingModule, SharedModule, NgxPayPalModule],
 })
