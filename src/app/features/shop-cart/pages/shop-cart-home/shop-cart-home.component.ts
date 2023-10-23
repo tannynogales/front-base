@@ -90,6 +90,7 @@ export class ShopCartHomeComponent implements OnInit {
     }
   }
 
+  // TODO:  manejo de errores
   onSubmit(): boolean {
     const isTheFormValid = this.isTheFormValid(this.form);
 

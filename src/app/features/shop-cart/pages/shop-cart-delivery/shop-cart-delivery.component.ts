@@ -176,6 +176,7 @@ export class ShopCartDeliveryComponent implements OnInit {
     }
   }
 
+  // TODO:  manejo de errores
   onSubmit(): boolean {
     const deliveryOption = this.cartDelivery.deliveryOption;
 
