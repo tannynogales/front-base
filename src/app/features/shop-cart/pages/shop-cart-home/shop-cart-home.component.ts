@@ -47,6 +47,7 @@ export class ShopCartHomeComponent implements OnInit {
     // TODO: unsubscribe
     this.cartUserService.cartUser$.subscribe((user) => {
       this.cartUser.cartId = user.cartId;
+      this.cartUser.cartState = user.cartState;
       this.cartUser.name = user.name;
       this.cartUser.email = user.email;
       this.cartUser.cellphone = user.cellphone;
