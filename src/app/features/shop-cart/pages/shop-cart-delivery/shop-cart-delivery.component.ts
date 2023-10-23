@@ -14,6 +14,7 @@ import {
   UtilitiesChileRegionesService,
 } from '@core/services';
 import { Observable } from 'rxjs';
+import { ToastService } from '@shared/components/toast/toast.service';
 
 @Component({
   selector: 'app-shop-cart-delivery',
@@ -78,7 +79,8 @@ export class ShopCartDeliveryComponent implements OnInit {
     private cartDeliveryService: CartDeliveryService,
     private cartProductsService: CartProductsService,
     private cartUserService: CartUserService,
-    private elementRef: ElementRef
+    private elementRef: ElementRef,
+    private toastService: ToastService
   ) {
     if (!this.cartId) {
       console.log('cartId not found');
@@ -209,29 +211,41 @@ export class ShopCartDeliveryComponent implements OnInit {
     this.isLoading = true;
 
     if (this.cartId) {
+      console.log('cartId found');
+
       const cartState = this.cartUserService.getFromLocalStorage()?.cartState;
       let state = 1;
       if (cartState) if (cartState >= 1) state = cartState;
 
-      console.log('cartId found');
-      this.cartDeliveryService
-        .updateCart(
-          this.cartId,
-          deliveryOption,
-          region,
-          comuna,
-          streetName,
-          streetNumber,
-          department,
-          state
-        )
-        .subscribe((response) => {
-          this.isLoading = false;
-          console.log(response);
-          this.cartUserService.unSet();
-          this.cartProductsService.unSet();
-          this.router.navigate(['/cart-shopping/success']);
+      const cartProducts =
+        this.cartProductsService.getFromLocalStorage().products;
+      console.log('cartProducts', cartProducts.length, cartProducts);
+      if (cartProducts.length > 0)
+        this.cartDeliveryService
+          .updateCart(
+            this.cartId,
+            deliveryOption,
+            region,
+            comuna,
+            streetName,
+            streetNumber,
+            department,
+            state
+          )
+          .subscribe((response) => {
+            this.isLoading = false;
+            console.log(response);
+            this.cartUserService.unSet();
+            this.cartProductsService.unSet();
+            this.router.navigate(['/cart-shopping/success']);
+          });
+      else {
+        console.log('cartProducts not found');
+        this.isLoading = false;
+        this.toastService.addToast({
+          message: 'Para continuar, agrega productos a tu carrito.',
         });
+      }
     } else console.log('cartId not found');
 
     return true;
