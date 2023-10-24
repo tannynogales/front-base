@@ -31,7 +31,7 @@ export class AppComponent {
           localStorage.setItem('history', JSON.stringify(historyArray));
         }
       }
-      gtag('config', 'G-XVMF57F2DX', {
+      gtag('config', 'G-CS4ZNPELWM', {
         page_path: event.urlAfterRedirects,
       });
     });

@@ -52,22 +52,34 @@ export class CartUserService {
     localStorage.setItem('cart-user', JSON.stringify(this.cartUserObject));
   }
 
+  // getFromLocalStorage(): CartUserObject {
+  //   const carritoData = localStorage.getItem('cart-user');
+  //   if (carritoData) {
+  //     console.log('if carritoData from localStorage', carritoData);
+  //     const data: CartUserObject = JSON.parse(carritoData);
+
+  //     if (data.email != '' && data.name != '') {
+  //       console.log(
+  //         "if carritoData from localStorage data.email != '' && data.name != ''"
+  //       );
+  //       return data;
+  //     }
+  //   }
+  //   if (this.userService.checkUser()) {
+  //     const user = this.userService.getUser();
+  //     console.log('if this.userService.checkUser()', user);
+
+  //     this.cartUserObject.email = user.email;
+  //     this.cartUserObject.name = user.name;
+  //   }
+
+  //   return this.cartUserObject;
+  // }
+
   getFromLocalStorage(): CartUserObject {
-    const carritoData = localStorage.getItem('cart-user');
-    if (carritoData) {
-      const data: CartUserObject = JSON.parse(carritoData);
-
-      if (data.email != '' && data.name != '') {
-        return data;
-      }
-    }
-    if (this.userService.checkUser()) {
-      const user = this.userService.getUser();
-      this.cartUserObject.email = user.email;
-      this.cartUserObject.name = user.name;
-    }
-
-    return this.cartUserObject;
+    const data = localStorage.getItem('cart-user');
+    if (data) return JSON.parse(data);
+    else return this.cartUserObject;
   }
 
   public createCart(

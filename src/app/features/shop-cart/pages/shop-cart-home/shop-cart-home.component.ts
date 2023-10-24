@@ -45,13 +45,32 @@ export class ShopCartHomeComponent implements OnInit {
     private cartProductsService: CartProductsService
   ) {
     // TODO: unsubscribe
-    this.cartUserService.cartUser$.subscribe((user) => {
-      this.cartUser.cartId = user.cartId;
-      this.cartUser.cartState = user.cartState;
+    // this.cartUserService.cartUser$.subscribe((user) => {
+    //   this.cartUser.cartId = user.cartId;
+    //   this.cartUser.cartState = user.cartState;
+    //   this.cartUser.name = user.name;
+    //   this.cartUser.email = user.email;
+    //   this.cartUser.cellphone = user.cellphone;
+    // });
+
+    let flag = false;
+    const cartUser = this.cartUserService.getFromLocalStorage();
+    if (cartUser)
+      if (cartUser.email != '' && cartUser.name != '') {
+        if (cartUser?.cartId) this.cartUser.cartId = cartUser.cartId;
+        if (cartUser?.cartState) this.cartUser.cartState = cartUser.cartState;
+        this.cartUser.name = cartUser.name;
+        this.cartUser.email = cartUser.email;
+        this.cartUser.cellphone = cartUser.cellphone;
+        flag = true;
+      }
+
+    if (!flag) {
+      const user = this.userService.getUser();
       this.cartUser.name = user.name;
       this.cartUser.email = user.email;
-      this.cartUser.cellphone = user.cellphone;
-    });
+    }
+
     this.shoppingCart$ = this.cartProductsService.shoppingCart$;
   }
 
