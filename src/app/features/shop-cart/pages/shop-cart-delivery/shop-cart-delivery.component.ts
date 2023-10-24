@@ -128,6 +128,7 @@ export class ShopCartDeliveryComponent implements OnInit {
     const comunas = region?.comunas;
 
     if (comunas) {
+      this.cartDelivery.comunaId = comunas[0].id;
       return this.comunaToOptions(comunas);
     } else return [];
   }
@@ -190,6 +191,7 @@ export class ShopCartDeliveryComponent implements OnInit {
     const { region, comuna, streetName, streetNumber, department } =
       this.form.value;
 
+    console.log('onSubmit', region, comuna);
     const values = {
       deliveryOption: deliveryOption,
       regionId: region,

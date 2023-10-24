@@ -1,3 +1,6 @@
+// TODO refact this component acording to https://angular.io/api/forms/SelectControlValueAccessor
+// -> is not managing correctly the empty cases
+// This compoenent is being used in shop-cart-delivery
 import {
   AfterViewInit,
   Component,

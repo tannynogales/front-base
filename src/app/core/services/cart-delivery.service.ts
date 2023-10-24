@@ -14,7 +14,7 @@ export class CartDeliveryService {
   private cartDeliveryObject: CartDeliveryObject = {
     deliveryOption: '1',
     regionId: '14',
-    comunaId: '',
+    comunaId: '259',
     streetName: '',
     streetNumber: '',
     department: '',
