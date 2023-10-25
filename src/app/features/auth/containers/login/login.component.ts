@@ -3,11 +3,7 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import { AuthService } from '@core/services/auth.service';
 import { UserService } from '@core/services/user.service';
 
-import {
-  UntypedFormControl,
-  UntypedFormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 
 import { User } from '@core/models';
@@ -23,7 +19,7 @@ import { Title } from '@angular/platform-browser';
 export class LoginComponent implements OnInit {
   isLoading = false;
 
-  formLogin: UntypedFormGroup = new UntypedFormGroup({});
+  formLogin: FormGroup = new FormGroup({});
   rememberMe = false;
 
   constructor(
@@ -43,13 +39,13 @@ export class LoginComponent implements OnInit {
   queryParamFrom!: string;
 
   ngOnInit(): void {
-    this.formLogin = new UntypedFormGroup({
-      email: new UntypedFormControl('demo@demo.demo', [
+    this.formLogin = new FormGroup({
+      email: new FormControl<string>('', [
         Validators.required,
         Validators.email,
       ]),
-      password: new UntypedFormControl('ambrosoli', [Validators.required]),
-      rememberMe: new UntypedFormControl(this.rememberMe, [
+      password: new FormControl<string>('', [Validators.required]),
+      rememberMe: new FormControl<boolean>(this.rememberMe, [
         Validators.required,
       ]),
     });

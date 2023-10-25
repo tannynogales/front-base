@@ -2,16 +2,13 @@
   <div class="container py-3">
     <div class="row">
       <div class="col-lg-5">
-        <h1 class="hero-heading mb-5">Login</h1>
-        <p class="text-muted">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </p>
+        <h1 class="hero-heading mb-5">Ingreso</h1>
+        <p class="text-muted">Para continuar, debes tener una cuenta.</p>
       </div>
     </div>
     <div class="row">
       <div class="col-lg-6">
-        <h2 class="h4 mb-4">Returning user</h2>
+        <h2 class="h4 mb-4">Usuarios Existentes</h2>
         <form
           class="mb-5"
           (ngSubmit)="sendLogin()"
@@ -20,7 +17,7 @@
         >
           <div class="row">
             <div class="form-group col-lg-6 mb-3">
-              <label class="form-label">Email address</label>
+              <label class="form-label">Correo</label>
               <input
                 formControlName="email"
                 name="email"
@@ -30,7 +27,7 @@
               />
             </div>
             <div class="form-group col-lg-6 mb-3">
-              <label class="form-label">Password</label>
+              <label class="form-label">Contraseña</label>
               <input
                 formControlName="password"
                 type="password"
@@ -50,7 +47,7 @@
                 <label
                   class="form-check-label text-muted"
                   for="flexCheckDefault"
-                  >Remember me for next time</label
+                  >Recuérdame</label
                 >
               </div>
             </div>
@@ -59,18 +56,15 @@
                 [loading]="isLoading"
                 [icon]="'arrow-right-to-arc'"
                 [disabled]="formLogin.invalid"
-                >Login
+                >Entrar
               </app-button>
             </div>
           </div>
         </form>
       </div>
       <div class="col-lg-5 ms-auto">
-        <h2 class="h4 mb-4">New customer</h2>
-        <p class="text-muted">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </p>
+        <h2 class="h4 mb-4">Nuevo usuario</h2>
+        <p class="text-muted">¿No tienes cuenta?</p>
         <app-button
           [outline]="true"
           [style]="'secondary'"

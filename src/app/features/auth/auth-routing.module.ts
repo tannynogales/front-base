@@ -1,6 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent, SignUpComponent } from './containers';
+import {
+  LoginComponent,
+  RegisterSuccessComponent,
+  SignUpComponent,
+} from './containers';
 
 const routes: Routes = [
   {
@@ -14,6 +18,10 @@ const routes: Routes = [
   {
     path: 'signup',
     component: SignUpComponent,
+  },
+  {
+    path: 'register-success',
+    component: RegisterSuccessComponent,
   },
   // {
   //   path: 'logout',

@@ -4,6 +4,7 @@ export const environment = {
   //https://developer.paypal.com/docs/reports/reference/paypal-supported-currencies/
   paypalCurrency: 'EUR', //USD
   strapi: 'https://roble-strapi.rj.r.appspot.com',
+  // strapi: 'http://localhost:1337',
   strapiSiteID: 1,
   sessionExpirationTime: 5, // minutes
 };

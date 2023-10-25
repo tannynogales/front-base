@@ -1,12 +1,12 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import {
-  UntypedFormGroup,
   Validators,
-  UntypedFormControl,
   AbstractControl,
   ValidationErrors,
   ValidatorFn,
-  UntypedFormBuilder,
+  FormControl,
+  FormGroup,
+  FormBuilder,
 } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
@@ -24,13 +24,13 @@ import { AuthService } from '@core/services';
   styleUrls: ['./sign-up.component.scss'],
 })
 export class SignUpComponent implements OnInit {
-  formSignUp: UntypedFormGroup = new UntypedFormGroup({});
+  formSignUp: FormGroup = new FormGroup({});
   isLoading = false;
   emailAlreadyTaken!: string | null;
 
   constructor(
     private toastService: ToastService,
-    private formBuilder: UntypedFormBuilder,
+    private formBuilder: FormBuilder,
     private elementRef: ElementRef,
     private router: Router,
     public authService: AuthService,
@@ -68,24 +68,24 @@ export class SignUpComponent implements OnInit {
     //     updateOn: 'change',
     //   });
 
-    this.formSignUp = new UntypedFormGroup(
+    this.formSignUp = new FormGroup(
       {
         // name: new FormControl('Nancy', [
         //   Validators.required,
         //   Validators.minLength(2),
         //   Validators.maxLength(15)
         // ]),
-        email: new UntypedFormControl('demo@demo.demo', [
+        email: new FormControl<string>('', [
           Validators.required,
           Validators.email,
         ]),
-        password: new UntypedFormControl('ambrosoli', [
+        password: new FormControl<string>('', [
           Validators.required,
           Validators.minLength(6),
           // createPasswordStrengthValidator(),
           // Validators.maxLength(4)
         ]),
-        passwordRepeat: new UntypedFormControl('ambrosoli', [
+        passwordRepeat: new FormControl<string>('', [
           // Validators.required,
           // Validators.minLength(6),
           // Validators.maxLength(12)
