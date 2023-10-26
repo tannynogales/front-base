@@ -11,6 +11,9 @@
       <div class="col-12 col-lg-6 m-0 p-0 d-flex align-items-center">
         <div class="input-group">
           <input
+            [(ngModel)]="email"
+            id="email"
+            name="email"
             type="text"
             class="form-control"
             placeholder="Ingresa tu correo"
@@ -20,7 +23,9 @@
           <button
             class="btn btn-outline-secondary"
             type="button"
-            id="button-addon2"
+            id="suscribe-button"
+            name="suscribe-button"
+            (click)="suscribe()"
           >
             Enviar
           </button>
