@@ -91,6 +91,13 @@ export class LoginComponent implements OnInit {
               });
             });
         }
+        const message2 = response?.error?.message;
+        if (message2 == 'Invalid identifier or password') {
+          this.router;
+          this.toastService.addToast({
+            message: 'Usuario o contraseña incorrectos',
+          });
+        }
       },
     });
   }
