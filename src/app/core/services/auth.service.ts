@@ -70,4 +70,13 @@ export class AuthService {
       password: password,
     });
   }
+
+  public sendEmailConfirmation(email: string): Observable<any> {
+    return this.http.post<any>(
+      `${this.baseUrl}/api/auth/send-email-confirmation`,
+      {
+        email: email,
+      }
+    );
+  }
 }

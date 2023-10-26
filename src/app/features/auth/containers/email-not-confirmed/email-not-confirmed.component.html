@@ -11,24 +11,24 @@
       </div>
       <div class="col-12 col-md-6 d-flex align-items-center">
         <div class="">
-          <h1 class="">Gracias por registrarte</h1>
+          <h1 class="">Tu correo no está confirmado</h1>
           <p class="">
             Por favor revisa en tu correo electrónico un enlace para activar tu
-            cuenta.
+            cuenta. Si no lo has recibido, puedes reenviarlo.
           </p>
           <button class="btn btn-secondary me-2" [routerLink]="['/']">
-            Volver
+            Ir al Inicio
           </button>
-          <button class="btn btn-primary" [routerLink]="['/auth/login']">
-            Iniciar sesión
-          </button>
+          <app-button (click)="sendEmail()" [loading]="isLoading"
+            >Reenviar enlace</app-button
+          >
         </div>
       </div>
       <div class="col-6 d-none d-md-block text-center">
         <img
           style="max-width: 300px"
           class="img-fluid"
-          src="assets/completing.svg"
+          src="assets/verified.svg"
           alt="contact us"
         />
       </div>

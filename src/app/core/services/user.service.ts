@@ -78,7 +78,8 @@ export class UserService {
     const user: User = this.getUser();
     return this.authService.checkJWT(user?.jwt).pipe(
       map((response: any) => {
-        if (response?.confirmed == true && response?.blocked == false) {
+        // Remove "response?.confirmed == true &&" from the next IF, because depends if "enable email confirmation" is on or off in Strapi
+        if (response?.blocked == false) {
           this.setUser({
             id: user.id,
             name: user.name,

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {
+  EmailNotConfirmedComponent,
   LoginComponent,
   RegisterSuccessComponent,
   SignUpComponent,
@@ -22,6 +23,10 @@ const routes: Routes = [
   {
     path: 'register-success',
     component: RegisterSuccessComponent,
+  },
+  {
+    path: 'email-not-confirmed/:email',
+    component: EmailNotConfirmedComponent,
   },
   // {
   //   path: 'logout',

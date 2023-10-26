@@ -6,7 +6,7 @@ import { UserService } from '@core/services/user.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 
-import { User } from '@core/models';
+import { User, Response } from '@core/models';
 import { ToastService } from '@shared/components/toast/toast.service';
 import { first } from 'rxjs';
 import { Title } from '@angular/platform-browser';
@@ -68,6 +68,7 @@ export class LoginComponent implements OnInit {
     const { email, password } = this.formLogin.value;
     this.authService.logIn(email, password).subscribe({
       next: (user: User) => {
+        console.log('user', user);
         this.isLoading = false;
 
         this.userService.setUser(user);
@@ -77,8 +78,19 @@ export class LoginComponent implements OnInit {
         });
       },
 
-      error: () => {
+      error: (response) => {
         this.isLoading = false;
+        const message = response?.error?.error?.message;
+        // console.log('Message error', message);
+        if (message == 'Your account email is not confirmed') {
+          this.router
+            .navigateByUrl('/auth/email-not-confirmed/' + email)
+            .then(() => {
+              this.toastService.addToast({
+                message: 'Cuenta de correo sin confirmar',
+              });
+            });
+        }
       },
     });
   }
