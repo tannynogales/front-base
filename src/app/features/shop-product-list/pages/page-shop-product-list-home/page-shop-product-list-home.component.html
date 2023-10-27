@@ -52,8 +52,10 @@
                       aria-label="Ordenar por"
                       (change)="sortByOnChange($event)"
                     >
-                      <option value="asc" selected>Precio: bajo a alto</option>
-                      <option value="desc">Precio: alto a bajo</option>
+                      <option value="asc">Precio: bajo a alto</option>
+                      <option value="desc" [selected]="true">
+                        Precio: alto a bajo
+                      </option>
                     </select>
                     <label for="floatingSelect">Ordenar por</label>
                   </div>
