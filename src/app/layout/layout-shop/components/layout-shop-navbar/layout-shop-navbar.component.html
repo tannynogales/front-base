@@ -168,7 +168,8 @@
                 <p class="fs-6 lh-sm">
                   {{ product.name }}<br />
                   <span class="text-muted">
-                    {{ product.price | currency : "$ " : "symbol" : "1.0-0" }}
+                    $ {{ product.price | currency
+                    }}<span class="iva">+IVA</span>
                   </span>
                 </p>
               </div>
@@ -197,27 +198,19 @@
                   <strong>Total Bruto</strong>
                 </div>
                 <div class="col-auto">
-                  {{
-                    shoppingCart.totalBruto
-                      | currency : "$ " : "symbol" : "1.0-0"
-                  }}
+                  $ {{ shoppingCart.totalBruto | currency }}
                 </div>
               </div>
               <div class="row px-3 py-2 mb-1 bg-light text-muted">
                 <div class="col text-uppercase"><strong>IVA</strong></div>
-                <div class="col-auto">
-                  {{ shoppingCart.IVA | currency : "$ " : "symbol" : "1.0-0" }}
-                </div>
+                <div class="col-auto">$ {{ shoppingCart.IVA | currency }}</div>
               </div>
               <div class="row px-3 py-2 mb-1 bg-light text-dark">
                 <div class="col text-uppercase">
                   <strong>Total Neto</strong>
                 </div>
                 <div class="col-auto">
-                  {{
-                    shoppingCart.totalNeto
-                      | currency : "$ " : "symbol" : "1.0-0"
-                  }}
+                  $ {{ shoppingCart.totalNeto | currency }}
                 </div>
               </div>
             </div>

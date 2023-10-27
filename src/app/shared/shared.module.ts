@@ -6,13 +6,16 @@ import { NouisliderModule } from 'ng2-nouislider';
 
 /* Components */
 import * as sharedComponents from './components';
+
+import * as sharedPipes from './pipes';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { MarkdownModule } from 'ngx-markdown';
 
 @NgModule({
-  declarations: [...sharedComponents.components],
+  declarations: [...sharedComponents.components, ...sharedPipes.pipes],
   imports: [
     NgOptimizedImage,
     CommonModule,
@@ -25,6 +28,7 @@ import { MarkdownModule } from 'ngx-markdown';
   ],
   exports: [
     ...sharedComponents.components,
+    ...sharedPipes.pipes,
     NouisliderModule,
     FormsModule,
     HttpClientModule,

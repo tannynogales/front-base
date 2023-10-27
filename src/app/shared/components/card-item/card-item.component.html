@@ -26,7 +26,9 @@
     </p>
     <p class="fs-6 card-text text-muted mb-2">
       <ng-container *ngIf="item.price; else noPrice">
-        <span>$ {{ item.price | number : "1.0-0" }}</span>
+        <span>$ {{ item.price | currency }}</span>
+
+        <span class="iva">+IVA</span>
       </ng-container>
       <ng-template #noPrice>
         <span>(Precio en tienda)</span>

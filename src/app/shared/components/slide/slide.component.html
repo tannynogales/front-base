@@ -15,7 +15,7 @@
         {{ description }}
       </p>
       <p [ngClass]="loading ? 'placeholder rounded col-4' : ''">
-        {{ price | currency : "$ " : "symbol" : "1.0-0" }}
+        $ {{ price | currency }}<span class="iva">+IVA</span>
       </p>
       <button
         [ngClass]="loading ? 'placeholder rounded col-3 disabled ' : ''"
