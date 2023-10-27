@@ -55,10 +55,16 @@
               </ul>
               <p class="small text-muted mb-2">12 customer reviews</p>
             </div>
-            <p class="h4">$ {{ product.data?.price | currency : "CLP" }}</p>
+            <p class="h4" *ngIf="product.data.price > 0; else noPrecio">
+              $ {{ product.data.price | currency }}<span class="iva">+IVA</span>
+            </p>
+            <ng-template #noPrecio>
+              <p class="h4">(Consultar precio en tienda)</p>
+            </ng-template>
+
             <p class="text-small mb-4">
               <markdown ngPreserveWhitespaces>
-                {{ product.data?.description }}
+                {{ product.data.description }}
               </markdown>
             </p>
 
