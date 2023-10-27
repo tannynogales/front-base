@@ -167,10 +167,16 @@
               <div class="col">
                 <p class="fs-6 lh-sm">
                   {{ product.name }}<br />
-                  <span class="text-muted">
+                  <span
+                    class="text-muted"
+                    *ngIf="product.price > 0; else elsePrecio"
+                  >
                     $ {{ product.price | currency
                     }}<span class="iva">+IVA</span>
                   </span>
+                  <ng-template #elsePrecio>
+                    <span class="text-muted">(Precio en tienda)</span>
+                  </ng-template>
                 </p>
               </div>
               <div class="col-auto">

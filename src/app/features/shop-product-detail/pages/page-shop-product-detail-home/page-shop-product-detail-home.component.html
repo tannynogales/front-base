@@ -55,10 +55,10 @@
               </ul>
               <p class="small text-muted mb-2">12 customer reviews</p>
             </div>
-            <p class="h4" *ngIf="product.data.price > 0; else noPrecio">
+            <p class="h4" *ngIf="product.data.price > 0; else elsePrecio">
               $ {{ product.data.price | currency }}<span class="iva">+IVA</span>
             </p>
-            <ng-template #noPrecio>
+            <ng-template #elsePrecio>
               <p class="h4">(Consultar precio en tienda)</p>
             </ng-template>
 
