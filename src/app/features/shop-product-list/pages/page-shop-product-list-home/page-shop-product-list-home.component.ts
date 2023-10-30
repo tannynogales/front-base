@@ -24,41 +24,8 @@ import { Observable } from 'rxjs';
 export class PageShopProductListHomeComponent implements OnInit, OnDestroy {
   @ViewChild('offcanvasFilters') offcanvasFilters!: ElementRef;
 
-  menu: ParentCategory[] = [
-    {
-      id: 1,
-      name: 'Panadería y Pastelería',
-      slug: 'panaderia-y-pasteleria',
-    },
-    {
-      id: 2,
-      name: 'Carnicería',
-      slug: 'carniceria',
-    },
-    {
-      id: 3,
-      name: 'Panadería',
-      slug: 'panaderia',
-    },
-    {
-      id: 4,
-      name: 'Refrigeración',
-      slug: 'refrigeracion',
-    },
-    {
-      id: 5,
-      name: 'Restaurant',
-      slug: 'acero-inoxidable',
-    },
-    {
-      id: 6,
-      name: 'Otros',
-      slug: 'Otros',
-    },
-  ];
-  // products = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
-
   categoryId: string = '';
+  maxPrice!: number;
 
   categories$: Observable<CategoryObject>;
   products$: Observable<ItemsObject>;
@@ -92,6 +59,11 @@ export class PageShopProductListHomeComponent implements OnInit, OnDestroy {
         this.productsService.fetch(categoryId);
       }
     });
+
+    this.productsService.products$.subscribe((products) => {
+      if (!this.maxPrice) this.maxPrice = products.data[0]?.price;
+      console.log('maxPrice', this.maxPrice);
+    });
   }
 
   changePage(page: number) {
@@ -107,6 +79,10 @@ export class PageShopProductListHomeComponent implements OnInit, OnDestroy {
   getCategoryName(categories: Category[]) {
     return categories.find((category) => category.slug === this.categoryId)
       ?.name;
+  }
+
+  onOffcanvasFilterChange($event: any) {
+    this.closeOffcanvasNavbar();
   }
 
   sortByOnChange(event: any) {

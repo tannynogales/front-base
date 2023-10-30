@@ -45,12 +45,18 @@ export class ProductsService {
     return this._order;
   }
 
+  _filterByPrice = '';
+  set filterByPrice({ min, max }: { min: number; max: number }) {
+    this._filterByPrice = `&filters[price][$gte]=${min}&filters[price][$lte]=${max}`;
+    console.log(this._filterByPrice);
+  }
+
   fetch(categorySlug: string, page: number = 1) {
     this.productsObject.loading = true;
     this._products.next(this.productsObject);
     const url =
       this.baseUrl +
-      `/products?filters[categories][slug][$eq]=${categorySlug}&[categories][site][id][$eq]=${this.siteID}&populate[primary_image]=*&populate[categories]=*&populate[product_attribute_values]=*&pagination[pageSize]=12&pagination[page]=${page}&sort=price:${this.order}`;
+      `/products?filters[categories][slug][$eq]=${categorySlug}&[categories][site][id][$eq]=${this.siteID}&populate[primary_image]=*${this._filterByPrice}&populate[categories]=*&populate[product_attribute_values]=*&pagination[pageSize]=12&pagination[page]=${page}&sort=price:${this.order}`;
     // console.log(url);
     this.httpClient
       .get<Response>(url)

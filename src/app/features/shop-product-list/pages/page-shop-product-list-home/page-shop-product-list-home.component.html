@@ -14,7 +14,12 @@
     <div class="row">
       <!-- Shop sidebar-->
       <div class="col-xl-2 col-lg-3 d-none d-lg-block">
-        <app-shop-product-list-filters></app-shop-product-list-filters>
+        <ng-container *ngIf="maxPrice >= 0">
+          <app-shop-product-list-filters
+            [categoryId]="categoryId"
+            [max]="maxPrice"
+          ></app-shop-product-list-filters>
+        </ng-container>
       </div>
       <!-- Shop listing-->
       <div class="col-xl-10 col-lg-9 order-1 order-lg-2 mb-5 mb-lg-0">
@@ -130,9 +135,15 @@
     ></button>
   </div>
   <div class="offcanvas-body">
-    <app-shop-product-list-filters></app-shop-product-list-filters>
+    <ng-container *ngIf="maxPrice >= 0">
+      <app-shop-product-list-filters
+        [categoryId]="categoryId"
+        (onChange)="onOffcanvasFilterChange($event)"
+        [max]="maxPrice"
+      ></app-shop-product-list-filters>
+    </ng-container>
 
-    <div class="d-grid gap-2 mt-3">
+    <!-- <div class="d-grid gap-2 mt-3">
       <button
         data-bs-dismiss="offcanvas"
         aria-label="Close"
@@ -141,6 +152,6 @@
       >
         Filtrar
       </button>
-    </div>
+    </div> -->
   </div>
 </div>

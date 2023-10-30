@@ -1,10 +1,11 @@
-<h5 class="mb-4">Price range</h5>
+<h5 class="mb-4">Rango de Precio</h5>
 <div class="price-range pt-1 pt-lg-4 mb-5">
   <nouislider
+    (change)="onSliderChange($event)"
     [step]="1000"
-    [min]="0"
+    [min]="min"
     [connect]="[false, true, false]"
-    [max]="500000"
+    [max]="(max + 1000) * 1.2"
     [tooltips]="[tooltips, tooltips]"
     [animate]="true"
     [(ngModel)]="someRange"
@@ -13,17 +14,18 @@
   <div class="row pt-2 d-lg-none">
     <div class="col-6">
       <strong class="small font-weight-bold"
-        >From: {{ tooltips.to(someRange[0]) }}</strong
+        >Desde: {{ tooltips.to(someRange[0]) }}</strong
       >
     </div>
     <div class="col-6 text-end">
       <strong class="small font-weight-bold"
-        >To: {{ tooltips.to(someRange[1]) }}</strong
+        >hasta: {{ tooltips.to(someRange[1]) }}</strong
       >
     </div>
   </div>
 </div>
-<h5 class="mb-3">Show by brand</h5>
+
+<!-- <h5 class="mb-3">Show by brand</h5>
 <div class="mb-2 form-check">
   <input class="form-check-input" id="exampleCheck1" type="checkbox" checked />
   <label class="form-check-label" for="exampleCheck1">Zara</label>
@@ -35,8 +37,8 @@
 <div class="mb-2 form-check">
   <input class="form-check-input" id="exampleCheck3" type="checkbox" checked />
   <label class="form-check-label" for="exampleCheck3">Rayban</label>
-</div>
-<div class="mb-2 form-check">
+</div> -->
+<!-- <div class="mb-2 form-check">
   <input class="form-check-input" id="exampleCheck4" type="checkbox" checked />
   <label class="form-check-label" for="exampleCheck4">Defactu</label>
 </div>
@@ -51,13 +53,13 @@
 <div class="mb-2 form-check">
   <input class="form-check-input" id="exampleCheck7" type="checkbox" />
   <label class="form-check-label" for="exampleCheck7">Nike</label>
-</div>
-<div class="mb-5 form-check">
+</div> -->
+<!-- <div class="mb-5 form-check">
   <input class="form-check-input" id="exampleCheck8" type="checkbox" />
   <label class="form-check-label" for="exampleCheck8">Ravin</label>
-</div>
-<h5 class="mb-3">Shop by color</h5>
-<form action="#">
+</div> -->
+<!-- <h5 class="mb-3">Shop by color</h5> -->
+<!-- <form action="#">
   <div class="form-check">
     <input class="form-check-input" id="seaColor" type="checkbox" />
     <label class="form-check-label d-flex align-items-center" for="seaColor"
@@ -100,4 +102,4 @@
       ><span>Black</span></label
     >
   </div>
-</form>
+</form> -->

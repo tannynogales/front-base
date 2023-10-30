@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ProductsService } from '@core/services';
 import { NouiFormatter } from 'ng2-nouislider';
 
 @Component({
@@ -6,8 +7,15 @@ import { NouiFormatter } from 'ng2-nouislider';
   templateUrl: './shop-product-list-filters.component.html',
   styleUrls: ['./shop-product-list-filters.component.scss'],
 })
-export class ShopProductListFiltersComponent {
-  someRange = [100000, 300000];
+export class ShopProductListFiltersComponent implements OnInit {
+  @Output() onChange = new EventEmitter<boolean>();
+  @Input() categoryId!: string;
+  @Input() min: number = 0;
+  // TODO el máximo debería venir de la categoría, para que sea automático y no queden todos los productos con un máximo tan alto. También, debería haber un hook en productos de manera que cada vez que se actualice un item se gatille un servicio que revise todos los item de esa categoria y actualice automaticamente el máximo.
+  @Input() max!: number;
+
+  // Selected range
+  someRange!: number[];
 
   formatForSlider: NouiFormatter = {
     // 'from' the formatted value.
@@ -29,4 +37,23 @@ export class ShopProductListFiltersComponent {
       return '$ ' + new Intl.NumberFormat('es-CL').format(numericValue);
     },
   };
+
+  constructor(private productsService: ProductsService) {}
+
+  ngOnInit(): void {
+    console.log('constructor max', this.max);
+    if (this.max >= 0) {
+      this.someRange = [0, this.max + 1000]; // sumo el "step"
+    }
+  }
+
+  onSliderChange(event: any) {
+    this.onChange.emit(true);
+    console.log(event);
+    this.productsService.filterByPrice = {
+      min: this.someRange[0],
+      max: this.someRange[1],
+    };
+    this.productsService.fetch(this.categoryId, 1);
+  }
 }
