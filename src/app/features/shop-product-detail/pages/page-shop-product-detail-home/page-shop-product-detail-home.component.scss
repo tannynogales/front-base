@@ -1,0 +1,34 @@
+@import "/src/assets/scss/core";
+
+// Import Bootstrap variables for use within theme
+@import "bootstrap/scss/functions.scss";
+@import "bootstrap/scss/variables.scss";
+@import "bootstrap/scss/mixins.scss";
+
+// Mobile first, los estilos por defecto son para mobile
+.addToCartSection {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: white; /* Establece el color de fondo que desees */
+  text-align: center; /* Alinea el contenido al centro */
+  z-index: 1; /* Controla la posición del elemento en capas */
+  border-top: 1px solid #dee2e6;
+}
+
+// Mobile first, luego se manejan estilos para otras resoluciones
+@include media-breakpoint-up(lg) {
+  .addToCartSection {
+    position: static;
+    border: 0;
+  }
+}
+
+.carousel-item {
+  background-position: center center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  max-width: 800px;
+  height: 400px;
+}

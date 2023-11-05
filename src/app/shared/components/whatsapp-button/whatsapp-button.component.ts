@@ -8,6 +8,7 @@ import { Site } from '@core/models';
 })
 export class WhatsappButtonComponent implements OnInit {
   @Input({ required: true }) site!: Site;
+  animation: boolean = true;
 
   svgWidth: number = 48;
   containerWidth: number = 80;
@@ -19,6 +20,7 @@ export class WhatsappButtonComponent implements OnInit {
     setTimeout(() => {
       this.svgWidth = this.svgWidth / 1.5;
       this.containerWidth = this.containerWidth / 1.5;
+      this.animation = false;
     }, 3000);
   }
 }

@@ -26,21 +26,20 @@ $color2: #8ad946;
   position: relative;
   box-shadow: 1px 3px 8px rgba(0, 0, 0, 0.24);
   position: fixed;
-  bottom: 12px;
-  right: 12px;
+  bottom: 9px;
+  right: 9px;
   z-index: 999;
 }
-
-.whatsapp:hover::after,
-.whatsapp:hover::before {
+.animation::after,
+.animation::before {
   border-color: $color2;
 }
-.whatsapp:hover {
+
+.animation:hover {
   background: $color2;
 }
-
-.whatsapp::after,
-.whatsapp::before {
+.animation::after,
+.animation::before {
   content: "";
   position: absolute;
   top: 0;
@@ -52,7 +51,7 @@ $color2: #8ad946;
   animation: animar 1s linear infinite;
 }
 
-.whatsapp::before {
+.animation::before {
   animation-delay: 0.5s;
 }
 

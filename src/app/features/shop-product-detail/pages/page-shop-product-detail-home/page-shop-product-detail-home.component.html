@@ -1,21 +1,34 @@
-<!-- <app-breadcrumb
-  [items]="[
-{
-  title: categoryId,
-  url: '/home/'+categoryId,
-},
-{
-  title: productId,
-  url: '',
-},
-]"
-></app-breadcrumb> -->
+<section>
+  <ng-container *ngIf="product$ | async as product">
+    <ng-container *ngIf="!product.loading; else loadingBreadcrumb">
+      <app-breadcrumb
+        class="d-lg-none"
+        [items]="[
+  {
+    title: categoryId,
+    url: '/home/'+categoryId,
+  },
+  {
+    title: product.data.name,
+    url: '',
+  },
+  ]"
+      ></app-breadcrumb>
+    </ng-container>
+  </ng-container>
+
+  <ng-template #loadingBreadcrumb>
+    <p class="my-3 placeholder-glow text-center">
+      <span class="placeholder col-7 rounded"></span>
+      <span class="placeholder col-8 rounded"></span></p
+  ></ng-template>
+</section>
 
 <section class="py-0 py-md-4">
   <div class="container">
     <div class="row">
       <ng-container *ngIf="product$ | async as product">
-        <ng-container *ngIf="!product.loading">
+        <ng-container *ngIf="!product.loading; else loadingProductSlider">
           <ng-container
             *ngIf="
               getImages(product.data?.primary_image, product.data?.images)
@@ -29,13 +42,27 @@
                 "
               ></app-shop-product-detail-slider>
             </div>
-          </ng-container>
+          </ng-container> </ng-container
+      ></ng-container>
 
-          <!-- Item info-->
-          <div class="col-lg-6">
+      <!-- Item info-->
+      <div class="col-lg-6">
+        <ng-template #loadingProductInfo class="placeholder-glow">
+          <h1 class="d-none d-lg-block placeholder rounded">
+            some product name
+          </h1>
+
+          <p class="h4 placeholder rounded">some text some text</p>
+          <p class="placeholder rounded">
+            some text some text some text some text
+          </p>
+        </ng-template>
+
+        <ng-container *ngIf="product$ | async as product">
+          <ng-container *ngIf="!product.loading; else loadingProductInfo">
             <!-- <div class="badge bg-info small rounded-0 mb-2">Trending</div> -->
-            <h1>{{ product.data.name }}</h1>
-            <div class="d-flex align-items-center">
+            <h1 class="d-none d-lg-block">{{ product.data.name }}</h1>
+            <div class="d-flex align-items-center d-none">
               <ul class="list-inline mb-2 me-3 small">
                 <li class="list-inline-item m-0">
                   <i class="fas fa-star small text-warning"></i>
@@ -68,13 +95,16 @@
               </markdown>
             </p>
 
-            <div class="d-flex align-items-center mb-4">
+            <div
+              class="d-flex align-items-center mb-lg-4 p-3 p-lg-0 addToCartSection"
+            >
               <a
-                class="btn btn-primary btn-sm py-2 border-bottom-0 px-5 me-3"
+                class="btn btn-primary btn-sm rounded-3 py-2 border-bottom-0 px-4 px-lg-5 me-3"
                 (click)="addProduct(product)"
               >
-                <i class="fas fa-shopping-bag py-1 me-2"></i>Agregar al carro</a
-              ><a class="p-0 reset-anchor d-inline-block mx-2" href="#"
+                <i class="d-none d-lg-inline fas fa-shopping-bag py-1 me-2"></i
+                >Agregar al Carrito</a
+              ><a class="p-0 reset-anchor d-inline-block mx-2 d-none" href="#"
                 ><i class="fas fa-heart"></i></a
               ><a
                 *ngIf="isShareEnable"
@@ -98,18 +128,48 @@
                 ><a class="reset-anchor ms-2" href="#">Innovation</a>
               </li> -->
             </ul>
-          </div>
+          </ng-container>
         </ng-container>
-      </ng-container>
+      </div>
     </div>
+    <ng-template #loadingProductSlider>
+      <div class="col-lg-6 mb-4 mb-lg-0">
+        <div class="row">
+          <div
+            class="col-md-2 order-2 order-md-1 p-0 d-flex justify-content-center justify-content-md-start align-items-md-center flex-md-column gap-3 placeholder-glow"
+          >
+            <button
+              type="button"
+              class="border rounded placeholder"
+              style="width: 80px; height: 80px"
+            ></button>
+
+            <button
+              type="button"
+              class="border rounded placeholder"
+              style="width: 80px; height: 80px"
+            ></button>
+          </div>
+          <div
+            class="col-md-10 order-1 order-md-2 p-0 mb-3 mb-lg-0 placeholder-glow"
+          >
+            <!-- Item slider-->
+
+            <div class="carousel-inner border rounded placeholder">
+              <div class="carousel-item rounded w-100 active"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
   </div>
 </section>
 
-<ng-container *ngIf="products$ | async as products">
-  <ng-container *ngIf="!products.loading">
-    <div class="container py-5">
-      <h3>¿Quieres ver más?</h3>
-      <section class="d-flex justify-content-start scroll-custom d-grid gap-3">
+<div class="container py-5">
+  <h3>¿Quieres ver más?</h3>
+  <section class="d-flex justify-content-start scroll-custom d-grid gap-3">
+    <ng-container *ngIf="products$ | async as products">
+      <ng-container *ngIf="!products.loading; else loadingProducts">
         <ng-container
           *ngFor="let product of filterProducts(products.data).slice(0, 5)"
         >
@@ -127,7 +187,12 @@
           *ngIf="filterProducts(products.data).length > 5"
           [url]="'/home/' + categoryId"
         ></app-card-see-more>
-      </section>
-    </div>
-  </ng-container>
-</ng-container>
+      </ng-container>
+    </ng-container>
+    <ng-template #loadingProducts>
+      <app-card-item-loading
+        *ngFor="let i of [1, 2, 3, 4, 5, 6]"
+      ></app-card-item-loading>
+    </ng-template>
+  </section>
+</div>
