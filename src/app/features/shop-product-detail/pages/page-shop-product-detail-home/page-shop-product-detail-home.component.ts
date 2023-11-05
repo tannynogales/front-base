@@ -46,6 +46,7 @@ export class PageShopProductDetailHomeComponent {
         this.productId = parseInt(productId);
         this.categoryId = categoryId;
         this.productService.fetch(productId);
+        this.productsService.order = 'asc';
         this.productsService.fetch(categoryId); // TODO dont use categoryId and get the category from the product it self, in order to use selectedMenuItem instead product.category[0] in app-shop-parent-category-home
       }
     });

@@ -25,7 +25,7 @@
             <div class="col-lg-6 mb-4 mb-lg-0">
               <app-shop-product-detail-slider
                 [slides]="
-                  getImages(product.data?.primary_image, product.data?.images)
+                  getImages(product.data.primary_image, product.data.images)
                 "
               ></app-shop-product-detail-slider>
             </div>
@@ -34,7 +34,7 @@
           <!-- Item info-->
           <div class="col-lg-6">
             <!-- <div class="badge bg-info small rounded-0 mb-2">Trending</div> -->
-            <h1>{{ product.data?.name }}</h1>
+            <h1>{{ product.data.name }}</h1>
             <div class="d-flex align-items-center">
               <ul class="list-inline mb-2 me-3 small">
                 <li class="list-inline-item m-0">
@@ -79,7 +79,7 @@
               ><a
                 *ngIf="isShareEnable"
                 class="p-0 reset-anchor d-inline-block mx-2"
-                (click)="share(product.data?.name)"
+                (click)="share(product.data.name)"
                 ><i class="fas fa-share-alt"></i
               ></a>
             </div>
@@ -87,7 +87,7 @@
             <ul class="list-unstyled small d-inline-block">
               <li class="px-3 py-2 mb-1 bg-light">
                 <strong class="text-uppercase">SKU:</strong
-                ><span class="ms-2 text-muted">{{ product.data?.code }}</span>
+                ><span class="ms-2 text-muted">{{ product.data.code }}</span>
               </li>
               <!-- <li class="px-3 py-2 mb-1 bg-light text-muted">
                 <strong class="text-uppercase text-dark">Category:</strong
