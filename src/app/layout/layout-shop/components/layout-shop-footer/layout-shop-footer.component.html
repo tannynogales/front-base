@@ -23,7 +23,11 @@
       </p>
     </div>
     <div class="col-12 d-flex align-items-center">
-      <p><a target="_blank" href="tel:+569 9864 1710">+569 9864 1710</a></p>
+      <p>
+        <a target="_blank" [href]="'tel:+' + site.cellphoneFormated">
+          >+{{ site.cellphoneFormated }}</a
+        >
+      </p>
     </div>
     <div class="col-12 d-flex align-items-center">
       <span class="mb-3 mb-md-0 text-muted">&copy; 2023 Company, Inc</span>

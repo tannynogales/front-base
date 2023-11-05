@@ -1,4 +1,4 @@
-<app-layout-shop-navbar></app-layout-shop-navbar>
+<app-layout-shop-navbar [site]="site"></app-layout-shop-navbar>
 <div
   class="container-fluid d-flex flex-column p-2"
   style="
@@ -10,11 +10,11 @@
   "
 >
   <div class="top-margin" style="height: 62px"></div>
-  <app-whatsapp-button></app-whatsapp-button>
+  <app-whatsapp-button [site]="site"></app-whatsapp-button>
 
   <router-outlet></router-outlet>
 
   <div class="mt-auto">
-    <app-layout-shop-footer></app-layout-shop-footer>
+    <app-layout-shop-footer [site]="site"></app-layout-shop-footer>
   </div>
 </div>

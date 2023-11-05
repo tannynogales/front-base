@@ -1,8 +1,9 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import {
   CategoryObject,
   ParentCategoryObject,
   ShoppingCartObject,
+  Site,
 } from '@core/models';
 import {
   CategoriesService,
@@ -19,6 +20,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./layout-shop-navbar.component.scss'],
 })
 export class LayoutShopNavbarComponent {
+  @Input({ required: true }) site!: Site;
   @ViewChild('offcanvasNavbar') offcanvasNavbar!: ElementRef;
   products: any[] = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
   categories$: Observable<CategoryObject>;

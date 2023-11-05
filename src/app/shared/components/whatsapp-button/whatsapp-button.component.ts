@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Site } from '@core/models';
 
 @Component({
   selector: 'app-whatsapp-button',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./whatsapp-button.component.scss'],
 })
 export class WhatsappButtonComponent implements OnInit {
+  @Input({ required: true }) site!: Site;
+
   svgWidth: number = 48;
   containerWidth: number = 80;
   // logoFontSize: number = 16;

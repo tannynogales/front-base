@@ -16,6 +16,7 @@ import { UtilitiesChileRegionesService } from './utilities-chile-regiones.servic
 import { CartDeliveryService } from './cart-delivery.service';
 import { PrivatePagesService } from './private-pages.service';
 import { SubscribeService } from './subscribe.service';
+import { SiteService } from './site.service';
 
 export const services = [
   ProductService,
@@ -36,6 +37,7 @@ export const services = [
   UtilitiesChileRegionesService,
   PrivatePagesService,
   SubscribeService,
+  SiteService,
 ];
 
 export * from './cart-products.service';
@@ -56,3 +58,4 @@ export * from './cart-delivery.service';
 export * from './cart-billing.service';
 export * from './private-pages.service';
 export * from './subscribe.service';
+export * from './site.service';
