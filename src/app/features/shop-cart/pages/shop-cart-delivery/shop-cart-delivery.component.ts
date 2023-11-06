@@ -216,7 +216,7 @@ export class ShopCartDeliveryComponent implements OnInit {
       console.log('cartId found');
 
       const cartState = this.cartUserService.getFromLocalStorage()?.cartState;
-      let state = 1;
+      let state = 2;
       if (cartState) if (cartState >= 1) state = cartState;
 
       const cartProducts =
