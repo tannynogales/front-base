@@ -1,0 +1,14 @@
+<div class="container">
+  <h1>Clientes</h1>
+  <ng-container *ngIf="customers$ | async as customers">
+    <ng-container *ngIf="!customers.loading; else loadingCustomers">
+      <div class="row" *ngFor="let customer of customers.data">
+        <div class="col-1">{{ customer.id }}</div>
+        <div class="col-5">{{ customer.username }}</div>
+        <div class="col-6">{{ customer.email }}</div>
+      </div>
+    </ng-container>
+
+    <ng-template #loadingCustomers></ng-template>
+  </ng-container>
+</div>

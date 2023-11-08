@@ -1,0 +1,31 @@
+@import "/src/assets/scss/core";
+
+.sidebar {
+  width: 280px;
+  height: 100vh;
+  transition: all 0.3s ease-in-out;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    z-index: 10001;
+    margin-left: -280px;
+
+    &.active {
+      margin-left: 0px;
+    }
+  }
+  .sidebar-background {
+    position: fixed;
+    z-index: 10000;
+    opacity: $modal-backdrop-opacity;
+    background-color: $modal-content-bg;
+    transition: all 0.3s ease-in-out;
+
+    &.active {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}

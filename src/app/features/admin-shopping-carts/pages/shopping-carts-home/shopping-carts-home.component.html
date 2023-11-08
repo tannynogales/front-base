@@ -1,0 +1,33 @@
+<div class="container">
+  <h1>Órdenes</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Estado</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Correo</th>
+        <th scope="col">Celular</th>
+        <th scope="col">Delivery Opción</th>
+        <th scope="col">Fecha de Actualización</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngIf="shoppingCarts$ | async as shoppingCarts">
+        <ng-container *ngIf="!shoppingCarts.loading; else loadingShoppingCarts">
+          <tr *ngFor="let shoppingCart of shoppingCarts.data">
+            <td>{{ shoppingCart.id }}</td>
+            <td>{{ shoppingCart.state }}</td>
+            <td>{{ shoppingCart.user_name }}</td>
+            <td>{{ shoppingCart.user_email }}</td>
+            <td>{{ shoppingCart.user_cellphone }}</td>
+            <td>{{ shoppingCart.delivery_option }}</td>
+            <td>{{ shoppingCart.updatedAt }}</td>
+          </tr>
+        </ng-container>
+
+        <ng-template #loadingShoppingCarts></ng-template>
+      </ng-container>
+    </tbody>
+  </table>
+</div>

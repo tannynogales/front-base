@@ -7,8 +7,9 @@ import {
 } from '@angular/router';
 import { ErrorComponent } from './error/error.component';
 import { LayoutShopComponent } from '@layout/layout-shop/layout/layout-shop.component';
-import { AdminLayoutComponent } from '@layout/admin-layout/layout/admin-layout/admin-layout.component';
+import { LayoutAdminComponent } from '@layout/layout-admin/layout/admin-layout/layout-admin.component';
 import { Title } from '@angular/platform-browser';
+import { SessionGuard } from '@core/guards';
 
 const routes: Routes = [
   //   {
@@ -16,6 +17,15 @@ const routes: Routes = [
   //     pathMatch: 'full',
   //     redirectTo: '/dashboard',
   // },
+  {
+    path: 'admin',
+    component: LayoutAdminComponent,
+    loadChildren: () =>
+      import('./layout/layout-admin/layout-admin.module').then(
+        (m) => m.LayoutAdminModule
+      ),
+    canActivate: [SessionGuard],
+  },
   {
     path: 'test',
     component: ErrorComponent,
@@ -33,14 +43,7 @@ const routes: Routes = [
         (m) => m.LayoutShopModule
       ),
   },
-  {
-    path: 'admin',
-    component: AdminLayoutComponent,
-    loadChildren: () =>
-      import('./layout/admin-layout/admin-layout.module').then(
-        (m) => m.AdminLayoutModule
-      ),
-  },
+
   // TODO 404 page
 ];
 

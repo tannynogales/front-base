@@ -1,6 +1,7 @@
 import { Router, NavigationEnd } from '@angular/router';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { filter } from 'rxjs';
+import { MetaService } from '@core/services';
 
 declare var gtag: any;
 
@@ -9,10 +10,10 @@ declare var gtag: any;
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'neges';
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private metaService: MetaService) {
     const navEndEvents$ = this.router.events.pipe(
       filter((event): event is NavigationEnd => event instanceof NavigationEnd)
     );
@@ -35,5 +36,8 @@ export class AppComponent {
         page_path: event.urlAfterRedirects,
       });
     });
+  }
+  ngOnInit(): void {
+    this.metaService.createCanonicalURL();
   }
 }

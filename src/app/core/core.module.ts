@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 /* Core Services */
-import * as coreComponents from './services';
+import * as coreServices from './services';
 
 @NgModule({
-  providers: [...coreComponents.services],
+  providers: [...coreServices.services], // TODO sacar del core los servicios queson de features
   declarations: [],
   imports: [CommonModule],
 })

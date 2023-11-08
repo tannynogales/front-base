@@ -17,6 +17,7 @@ import { CartDeliveryService } from './cart-delivery.service';
 import { PrivatePagesService } from './private-pages.service';
 import { SubscribeService } from './subscribe.service';
 import { SiteService } from './site.service';
+import { MetaService } from './meta.service';
 
 export const services = [
   ProductService,
@@ -38,6 +39,7 @@ export const services = [
   PrivatePagesService,
   SubscribeService,
   SiteService,
+  MetaService,
 ];
 
 export * from './cart-products.service';
@@ -59,3 +61,4 @@ export * from './cart-billing.service';
 export * from './private-pages.service';
 export * from './subscribe.service';
 export * from './site.service';
+export * from './meta.service';
