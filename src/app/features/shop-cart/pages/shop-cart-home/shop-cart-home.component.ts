@@ -45,23 +45,26 @@ export class ShopCartHomeComponent implements OnInit {
     private cartProductsService: CartProductsService
   ) {
     // TODO: unsubscribe
-    // this.cartUserService.cartUser$.subscribe((user) => {
-    //   this.cartUser.cartId = user.cartId;
-    //   this.cartUser.cartState = user.cartState;
-    //   this.cartUser.name = user.name;
-    //   this.cartUser.email = user.email;
-    //   this.cartUser.cellphone = user.cellphone;
-    // });
+    this.cartUserService.cartUser$.subscribe((user) => {
+      this.setCartUser(user);
+    });
+
+    this.shoppingCart$ = this.cartProductsService.shoppingCart$;
+  }
+
+  // Is used to set get the userCart, but if the userCart is not set, it will use the user info from the login
+  setCartUser(cartUser: CartUserObject) {
+    this.cartUser = cartUser;
 
     let flag = false;
-    const cartUser = this.cartUserService.getFromLocalStorage();
+    // const cartUser = this.cartUserService.getFromLocalStorage();
     if (cartUser)
       if (cartUser.email != '' && cartUser.name != '') {
-        if (cartUser?.cartId) this.cartUser.cartId = cartUser.cartId;
-        if (cartUser?.cartState) this.cartUser.cartState = cartUser.cartState;
-        this.cartUser.name = cartUser.name;
-        this.cartUser.email = cartUser.email;
-        this.cartUser.cellphone = cartUser.cellphone;
+        // if (cartUser?.cartId) this.cartUser.cartId = cartUser.cartId;
+        // if (cartUser?.cartState) this.cartUser.cartState = cartUser.cartState;
+        // this.cartUser.name = cartUser.name;
+        // this.cartUser.email = cartUser.email;
+        // this.cartUser.cellphone = cartUser.cellphone;
         flag = true;
       }
 
@@ -70,8 +73,7 @@ export class ShopCartHomeComponent implements OnInit {
       this.cartUser.name = user.name;
       this.cartUser.email = user.email;
     }
-
-    this.shoppingCart$ = this.cartProductsService.shoppingCart$;
+    console.log('setCartUser', this.cartUser);
   }
 
   // @ViewChild('miDiv', { static: true }) miDiv!: ElementRef;
@@ -111,7 +113,14 @@ export class ShopCartHomeComponent implements OnInit {
   }
 
   // TODO:  manejo de errores
+  submittedTimes = 0;
   onSubmit(): boolean {
+    console.log('onSubmit', this.submittedTimes);
+    if (this.submittedTimes >= 2) {
+      console.log('IF onSubmit', this.submittedTimes);
+      return false;
+    }
+
     const isTheFormValid = this.isTheFormValid(this.form);
 
     if (!isTheFormValid) return false;
@@ -133,26 +142,51 @@ export class ShopCartHomeComponent implements OnInit {
 
         this.cartUserService
           .updateCart(cartId, user.id, name, email, cellphone, state)
-          .subscribe((response) => {
-            const cartId = response?.data?.id;
-            console.log('update', cartId);
-            this.createProducts(cartId);
+          .subscribe({
+            next: (response) => {
+              const cartId = response?.data?.id;
+              console.log('update', cartId);
+              this.createProducts(cartId);
+            },
+            // complete: () => {
+            //   console.log('complete');
+            // },
+            error: (response) => {
+              this.isLoading = false;
+              const status = response.status;
+              console.log('update error', typeof response.status);
+              if (response.status == status) {
+                console.log('error 400 if');
+                this.submittedTimes++;
+                this.cartUserService.unSet();
+                this.onSubmit();
+              }
+            },
           });
         return true;
       } else {
         this.cartUserService
           .createCart(user.id, name, email, cellphone)
-          .subscribe((response) => {
-            const cartId = response?.data?.id;
-            this.cartUserService.set({
-              cartId: cartId,
-              cartState: 1,
-              name: name,
-              email: email,
-              cellphone: cellphone,
-            });
-            console.log('create', cartId);
-            this.createProducts(cartId);
+          .subscribe({
+            next: (response) => {
+              const cartId = response?.data?.id;
+              this.cartUserService.set({
+                cartId: cartId,
+                cartState: 1,
+                name: name,
+                email: email,
+                cellphone: cellphone,
+              });
+              console.log('create', cartId);
+              this.createProducts(cartId);
+            },
+            complete: () => {
+              this.isLoading = false;
+              console.log('complete');
+            },
+            error: (response) => {
+              console.log('create error', response);
+            },
           });
         return true;
       }

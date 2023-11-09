@@ -25,8 +25,8 @@ export class SiteService {
     return this._site.asObservable();
   }
 
-  fetch(dominio: string) {
-    console.log(dominio);
+  fetch(domain: string) {
+    // console.log('fetch site', domain);
     // this.siteObject.data = data;
     this.siteObject.loading = false;
     this._site.next(this.siteObject);

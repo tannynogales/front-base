@@ -81,7 +81,7 @@ export class InputComponent
       const tooltipTriggerList = document.querySelectorAll(
         '[data-bs-toggle="tooltip"]'
       );
-      console.log(tooltipTriggerList);
+      // console.log(tooltipTriggerList);
       const tooltipList = [...Array.from(tooltipTriggerList)].map(
         (tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl)
       );
