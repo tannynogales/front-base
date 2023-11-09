@@ -1,6 +1,10 @@
 <div class="d-flex justify-content-center align-items-center mt-2">
   <div #scrollContainer class="d-flex scroll-custom gap-4">
-    <div *ngFor="let item of items; let first = first" class="text-nowrap py-4">
+    <div
+      [id]="item.slug"
+      *ngFor="let item of items; let first = first"
+      class="text-nowrap py-4"
+    >
       <a
         class="text-decoration-none"
         [routerLink]="['/', item.slug]"

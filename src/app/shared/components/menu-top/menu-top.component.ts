@@ -4,7 +4,10 @@ import {
   ElementRef,
   HostListener,
   Input,
+  OnDestroy,
+  QueryList,
   ViewChild,
+  ViewChildren,
 } from '@angular/core';
 import { ParentCategory } from '@core/models';
 
@@ -13,7 +16,7 @@ import { ParentCategory } from '@core/models';
   templateUrl: './menu-top.component.html',
   styleUrls: ['./menu-top.component.scss'],
 })
-export class MenuTopComponent implements AfterViewInit {
+export class MenuTopComponent implements AfterViewInit, OnDestroy {
   @Input() selected: string = '';
   @Input() items: ParentCategory[] = [
     {
@@ -27,6 +30,9 @@ export class MenuTopComponent implements AfterViewInit {
   @ViewChild('scrollContainer') scrollContainer!: ElementRef;
   @ViewChild('rightArrow') rightArrow!: ElementRef;
 
+  // @ViewChildren('items') actions: QueryList<CustomCardAction>;
+
+  // TODO: documentar por qué hago esto
   @HostListener('window:resize', ['$event'])
   onResize() {
     if (
@@ -41,8 +47,16 @@ export class MenuTopComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.onResize();
-    // Detect scroll evento on scrollContainer
+    // Detect scroll event on scrollContainer
     // this.scrollContainer.nativeElement.addEventListener('scroll', () => {});
+    // console.log(this.selected);
+    const element = document.getElementById(this.selected);
+    if (element)
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'start',
+      });
   }
 
   moveScroll() {
@@ -50,5 +64,13 @@ export class MenuTopComponent implements AfterViewInit {
     const newScrollPosition = currentScrollPosition + 70;
 
     this.scrollContainer.nativeElement.scrollLeft = newScrollPosition;
+  }
+
+  constructor() {
+    console.log('constructor ' + this.selected);
+  }
+
+  ngOnDestroy(): void {
+    console.log('ngOnDestroy ' + this.selected);
   }
 }
