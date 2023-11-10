@@ -4,10 +4,9 @@ import {
   ElementRef,
   HostListener,
   Input,
-  OnDestroy,
-  QueryList,
+  OnChanges,
+  SimpleChanges,
   ViewChild,
-  ViewChildren,
 } from '@angular/core';
 import { ParentCategory } from '@core/models';
 
@@ -16,7 +15,9 @@ import { ParentCategory } from '@core/models';
   templateUrl: './menu-top.component.html',
   styleUrls: ['./menu-top.component.scss'],
 })
-export class MenuTopComponent implements AfterViewInit, OnDestroy {
+export class MenuTopComponent
+  implements AfterViewInit, OnChanges, AfterViewInit
+{
   @Input() selected: string = '';
   @Input() items: ParentCategory[] = [
     {
@@ -49,14 +50,7 @@ export class MenuTopComponent implements AfterViewInit, OnDestroy {
     this.onResize();
     // Detect scroll event on scrollContainer
     // this.scrollContainer.nativeElement.addEventListener('scroll', () => {});
-    // console.log(this.selected);
-    const element = document.getElementById(this.selected);
-    if (element)
-      element.scrollIntoView({
-        behavior: 'smooth',
-        block: 'nearest',
-        inline: 'start',
-      });
+    this.goToElement(this.selected);
   }
 
   moveScroll() {
@@ -66,11 +60,29 @@ export class MenuTopComponent implements AfterViewInit, OnDestroy {
     this.scrollContainer.nativeElement.scrollLeft = newScrollPosition;
   }
 
-  constructor() {
-    console.log('constructor ' + this.selected);
+  ngOnChanges(changes: SimpleChanges) {
+    // console.log(changes);
+    if (changes['selected']) {
+      // console.log(
+      //   'El valor de inputText ha cambiado:',
+      //   changes['selected'].currentValue
+      // );
+      this.goToElement(this.selected);
+    }
   }
 
-  ngOnDestroy(): void {
-    console.log('ngOnDestroy ' + this.selected);
+  goToElement(id: string) {
+    const menuItem = document.getElementById(id);
+    // const rect = menuItem?.getBoundingClientRect();
+
+    setTimeout(function () {
+      if (menuItem) {
+        menuItem.scrollIntoView({
+          behavior: 'smooth',
+          block: 'nearest',
+          inline: 'start',
+        });
+      }
+    }, 1);
   }
 }
