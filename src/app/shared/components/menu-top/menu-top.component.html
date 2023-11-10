@@ -8,7 +8,10 @@
       <a
         class="text-decoration-none"
         [routerLink]="['/', item.slug]"
-        [ngClass]="{ 'link-body-emphasis': selected !== item.slug }"
+        [ngClass]="{
+          'link-body-emphasis': selected !== item.slug,
+          'fw-bold': selected == item.slug
+        }"
       >
         <!-- link-body-emphasis -->
         {{ item.name }}

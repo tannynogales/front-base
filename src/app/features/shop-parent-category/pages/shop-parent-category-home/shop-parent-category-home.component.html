@@ -41,7 +41,42 @@
           <h5 class="mb-3">Panadería y Pastelería</h5>
         </div>
       </section> -->
-      <h1>{{ selectedMenuItem }}</h1>
+      <!-- <h1>{{ selectedMenuItem }}</h1> -->
+      <ng-container *ngIf="categories$ | async as categories">
+        <div class="form-floating">
+          <select
+            name="filterByProduct"
+            class="form-select mb-3 d-lg-none"
+            id="filterByProduct"
+            aria-label="Productos"
+            (change)="goToProductList($event)"
+          >
+            <option [selected]="true" [disabled]="true">
+              Selecciona un producto
+            </option>
+            <option
+              [value]="category.slug"
+              *ngFor="let category of categories.data"
+            >
+              {{ category.name }}
+            </option>
+          </select>
+          <label for="floatingSelect">Filtrar</label>
+        </div>
+      </ng-container>
+
+      <!-- <ng-container *ngIf="categories$ | async as categories">
+        <select
+          class="form-select d-lg-none mb-3"
+          aria-label="Default select example"
+        >
+          <option selected disabled>Filtra por Producto</option>
+          <option *ngFor="let category of categories.data">
+            {{ category.name }}
+          </option>
+        </select>
+      </ng-container> -->
+
       <section>
         <div class="row">
           <!-- Product-->

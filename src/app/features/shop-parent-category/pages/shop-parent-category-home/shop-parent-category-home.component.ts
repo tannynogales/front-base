@@ -1,6 +1,6 @@
 import { SelectedParentCategoryService } from './../../../../core/services/selected-parent-category.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import {
   Category,
   CategoryObject,
@@ -33,7 +33,8 @@ export class ShopParentCategoryHomeComponent implements OnInit {
     private categoriesService: CategoriesService,
     private parentCategoriesService: ParentCategoriesService,
     private selectedParentCategoryService: SelectedParentCategoryService,
-    private parentCategoryProductsService: ParentCategoryProductsService
+    private parentCategoryProductsService: ParentCategoryProductsService,
+    private router: Router
   ) {
     this.categories$ = this.categoriesService.categories$;
     this.parentCategories$ = this.parentCategoriesService.parentCategories$;
@@ -63,5 +64,13 @@ export class ShopParentCategoryHomeComponent implements OnInit {
   changePage(page: number) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     this.parentCategoryProductsService.fetch(this.selectedMenuItem, page);
+  }
+
+  goToProductList($event: any) {
+    const categoryID = String($event.target.value);
+    console.log('categoryID', categoryID);
+    this.router.navigate(['/home/' + categoryID], {
+      // queryParams: { from: state.url },
+    });
   }
 }
