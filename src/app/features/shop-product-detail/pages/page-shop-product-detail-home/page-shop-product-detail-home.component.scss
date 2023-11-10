@@ -32,3 +32,8 @@
   max-width: 800px;
   height: 400px;
 }
+
+app-card-item,
+app-card-item-loading {
+  min-width: 200px !important;
+}

@@ -83,7 +83,7 @@
           <ng-container *ngIf="parentCategoryProducts$ | async as products">
             <ng-container *ngIf="!products.loading; else loading">
               <div
-                class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12 mb-4 p-2"
+                class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 mb-4 p-2"
                 *ngFor="let product of products.data"
               >
                 <div class="d-flex justify-content-center m-0 p-0">
@@ -106,7 +106,7 @@
             </ng-container>
             <ng-template #loading>
               <div
-                class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12 mb-4 p-2"
+                class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 mb-4 p-2"
                 *ngFor="let product of emptyProducts"
               >
                 <div class="d-flex justify-content-center m-0 p-0">

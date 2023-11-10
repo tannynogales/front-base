@@ -3,3 +3,8 @@
   overflow-x: auto;
   overflow-y: hidden;
 }
+
+app-card-item,
+app-card-item-loading {
+  min-width: 200px !important;
+}
