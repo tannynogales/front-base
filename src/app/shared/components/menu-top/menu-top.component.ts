@@ -78,7 +78,7 @@ export class MenuTopComponent
     setTimeout(function () {
       if (menuItem) {
         menuItem.scrollIntoView({
-          behavior: 'smooth',
+          behavior: 'auto',
           block: 'nearest',
           inline: 'start',
         });

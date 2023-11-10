@@ -43,10 +43,10 @@
       </section> -->
       <!-- <h1>{{ selectedMenuItem }}</h1> -->
       <ng-container *ngIf="categories$ | async as categories">
-        <div class="form-floating">
+        <div class="form-floating d-lg-none">
           <select
             name="filterByProduct"
-            class="form-select mb-3 d-lg-none"
+            class="form-select mb-3"
             id="filterByProduct"
             aria-label="Productos"
             (change)="goToProductList($event)"
