@@ -1,0 +1,15 @@
+<p>shopping-cart-detail works!</p>
+<ng-container *ngIf="shoppingCartProducts$ | async as shoppingCartProducts">
+  <ng-container *ngIf="!shoppingCartProducts.loading">
+    <p *ngFor="let shoppingCartProduct of shoppingCartProducts.data.products">
+      {{ shoppingCartProduct.name }}
+      <a
+        target="_blank"
+        href="https://www.importadoraroble.cl/home/{{
+          shoppingCartProduct.category
+        }}/{{ shoppingCartProduct.productId }}"
+        >link</a
+      >
+    </p>
+  </ng-container>
+</ng-container>

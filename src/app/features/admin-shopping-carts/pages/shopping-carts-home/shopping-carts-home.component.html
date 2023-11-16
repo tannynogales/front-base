@@ -1,6 +1,6 @@
 <div class="container">
   <h1>Órdenes</h1>
-  <table class="table">
+  <table class="table table-hover">
     <thead>
       <tr>
         <th scope="col">#</th>
@@ -15,13 +15,24 @@
     <tbody>
       <ng-container *ngIf="shoppingCarts$ | async as shoppingCarts">
         <ng-container *ngIf="!shoppingCarts.loading; else loadingShoppingCarts">
-          <tr *ngFor="let shoppingCart of shoppingCarts.data">
+          <tr
+            *ngFor="let shoppingCart of shoppingCarts.data"
+            routerLink="{{ shoppingCart.id }}"
+          >
             <td>{{ shoppingCart.id }}</td>
-            <td>{{ shoppingCart.state }}</td>
+            <td>{{ getState(shoppingCart.state) }}</td>
             <td>{{ shoppingCart.user_name }}</td>
             <td>{{ shoppingCart.user_email }}</td>
             <td>{{ shoppingCart.user_cellphone }}</td>
-            <td>{{ shoppingCart.delivery_option }}</td>
+            <td>
+              {{
+                shoppingCart.delivery_option == "1"
+                  ? "Retiro"
+                  : shoppingCart.delivery_option == "2"
+                  ? "Despacho"
+                  : shoppingCart.delivery_option
+              }}
+            </td>
             <td>{{ shoppingCart.updatedAt }}</td>
           </tr>
         </ng-container>

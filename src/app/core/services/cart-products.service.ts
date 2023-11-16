@@ -47,8 +47,9 @@ export class CartProductsService {
     );
 
     this.shoppingCartObject.totalBruto = totalBruto;
-    this.shoppingCartObject.IVA = totalBruto * IVA;
-    this.shoppingCartObject.totalNeto = totalBruto * (1 + IVA);
+    this.shoppingCartObject.IVA = Math.ceil(totalBruto * IVA);
+    this.shoppingCartObject.totalNeto =
+      totalBruto + this.shoppingCartObject.IVA;
     this.shoppingCartObject.totalProducts = totalProducts;
   }
 

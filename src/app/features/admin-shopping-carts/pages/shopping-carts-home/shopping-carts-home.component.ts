@@ -18,4 +18,15 @@ export class ShoppingCartsHomeComponent {
   ngOnInit(): void {
     this.shoppingCartsService.fetch();
   }
+
+  getState(state: number) {
+    if (state == 1) {
+      return 'Despacho';
+    } else if (state == 2) {
+      // return 'Facturación';
+      return 'Enviada';
+    } else {
+      return state;
+    }
+  }
 }
