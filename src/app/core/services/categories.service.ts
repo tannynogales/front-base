@@ -32,7 +32,7 @@ export class CategoriesService {
     this._categories.next(this.categoryObject);
     const url =
       this.baseUrl +
-      `/categories?filters[site][id][$eq]=${this.siteID}&sort=name&populate[parent_categories]=*&populate[image]=*&pagination[pageSize]=100`;
+      `/categories?filters[site][id][$eq]=${this.siteID}&sort=name&populate[parent_categories]=*&populate[image]=*&pagination[pageSize]=100&populate[seo]=*`;
     // console.log(url);
 
     this.httpClient
@@ -60,6 +60,10 @@ export class CategoriesService {
                       }
                     )
                   : [],
+              seo: {
+                metaTitle: element.attributes?.seo?.metaTitle,
+                metaDescription: element.attributes?.seo?.metaDescription,
+              },
             };
           });
         })

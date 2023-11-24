@@ -5,7 +5,6 @@ import { PageShopProductListHomeComponent } from './pages/page-shop-product-list
 const routes: Routes = [
   {
     path: '',
-    title: 'Product List',
     component: PageShopProductListHomeComponent,
   },
 ];

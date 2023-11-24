@@ -12,7 +12,12 @@ import {
   ItemsObject,
   ParentCategory,
 } from '@core/models';
-import { CategoriesService, ProductsService } from '@core/services';
+import { Seo } from '@core/models/seo.model';
+import {
+  CategoriesService,
+  MetaService,
+  ProductsService,
+} from '@core/services';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -32,10 +37,53 @@ export class PageShopProductListHomeComponent implements OnInit, OnDestroy {
   constructor(
     private activatedRoute: ActivatedRoute,
     public productsService: ProductsService,
-    private categoriesService: CategoriesService
+    private categoriesService: CategoriesService,
+    private metaService: MetaService
   ) {
+    console.log('product list constructor');
+
     this.products$ = this.productsService.products$;
     this.categories$ = this.categoriesService.categories$;
+
+    this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
+      const categoryId = params.get('categoryId');
+      if (categoryId !== null) {
+        this.categoryId = categoryId;
+        this.productsService.fetch(categoryId);
+      }
+    });
+
+    this.categories$.subscribe((categories) => {
+      if (categories.data.length > 0 && categories.loading === false) {
+        // console.log('categories', categories);
+        if (this.categoryId !== '') {
+          const category = categories.data.find(
+            (category) => category.slug === this.categoryId
+          );
+          // console.log('category', category);
+          const metaTitle = category?.seo?.metaTitle;
+          const metaDescription = category?.seo?.metaDescription;
+          if (metaTitle && metaDescription) {
+            const seo: Seo = {
+              metaTitle: metaTitle,
+              metaDescription: metaDescription,
+            };
+            this.metaService.setMeta(seo, {
+              cellphone: 0,
+              cellphoneFormatted: 'string',
+              name: 'Roble',
+              pageTitlePrefix: 'Roble',
+              image:
+                'https://storage.googleapis.com/roble-strapi-bucket/site_og_image_ebbef09a93/site_og_image_ebbef09a93.jpg',
+              seo: {
+                metaTitle: '',
+                metaDescription: '',
+              },
+            });
+          }
+        }
+      }
+    });
   }
 
   ngOnDestroy(): void {
@@ -52,17 +100,11 @@ export class PageShopProductListHomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
-      const categoryId = params.get('categoryId');
-      if (categoryId !== null) {
-        this.categoryId = categoryId;
-        this.productsService.fetch(categoryId);
-      }
-    });
+    console.log('product list OnInit');
 
     this.productsService.products$.subscribe((products) => {
       if (!this.maxPrice) this.maxPrice = products.data[0]?.price;
-      console.log('maxPrice', this.maxPrice);
+      // console.log('maxPrice', this.maxPrice);
     });
   }
 

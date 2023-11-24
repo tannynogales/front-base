@@ -1,3 +1,5 @@
+import { Seo } from './seo.model';
+
 export interface SiteObject {
   data: Site;
   loading: boolean;
@@ -5,5 +7,9 @@ export interface SiteObject {
 
 export interface Site {
   cellphone: number;
-  cellphoneFormated: string;
+  cellphoneFormatted: string;
+  name: string;
+  pageTitlePrefix: string;
+  seo: Seo;
+  image: string;
 }

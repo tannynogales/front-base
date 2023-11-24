@@ -10,7 +10,16 @@ export class SiteService {
   private siteObject: SiteObject = {
     data: {
       cellphone: 56993187101,
-      cellphoneFormated: this.formatCellphone(56993187101),
+      cellphoneFormatted: this.formatCellphone(56993187101),
+      name: 'Roble',
+      pageTitlePrefix: 'Roble',
+      seo: {
+        metaTitle: 'Máquinas de gastronomía',
+        metaDescription:
+          'Descubre la mejor selección de revolvedoras, embutidoras, moledoras de carne, motores y equipamiento para panaderías, pastelerías, carnicerías, refrigeración y restaurantes. ¡Impulsa tu negocio en la industria gastronómica con nuestras soluciones de calidad',
+      },
+      image:
+        'https://storage.googleapis.com/roble-strapi-bucket/site_og_image_ebbef09a93/site_og_image_ebbef09a93.jpg',
     },
     loading: true,
   };

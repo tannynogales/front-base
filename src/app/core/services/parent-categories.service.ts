@@ -29,7 +29,7 @@ export class ParentCategoriesService {
   fetch() {
     this.ParentCategoryObject.loading = true;
     this._parentCategories.next(this.ParentCategoryObject);
-    const url = this.baseUrl + `/parent-categories`; // ?sort=name
+    const url = this.baseUrl + `/parent-categories?populate[seo]=*`; // ?sort=name
     // console.log(url);
     this.httpClient
       .get<Response>(url)
@@ -40,6 +40,10 @@ export class ParentCategoriesService {
               id: element.id,
               name: element.attributes.name,
               slug: element.attributes.slug,
+              seo: {
+                metaTitle: element.attributes?.seo?.metaTitle,
+                metaDescription: element.attributes?.seo?.metaDescription,
+              },
             };
           });
         })

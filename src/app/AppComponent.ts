@@ -1,12 +1,9 @@
 import { SiteService } from './core/services/site.service';
 import { Router, NavigationEnd } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { Observable, filter } from 'rxjs';
+import { filter } from 'rxjs';
 import { MetaService } from '@core/services';
-import { Site, SiteObject } from '@core/models';
-import { Seo } from '@core/models/seo.model';
-
-declare var gtag: any;
+import { gtag } from './app.component';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +11,13 @@ declare var gtag: any;
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  constructor(private router: Router, private siteService: SiteService) {
+  title = 'neges';
+
+  constructor(
+    private router: Router,
+    private metaService: MetaService,
+    private siteService: SiteService
+  ) {
     const navEndEvents$ = this.router.events.pipe(
       filter((event): event is NavigationEnd => event instanceof NavigationEnd)
     );
@@ -38,5 +41,8 @@ export class AppComponent implements OnInit {
       });
     });
   }
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // this.metaService.createCanonicalURL();
+    this.metaService.setMeta({});
+  }
 }

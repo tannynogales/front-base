@@ -25,7 +25,7 @@ export class LayoutShopComponent implements OnInit {
 
     this.categoriesService.fetch();
     this.parentCategoriesService.fetch();
-    this.siteService.fetch('');
+    this.siteService.fetch('roble');
   }
 
   ngOnInit(): void {
