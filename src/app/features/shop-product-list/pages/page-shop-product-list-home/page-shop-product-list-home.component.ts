@@ -60,9 +60,14 @@ export class PageShopProductListHomeComponent implements OnInit, OnDestroy {
           const category = categories.data.find(
             (category) => category.slug === this.categoryId
           );
-          // console.log('category', category);
-          const metaTitle = category?.seo?.metaTitle;
-          const metaDescription = category?.seo?.metaDescription;
+          console.log('category', category);
+          const metaTitle = category?.seo?.metaTitle
+            ? category?.seo?.metaTitle
+            : category?.name;
+          const metaDescription = category?.seo?.metaDescription
+            ? category?.seo?.metaDescription
+            : category?.name;
+
           if (metaTitle && metaDescription) {
             const seo: Seo = {
               metaTitle: metaTitle,
@@ -80,7 +85,7 @@ export class PageShopProductListHomeComponent implements OnInit, OnDestroy {
                 metaDescription: '',
               },
             });
-          }
+          } else console.error('not found metaTitle or metaDescription');
         }
       }
     });
