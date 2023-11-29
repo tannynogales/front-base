@@ -73,6 +73,7 @@ export class PageShopProductListHomeComponent implements OnInit, OnDestroy {
               metaTitle: metaTitle,
               metaDescription: metaDescription,
             };
+            // TODO no debería tener valores en duro
             this.metaService.setMeta(seo, {
               cellphone: 0,
               cellphoneFormatted: 'string',
