@@ -1,6 +1,6 @@
 <div class="container">
   <h1>Órdenes</h1>
-  <table class="table table-hover">
+  <table class="table table-hover align-middle">
     <thead>
       <tr>
         <th scope="col">#</th>
@@ -10,15 +10,14 @@
         <th scope="col">Celular</th>
         <th scope="col">Delivery Opción</th>
         <th scope="col">Fecha de Actualización</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
       <ng-container *ngIf="shoppingCarts$ | async as shoppingCarts">
         <ng-container *ngIf="!shoppingCarts.loading; else loadingShoppingCarts">
-          <tr
-            *ngFor="let shoppingCart of shoppingCarts.data"
-            routerLink="{{ shoppingCart.id }}"
-          >
+          <tr *ngFor="let shoppingCart of shoppingCarts.data">
             <td>{{ shoppingCart.id }}</td>
             <td>{{ getState(shoppingCart.state) }}</td>
             <td>{{ shoppingCart.user_name }}</td>
@@ -33,11 +32,88 @@
                   : shoppingCart.delivery_option
               }}
             </td>
-            <td>{{ shoppingCart.updatedAt }}</td>
+            <td>
+              {{ shoppingCart.updatedAt | date }}
+            </td>
+            <td>
+              <app-button-icon
+                data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasNavbar"
+                aria-controls="offcanvasNavbar"
+                aria-label="Toggle navigation"
+                [icon]="'delete'"
+              ></app-button-icon>
+            </td>
+            <td>
+              <app-button-icon
+                data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasNavbar"
+                aria-controls="offcanvasNavbar"
+                aria-label="Toggle navigation"
+                [icon]="'right-arrow'"
+                routerLink="{{ shoppingCart.id }}"
+              ></app-button-icon>
+            </td>
           </tr>
         </ng-container>
 
-        <ng-template #loadingShoppingCarts></ng-template>
+        <ng-template #loadingShoppingCarts>
+          <tr *ngFor="let _ of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]">
+            <td>
+              <p class="card-text placeholder-glow">
+                <span class="placeholder rounded">42</span>
+              </p>
+            </td>
+            <td>
+              <p class="card-text placeholder-glow">
+                <span class="placeholder rounded">Despacho</span>
+              </p>
+            </td>
+            <td>
+              <p class="card-text placeholder-glow">
+                <span class="placeholder rounded">loremIpsum@lorem</span>
+              </p>
+            </td>
+            <td>
+              <p class="card-text placeholder-glow">
+                <span class="placeholder rounded">loremIpsum@lorem</span>
+              </p>
+            </td>
+            <td>
+              <p class="card-text placeholder-glow">
+                <span class="placeholder rounded">912345678</span>
+              </p>
+            </td>
+            <td>
+              <p class="card-text placeholder-glow">
+                <span class="placeholder rounded">Despacho</span>
+              </p>
+            </td>
+            <td>
+              <p class="card-text placeholder-glow">
+                <span class="placeholder rounded">Nov_4__2023 </span>
+              </p>
+            </td>
+            <td>
+              <app-button-icon
+                data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasNavbar"
+                aria-controls="offcanvasNavbar"
+                aria-label="Toggle navigation"
+                [icon]="'placeholder'"
+              ></app-button-icon>
+            </td>
+            <td>
+              <app-button-icon
+                data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasNavbar"
+                aria-controls="offcanvasNavbar"
+                aria-label="Toggle navigation"
+                [icon]="'placeholder'"
+              ></app-button-icon>
+            </td>
+          </tr>
+        </ng-template>
       </ng-container>
     </tbody>
   </table>

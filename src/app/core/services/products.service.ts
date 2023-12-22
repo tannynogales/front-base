@@ -87,7 +87,7 @@ export class ProductsService {
               price: parseInt(element.attributes.price),
               primary_image: element.attributes.primary_image.data
                 ? element.attributes.primary_image.data?.attributes?.formats
-                    .thumbnail?.url
+                    ?.thumbnail?.url
                 : '',
               tag: '',
               images: [],
