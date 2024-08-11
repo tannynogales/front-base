@@ -69,10 +69,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "neges:build:production"
+              "browserTarget": "neges:build:production"
             },
             "development": {
-              "buildTarget": "neges:build:development"
+              "browserTarget": "neges:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -80,7 +80,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "neges:build"
+            "browserTarget": "neges:build"
           }
         },
         "test": {
