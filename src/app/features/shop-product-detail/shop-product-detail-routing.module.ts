@@ -5,7 +5,7 @@ import { PageShopProductDetailHomeComponent } from './pages/page-shop-product-de
 const routes: Routes = [
   {
     path: '',
-    title: 'Product Detail',
+    // title: 'Product Detail',
     component: PageShopProductDetailHomeComponent,
   },
 ];
