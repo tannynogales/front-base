@@ -36,25 +36,25 @@ export class PageShopProductDetailHomeComponent {
     this.products$ = this.productsService.products$;
 
     this.product$.subscribe((product) => {
-      // if (product.data.category.length > 0 && product.loading === false)
-
-      // TODO: debería tener un metaDescription máselaborado, que cumpla criterios de SEO como longitud y contenido de palabras clave.
-      const seo: Seo = {
-        metaTitle: product.data.name,
-        metaDescription: product.data.description || '',
-      };
-      // TODO no debería tener valores en duro
-      this.metaService.setMeta(seo, {
-        cellphone: 0,
-        cellphoneFormatted: 'string',
-        name: 'Roble',
-        pageTitlePrefix: 'Roble',
-        image: product.data.primary_image,
-        seo: {
-          metaTitle: '',
-          metaDescription: '',
-        },
-      });
+      if (product.loading === false) {
+        // TODO: debería tener un metaDescription máselaborado, que cumpla criterios de SEO como longitud y contenido de palabras clave.
+        const seo: Seo = {
+          metaTitle: product.data.name,
+          metaDescription: product.data.description || '',
+        };
+        // TODO no debería tener valores en duro
+        this.metaService.setMeta(seo, {
+          cellphone: 0,
+          cellphoneFormatted: 'string',
+          name: 'Roble',
+          pageTitlePrefix: 'Roble',
+          image: product.data.primary_image,
+          seo: {
+            metaTitle: '',
+            metaDescription: '',
+          },
+        });
+      }
       //  else console.error('not found metaTitle or metaDescription');
     });
   }
