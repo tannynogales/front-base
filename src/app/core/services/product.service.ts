@@ -74,7 +74,10 @@ export class ProductService {
               : [],
             category: response.data.attributes.categories.data.map(
               (element: any) => {
-                return element.attributes.slug;
+                return {
+                  name: element.attributes.name,
+                  slug: element.attributes.slug,
+                };
               }
             ),
             attributes: attributesValues,
@@ -84,7 +87,7 @@ export class ProductService {
       .subscribe((data) => {
         this.productObject.data = data;
         this.productObject.loading = false;
-        // console.log(this.productObject);
+        console.log(this.productObject);
         this._product.next(this.productObject);
       });
   }

@@ -29,7 +29,7 @@ export class MetaService {
   // }
 
   setMeta(seo: Seo, site: Site) {
-    this.titleService.setTitle(`${site.pageTitlePrefix} | ${seo.metaTitle}`);
+    this.titleService.setTitle(`${seo.metaTitle} | ${site.pageTitlePrefix}`);
 
     this.metaService.updateTag({
       name: 'description',

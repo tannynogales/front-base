@@ -9,7 +9,8 @@ export interface Item {
   price: number;
   primary_image: string;
   tag: string;
-  category: Array<string>;
+  // category: Array<string>;
+  category: categoryObject[];
   images: Array<string>;
   attributes: Array<string>;
   description?: string;
@@ -25,4 +26,9 @@ export interface ItemsObject {
 export interface ItemObject {
   data: Item;
   loading: boolean;
+}
+
+interface categoryObject {
+  name: string;
+  slug: string;
 }

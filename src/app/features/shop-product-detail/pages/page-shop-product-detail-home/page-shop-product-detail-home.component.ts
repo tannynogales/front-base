@@ -5,9 +5,11 @@ import {
   ProductService,
   ProductsService,
   CartProductsService,
+  MetaService,
 } from '@core/services';
 import { Observable } from 'rxjs';
 import { ToastService } from '@shared/components/toast/toast.service';
+import { Seo } from '@core/models/seo.model';
 @Component({
   selector: 'app-page-shop-product-detail-home',
   templateUrl: './page-shop-product-detail-home.component.html',
@@ -27,10 +29,34 @@ export class PageShopProductDetailHomeComponent {
     public productService: ProductService,
     private productsService: ProductsService,
     private cartProductsService: CartProductsService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private metaService: MetaService
   ) {
     this.product$ = this.productService.products$;
     this.products$ = this.productsService.products$;
+
+    this.product$.subscribe((product) => {
+      // if (product.data.category.length > 0 && product.loading === false)
+
+      // TODO: debería tener un metaDescription máselaborado, que cumpla criterios de SEO como longitud y contenido de palabras clave.
+      const seo: Seo = {
+        metaTitle: product.data.name,
+        metaDescription: product.data.description || '',
+      };
+      // TODO no debería tener valores en duro
+      this.metaService.setMeta(seo, {
+        cellphone: 0,
+        cellphoneFormatted: 'string',
+        name: 'Roble',
+        pageTitlePrefix: 'Roble',
+        image: product.data.primary_image,
+        seo: {
+          metaTitle: '',
+          metaDescription: '',
+        },
+      });
+      //  else console.error('not found metaTitle or metaDescription');
+    });
   }
 
   ngOnInit() {
