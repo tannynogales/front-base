@@ -165,6 +165,20 @@
   </div>
 </section>
 
+<ng-container *ngIf="product$ | async as product">
+  <ng-container *ngIf="!product.loading; else loadingBreadcrumb">
+    <p
+      *ngFor="
+        let category of product.data.category;
+        index as i;
+        first as isFirst
+      "
+    >
+      {{ category.name }}
+    </p>
+  </ng-container>
+</ng-container>
+
 <div class="container py-5">
   <h3>¿Quieres ver más?</h3>
   <section class="d-flex justify-content-start scroll-custom d-grid gap-3">

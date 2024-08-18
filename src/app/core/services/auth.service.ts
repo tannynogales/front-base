@@ -55,7 +55,10 @@ export class AuthService {
       }),
     };
 
-    return this.http.get<any>(`${this.baseUrl}/api/users/me`, httpOptions);
+    return this.http.get<any>(
+      `${this.baseUrl}/api/users/me?populate=role`,
+      httpOptions
+    );
   }
 
   public create(
