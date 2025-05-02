@@ -11,7 +11,8 @@ export class ButtonIconComponent {
     | 'search'
     | 'delete'
     | 'right-arrow'
-    | 'placeholder' = 'search';
+    | 'placeholder'
+    | 'logout' = 'search';
   @Input() badge: number = 0;
   size = '40';
   strokeWidth = 0.8399999999999999;
