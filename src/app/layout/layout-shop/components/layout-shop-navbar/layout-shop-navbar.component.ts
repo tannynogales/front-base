@@ -10,7 +10,9 @@ import {
   ParentCategoriesService,
   SelectedParentCategoryService,
   CartProductsService,
+  UserService,
 } from '@core/services';
+import { ConfirmDialogService } from '@shared/components/confirm-dialog/confirm-dialog.service';
 import { ToastService } from '@shared/components/toast/toast.service';
 import { Observable } from 'rxjs';
 
@@ -33,7 +35,9 @@ export class LayoutShopNavbarComponent {
     private parentCategoriesService: ParentCategoriesService,
     private selectedParentCategoryService: SelectedParentCategoryService,
     private cartProductsService: CartProductsService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    public userService: UserService,
+    private confirmDialogService: ConfirmDialogService
   ) {
     this.categories$ = this.categoriesService.categories$;
     this.parentCategories$ = this.parentCategoriesService.parentCategories$;
@@ -74,5 +78,15 @@ export class LayoutShopNavbarComponent {
       // console.log(quantityDecreased, quantity);
       this.cartProductsService.decreaseProductQuantity(productID);
     }
+  }
+
+  logout() {
+    this.confirmDialogService.confirmThis(
+      '¿Seguro que desea cerrar sesión?',
+      () => {
+        this.userService.deleteUser();
+        location.reload();
+      }
+    );
   }
 }

@@ -24,6 +24,7 @@ import { InputErrorComponent } from './input-error/input-error.component';
 import { TokenExpirationComponent } from './token-expiration/token-expiration.component';
 import { WhatsappButtonComponent } from './whatsapp-button/whatsapp-button.component';
 import { SelectComponent } from './select/select.component';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 export const components = [
   CarouselComponent,
@@ -52,6 +53,7 @@ export const components = [
   TokenExpirationComponent,
   WhatsappButtonComponent,
   SelectComponent,
+  ConfirmDialogComponent,
 ];
 
 export * from './carousel/carousel.component';
@@ -80,3 +82,4 @@ export * from './input-error/input-error.component';
 export * from './token-expiration/token-expiration.component';
 export * from './whatsapp-button/whatsapp-button.component';
 export * from './select/select.component';
+export * from './confirm-dialog/confirm-dialog.component';

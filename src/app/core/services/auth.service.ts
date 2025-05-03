@@ -82,4 +82,22 @@ export class AuthService {
       }
     );
   }
+
+  public forgotPassword(email: string): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/api/auth/forgot-password`, {
+      email: email,
+    });
+  }
+
+  public resetPassword(
+    code: string,
+    password: string,
+    passwordConfirmation: string
+  ): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/api/auth/reset-password`, {
+      code: code,
+      password: password,
+      passwordConfirmation: passwordConfirmation,
+    });
+  }
 }

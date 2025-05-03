@@ -1,0 +1,41 @@
+<!-- Modal -->
+<div
+  #confirmDialog
+  class="modal fade"
+  id="confirmDialog"
+  tabindex="-1"
+  aria-labelledby="confirmDialogLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div *ngIf="data.title" class="modal-header">
+        <h5 class="modal-title" id="confirmDialogLabel">{{ data.title }}</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">{{ data.message }}</div>
+      <div class="modal-footer">
+        <button
+          (click)="data.cancel?.function()"
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+        >
+          Cancelar
+        </button>
+        <button
+          (click)="data.accept?.function()"
+          type="button"
+          class="btn btn-primary"
+        >
+          Confirmar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

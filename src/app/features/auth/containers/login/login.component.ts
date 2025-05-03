@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
     public readonly title: Title,
     public rememberMeService: RememberMeService
   ) {
-    this.title.setTitle(`Login | Curriculum`);
+    this.title.setTitle(`Login | Iniciar sesión`);
     this.rememberMe = this.rememberMeService.rememberMe;
     // console.log("this.rememberMe", this.rememberMe);
   }
