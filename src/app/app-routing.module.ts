@@ -5,7 +5,6 @@ import {
   Routes,
   TitleStrategy,
 } from '@angular/router';
-import { ErrorComponent } from './error/error.component';
 import { LayoutShopComponent } from '@layout/layout-shop/layout/layout-shop.component';
 import { LayoutAdminComponent } from '@layout/layout-admin/layout/admin-layout/layout-admin.component';
 import { Title } from '@angular/platform-browser';
@@ -27,11 +26,8 @@ const routes: Routes = [
     canActivate: [SessionGuard],
   },
   {
-    path: 'test',
-    component: ErrorComponent,
-  },
-  {
     path: 'auth',
+    component: LayoutShopComponent,
     loadChildren: () =>
       import('./features/auth/auth.module').then((m) => m.AuthModule),
   },

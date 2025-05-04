@@ -1,4 +1,5 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import {
   CategoryObject,
   ParentCategoryObject,
@@ -37,7 +38,8 @@ export class LayoutShopNavbarComponent {
     private cartProductsService: CartProductsService,
     private toastService: ToastService,
     public userService: UserService,
-    private confirmDialogService: ConfirmDialogService
+    private confirmDialogService: ConfirmDialogService,
+    public router: Router
   ) {
     this.categories$ = this.categoriesService.categories$;
     this.parentCategories$ = this.parentCategoriesService.parentCategories$;
@@ -85,7 +87,10 @@ export class LayoutShopNavbarComponent {
       '¿Seguro que desea cerrar sesión?',
       () => {
         this.userService.deleteUser();
-        location.reload();
+
+        this.router.navigateByUrl('/').then(() => {
+          this.toastService.addToast({ message: 'Has cerrado sesión' });
+        });
       }
     );
   }
