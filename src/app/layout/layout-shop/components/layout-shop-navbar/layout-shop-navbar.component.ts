@@ -69,13 +69,15 @@ export class LayoutShopNavbarComponent {
   decreaseQuantity($event: boolean, productID: number, quantity: number) {
     const quantityDecreased = quantity - 1;
     if (quantityDecreased <= 0) {
-      const confirm = window.confirm('¿Seguro que desea eliminar el producto?');
-      if (confirm) {
-        this.cartProductsService.deleteProduct(productID);
-        this.toastService.addToast({
-          message: 'Producto eliminado del carro',
-        });
-      }
+      this.confirmDialogService.confirmThis(
+        '¿Desea quitar el producto de su carrito?',
+        () => {
+          this.cartProductsService.deleteProduct(productID);
+          this.toastService.addToast({
+            message: 'Producto eliminado del carro',
+          });
+        }
+      );
     } else {
       // console.log(quantityDecreased, quantity);
       this.cartProductsService.decreaseProductQuantity(productID);
