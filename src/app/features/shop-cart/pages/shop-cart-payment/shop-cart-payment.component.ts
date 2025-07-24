@@ -236,7 +236,7 @@ export class ShopCartPaymentComponent implements OnInit {
         cartId,
         this.generateSessionId(),
         this.shoppingCart.totalBruto,
-        'http://localhost:4200/cart-shopping/success',
+        `${window.location.origin}/cart-shopping/success`,
         this.paymentData.paymentMethodId
       )
       .subscribe({

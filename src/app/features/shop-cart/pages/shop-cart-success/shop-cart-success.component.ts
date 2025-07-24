@@ -118,10 +118,6 @@ export class ShopCartSuccessComponent implements OnInit {
           text: 'Volver a intentar',
           url: '/cart-shopping/payment',
         };
-        this.button = {
-          text: 'Seguir comprando',
-          url: '/',
-        };
         return;
       }
 
