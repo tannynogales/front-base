@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, ElementRef, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import {
@@ -25,7 +25,6 @@ export class ShopCartDeliveryComponent implements OnInit {
   cartDelivery!: CartDeliveryObject;
   regiones!: regionesOptions[];
   comunas!: comunasOptions[];
-  cartId = this.cartUserService.getFromLocalStorage()?.cartId;
 
   form: FormGroup = new FormGroup({});
   isLoading: boolean = false;
@@ -43,12 +42,12 @@ export class ShopCartDeliveryComponent implements OnInit {
       description:
         'Avenida Recoleta #2504, Comuna de Recoleta, Santiago, Chile.',
     },
-    {
-      id: '2',
-      title: 'Despacho',
-      description:
-        'Despacho dentro de Santiago o Envío a regiones por pagar a través de Litcargo.',
-    },
+    // {
+    //   id: '2',
+    //   title: 'Despacho',
+    //   description:
+    //     'Despacho dentro de Santiago o Envío a regiones por pagar a través de Litcargo.',
+    // },
   ];
 
   // selectedDespachoOption: number = 1;
@@ -73,34 +72,40 @@ export class ShopCartDeliveryComponent implements OnInit {
   activeStep = 1;
   shoppingCart$: Observable<ShoppingCartObject>;
 
-  constructor(
-    private router: Router,
-    private utilitiesChileRegionesService: UtilitiesChileRegionesService,
-    private cartDeliveryService: CartDeliveryService,
-    private cartProductsService: CartProductsService,
-    private cartUserService: CartUserService,
-    private elementRef: ElementRef,
-    private toastService: ToastService
-  ) {
+  router = inject(Router);
+  utilitiesChileRegionesService = inject(UtilitiesChileRegionesService);
+  cartDeliveryService = inject(CartDeliveryService);
+  cartProductsService = inject(CartProductsService);
+  cartUserService = inject(CartUserService);
+  elementRef = inject(ElementRef);
+  toastService = inject(ToastService);
+
+  cartId = this.cartUserService.getFromLocalStorage()?.cartId;
+
+  constructor() {
     if (!this.cartId) {
       console.log('cartId not found');
       this.router.navigate(['/cart-shopping']);
     }
 
+    // TODO: unsubscribe
     this.utilitiesChileRegionesService.regiones$.subscribe((regiones) => {
       this.regiones = this.regionToOptions(regiones.data);
       if (this.cartDelivery?.regionId)
         this.comunas = this.getComunasByRegion(this.cartDelivery.regionId);
     });
 
+    // TODO: unsubscribe
     this.cartDeliveryService.cartDelivery$.subscribe((delivery) => {
       this.cartDelivery = delivery;
     });
+
     this.shoppingCart$ = this.cartProductsService.shoppingCart$;
   }
 
   ngOnInit(): void {
     //TODO: I should call this service in the layout. In this point, I will call the service every time that I visit the page.
+
     this.utilitiesChileRegionesService.fetch();
 
     this.form = new FormGroup({
@@ -128,13 +133,13 @@ export class ShopCartDeliveryComponent implements OnInit {
     const comunas = region?.comunas;
 
     if (comunas) {
-      this.cartDelivery.comunaId = comunas[0].id;
+      // this.cartDelivery.comunaId = comunas[0].id;
       return this.comunaToOptions(comunas);
     } else return [];
   }
 
   regionToOptions(regiones: Region[]): regionesOptions[] {
-    console.log('regionToOptions');
+    // console.log('regionToOptions');
     const options = regiones.map((region) => {
       return {
         value: region.id,
@@ -147,7 +152,7 @@ export class ShopCartDeliveryComponent implements OnInit {
   }
 
   comunaToOptions(comunas: Comuna[]): comunasOptions[] {
-    console.log('comunaToOptions');
+    // console.log('comunaToOptions');
     const options = comunas.map((comuna) => {
       return {
         value: comuna.id,
@@ -156,6 +161,7 @@ export class ShopCartDeliveryComponent implements OnInit {
     });
     return options;
   }
+
   onRegionChange() {
     console.log('onRegionChange', this.form.get('region')?.value);
     const region = this.form.get('region')?.value;
@@ -212,45 +218,48 @@ export class ShopCartDeliveryComponent implements OnInit {
 
     this.isLoading = true;
 
-    if (this.cartId) {
-      console.log('cartId found');
+    if (!this.cartId) {
+      console.log('cartId not found');
+      return true;
+    }
 
-      const cartState = this.cartUserService.getFromLocalStorage()?.cartState;
-      let state = 2;
-      if (cartState) if (cartState > 2) state = cartState;
+    console.log('cartId found');
 
-      console.log('state', state);
+    const cartState = this.cartUserService.getFromLocalStorage()?.cartState;
+    let state = 2;
+    if (cartState) if (cartState > 2) state = cartState;
 
-      const cartProducts =
-        this.cartProductsService.getFromLocalStorage().products;
-      console.log('cartProducts', cartProducts.length, cartProducts);
-      if (cartProducts.length > 0)
-        this.cartDeliveryService
-          .updateCart(
-            this.cartId,
-            deliveryOption,
-            region,
-            comuna,
-            streetName,
-            streetNumber,
-            department,
-            state
-          )
-          .subscribe((response) => {
-            this.isLoading = false;
-            console.log(response);
-            this.cartUserService.unSet();
-            this.cartProductsService.unSet();
-            this.router.navigate(['/cart-shopping/success']);
-          });
-      else {
-        console.log('cartProducts not found');
+    console.log('state', state);
+
+    const cartProducts =
+      this.cartProductsService.getFromLocalStorage().products;
+    console.log('cartProducts', cartProducts.length, cartProducts);
+
+    if (cartProducts.length <= 0) {
+      console.log('cartProducts not found');
+      this.isLoading = false;
+      this.toastService.addToast({
+        message: 'Para continuar, agrega productos a tu carrito.',
+      });
+      return true;
+    }
+
+    this.cartDeliveryService
+      .updateCart(
+        this.cartId,
+        deliveryOption,
+        region,
+        comuna,
+        streetName,
+        streetNumber,
+        department,
+        state
+      )
+      .subscribe((response) => {
         this.isLoading = false;
-        this.toastService.addToast({
-          message: 'Para continuar, agrega productos a tu carrito.',
-        });
-      }
-    } else console.log('cartId not found');
+        console.log('updateCart', response);
+        this.router.navigate(['/cart-shopping/billing']);
+      });
 
     return true;
   }

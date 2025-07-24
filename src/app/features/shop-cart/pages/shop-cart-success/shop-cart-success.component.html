@@ -3,13 +3,21 @@
   [items]="breadcrumbItems"
 ></app-breadcrumb> -->
 
+<div *ngIf="loading" class="spinner-border" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>
+
 <div class="container">
   <div class="row mt-5">
     <div class="col-12 col-md-6">
-      <h1>Tu cotización se ha ingresado con éxito.</h1>
-      <p>Pronto un ejecutivo se pondrá en contacto contigo.</p>
-      <button [routerLink]="['/']" class="btn btn-primary">
-        Seguir comprando
+      <h1>{{ title }}</h1>
+      <div class="alert alert-primary" role="alert">
+        Número de compra: {{ cartId }}
+      </div>
+      <p>{{ message }}</p>
+      <!-- <p>{{ responseWebpayInit | json }}</p> -->
+      <button [routerLink]="button.url" class="btn btn-primary">
+        {{ button.text }}
       </button>
     </div>
     <div class="col-6 d-none d-md-block">

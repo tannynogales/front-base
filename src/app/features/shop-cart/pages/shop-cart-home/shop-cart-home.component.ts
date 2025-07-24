@@ -73,7 +73,7 @@ export class ShopCartHomeComponent implements OnInit {
       this.cartUser.name = user.name;
       this.cartUser.email = user.email;
     }
-    console.log('setCartUser', this.cartUser);
+    // console.log('setCartUser', this.cartUser);
   }
 
   // @ViewChild('miDiv', { static: true }) miDiv!: ElementRef;

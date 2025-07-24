@@ -48,7 +48,7 @@ export class CartUserService {
     this._cartUser.next(this.cartUserObject);
   }
 
-  saveInLocalStorage() {
+  private saveInLocalStorage() {
     localStorage.setItem('cart-user', JSON.stringify(this.cartUserObject));
   }
 

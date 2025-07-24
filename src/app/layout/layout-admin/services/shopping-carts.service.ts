@@ -34,11 +34,18 @@ export class ShoppingCartsService {
     return this._shoppingCarts.asObservable();
   }
 
-  fetch(page: number = 1) {
+  fetch(
+    page: number = 1,
+    pageSize: number = 3,
+    state: number = 2,
+    userId: string = '36'
+  ): void {
     this.shoppingCartsObject.loading = true;
     this._shoppingCarts.next(this.shoppingCartsObject);
-    const url = this.baseUrl + `/shopping-carts`;
-    // console.log(url);
+    const url =
+      this.baseUrl +
+      `/shopping-carts?populate=*&pagination[pageSize]=${pageSize}&sort=updatedAt:desc&filters[state][$eq]=${state}&filters[user][id][$eq]=${userId}`;
+    // console.log('url', url);
     this.httpClient
       .get<Response>(url)
       .pipe(
@@ -71,6 +78,17 @@ export class ShoppingCartsService {
               delivery_street_name: element.attributes.delivery_street_name,
               delivery_street_number: element.attributes.delivery_street_number,
               delivery_department: element.attributes.delivery_department,
+              billing_type: element.attributes.billing_type,
+              billing_rut: element.attributes.billing_rut,
+              billing_name: element.attributes.billing_name,
+              billing_giro: element.attributes.billing_giro,
+              billing_direccion: element.attributes.billing_direccion,
+              billing_comuna: element.attributes.billing_comuna?.data?.id,
+              billing_comuna_name:
+                element.attributes.billing_comuna?.data?.attributes?.name,
+              billing_email: element.attributes.billing_email,
+              billing_telefono: element.attributes.billing_telefono,
+
               // attributes: attributesValues,
             };
           });

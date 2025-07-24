@@ -8,7 +8,8 @@
     (blur)="touched()"
     class="form-control"
   >
-    <!-- <option>Selecciona una opción</option> -->
+    <option *ngIf="!value" disabled selected>Selecciona una opción</option>
+
     <option
       *ngFor="let option of options"
       [value]="option.value"
@@ -19,7 +20,6 @@
   </select>
 
   <label *ngIf="label" [for]="fieldName">{{ label }}</label>
-
   <ng-container *ngIf="showError">
     <app-input-error
       [fieldName]="fieldName"

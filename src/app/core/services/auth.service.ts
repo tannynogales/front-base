@@ -83,6 +83,12 @@ export class AuthService {
     );
   }
 
+  // public emailConfirmation(confirmation: string): Observable<any> {
+  //   return this.http.get<any>(
+  //     `${this.baseUrl}/api/auth/email-confirmation?confirmation=${confirmation}`
+  //   );
+  // }
+
   public forgotPassword(email: string): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}/api/auth/forgot-password`, {
       email: email,
