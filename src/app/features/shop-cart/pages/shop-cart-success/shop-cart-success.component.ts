@@ -5,6 +5,8 @@ import {
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastService } from '@shared/components/toast/toast.service';
+import { CartUserService } from '@core/services/cart-user.service';
+import { CartProductsService } from '@core/services/cart-products.service';
 
 declare var gtag: any;
 
@@ -61,6 +63,9 @@ export class ShopCartSuccessComponent implements OnInit {
   // cartUserService = inject(CartUserService);
   activatedRoute = inject(ActivatedRoute);
   webpayService = inject(WebpayService);
+
+  cartUserService = inject(CartUserService);
+  cartProductsService = inject(CartProductsService);
 
   loading = true;
   title!: string;
@@ -137,6 +142,8 @@ export class ShopCartSuccessComponent implements OnInit {
                 text: 'Seguir comprando',
                 url: '/',
               };
+              this.cartUserService.unSet();
+              this.cartProductsService.unSet();
             } else {
               this.title = 'Ups, algo salió mal';
               this.message =
