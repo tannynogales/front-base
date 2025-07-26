@@ -11,10 +11,15 @@ export class CartPaymentService {
 
   httpClient = inject(HttpClient);
 
-  public updateCart(id: number, state: number): Observable<Response> {
+  public updateCart(
+    id: number,
+    state: number,
+    payment_method: string
+  ): Observable<Response> {
     const data = {
       data: {
         state: state,
+        payment_method: payment_method,
       },
     };
     console.log(`/shopping-carts/${id}`, data);

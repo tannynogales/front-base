@@ -199,24 +199,26 @@ export class ShopCartPaymentComponent implements OnInit {
         });
         return false;
       }
-      this.cartPaymentService.updateCart(this.cartId, 6).subscribe({
-        next: (response) => {
-          console.log('Cart updated successfully:', response);
-          this.cartUserService.unSet();
-          this.cartProductsService.unSet();
-          this.router.navigate(['/cart-shopping/success'], {
-            queryParams: {
-              paymentMethod: 'bank_transfer',
-              cartId: this.cartId,
-            },
-          });
-        },
-        error: (error) => {
-          this.toastService.addToast({
-            message: 'Ha ocurrido un error: ' + JSON.stringify(error),
-          });
-        },
-      });
+      this.cartPaymentService
+        .updateCart(this.cartId, 6, this.paymentData.paymentMethodId)
+        .subscribe({
+          next: (response) => {
+            console.log('Cart updated successfully:', response);
+            this.cartUserService.unSet();
+            this.cartProductsService.unSet();
+            this.router.navigate(['/cart-shopping/success'], {
+              queryParams: {
+                paymentMethod: 'bank_transfer',
+                cartId: this.cartId,
+              },
+            });
+          },
+          error: (error) => {
+            this.toastService.addToast({
+              message: 'Ha ocurrido un error: ' + JSON.stringify(error),
+            });
+          },
+        });
     }
     return true;
   }
