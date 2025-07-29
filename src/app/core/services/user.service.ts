@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { User } from '@core/models';
-import { environment } from 'src/environments/environment.development';
+import { environment } from 'src/environments/environment';
 import { RememberMeService } from '@core/services/remember-me.service';
 import { AuthService } from '@core/services/auth.service';
 import { map, Observable, Subject, catchError, of } from 'rxjs';

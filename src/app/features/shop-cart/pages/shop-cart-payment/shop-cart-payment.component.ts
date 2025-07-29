@@ -14,7 +14,7 @@ import {
 import { ToastService } from '@shared/components/toast/toast.service';
 import { ICreateOrderRequest, IPayPalConfig } from 'ngx-paypal';
 import { ignoreElements, Observable } from 'rxjs';
-import { environment } from 'src/environments/environment.development';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-shop-cart-payment',

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, map, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment.development';
+import { environment } from 'src/environments/environment';
 import { ShoppingCart, ShoppingCartsObject } from '@layout/layout-admin/models';
 
 @Injectable({

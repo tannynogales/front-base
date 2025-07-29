@@ -86,7 +86,7 @@ export class ShopCartDeliveryComponent implements OnInit {
     if (!this.cartId) {
       console.log('cartId not found');
       this.router.navigate(['/cart-shopping']);
-    }
+    } else console.log('cartId found', this.cartId);
 
     // TODO: unsubscribe
     this.utilitiesChileRegionesService.regiones$.subscribe((regiones) => {

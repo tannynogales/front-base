@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Response } from '@core/models';
 import { BehaviorSubject, Observable, map } from 'rxjs';
-import { environment } from 'src/environments/environment.development';
+import { environment } from 'src/environments/environment';
 
 export interface ShoppingCartItem {
   // id?: number;
