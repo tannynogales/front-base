@@ -237,7 +237,7 @@ export class ShopCartPaymentComponent implements OnInit {
       .init(
         cartId,
         this.generateSessionId(),
-        this.shoppingCart.totalBruto,
+        this.shoppingCart.totalNeto,
         `${window.location.origin}/cart-shopping/success`,
         this.paymentData.paymentMethodId
       )
