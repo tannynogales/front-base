@@ -7,5 +7,5 @@ export const environment = {
   strapi: 'https://neges-strapi-production.up.railway.app',
   // strapi: 'http://localhost:1337',
   strapiSiteID: 1,
-  sessionExpirationTime: 5, // minutes
+  sessionExpirationTime: 15, // minutes
 };
