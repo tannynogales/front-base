@@ -56,7 +56,7 @@ export class ProductsService {
     this._products.next(this.productsObject);
     const url =
       this.baseUrl +
-      `/products?filters[categories][slug][$eq]=${categorySlug}&[categories][site][id][$eq]=${this.siteID}&populate[primary_image]=*${this._filterByPrice}&populate[categories]=*&populate[product_attribute_values]=*&pagination[pageSize]=12&pagination[page]=${page}&sort=price:${this.order}`;
+      `/products?filters[status][$notIn][0]=deleted&filters[status][$notIn][1]=rejected&filters[categories][slug][$eq]=${categorySlug}&[categories][site][id][$eq]=${this.siteID}&populate[primary_image]=*${this._filterByPrice}&populate[categories]=*&populate[product_attribute_values]=*&pagination[pageSize]=12&pagination[page]=${page}&sort=price:${this.order}`;
     // console.log(url);
     this.httpClient
       .get<Response>(url)

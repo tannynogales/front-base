@@ -40,7 +40,7 @@ export class HighlightedHomeProductsService {
     this._products.next(this.productsObject);
     const url =
       this.baseUrl +
-      `/products?filters[highlighted][$eq]=true&[categories][site][id][$eq]=${this.siteID}&populate[primary_image]=*&populate[categories]=*&populate[product_attribute_values]=*&pagination[pageSize]=12&sort=highlighted_order`;
+      `/products?filters[status][$notIn][0]=deleted&filters[status][$notIn][1]=rejected&filters[highlighted][$eq]=true&[categories][site][id][$eq]=${this.siteID}&populate[primary_image]=*&populate[categories]=*&populate[product_attribute_values]=*&pagination[pageSize]=12&sort=highlighted_order`;
 
     // console.log(url);
     this.httpClient
