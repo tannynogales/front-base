@@ -99,19 +99,33 @@
               class="d-flex align-items-center mb-lg-4 p-3 p-lg-0 addToCartSection"
             >
               <a
+                *ngIf="product.data.hasStock"
                 class="btn btn-primary btn-sm rounded-3 py-2 border-bottom-0 px-4 px-lg-5 me-3"
                 (click)="addProduct(product)"
               >
                 <i class="d-none d-lg-inline fas fa-shopping-bag py-1 me-2"></i
                 >Agregar al Carrito</a
               ><a class="p-0 reset-anchor d-inline-block mx-2 d-none" href="#"
-                ><i class="fas fa-heart"></i></a
-              ><a
+                ><i class="fas fa-heart"></i
+              ></a>
+              <button
                 *ngIf="isShareEnable"
                 class="p-0 reset-anchor d-inline-block mx-2"
                 (click)="share(product.data.name)"
-                ><i class="fas fa-share-alt"></i
-              ></a>
+                type="button"
+                class="btn btn-outline-secondary"
+              >
+                <i class="fas fa-share-alt"></i> Compartir
+              </button>
+            </div>
+
+            <div
+              *ngIf="!product.data.hasStock"
+              class="alert alert-primary"
+              role="alert"
+            >
+              Puede que no haya suficiente stock disponible. Por favor, consulta
+              con un ejecutivo para confirmar la disponibilidad.
             </div>
             <br />
             <ul class="list-unstyled small d-inline-block">

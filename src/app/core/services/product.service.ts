@@ -25,6 +25,7 @@ export class ProductService {
       images: [],
       attributes: [],
       description: '',
+      hasStock: false,
     },
     loading: true,
   };
@@ -81,6 +82,7 @@ export class ProductService {
               }
             ),
             attributes: attributesValues,
+            hasStock: response.data.attributes.has_stock,
           };
         })
       )

@@ -14,6 +14,7 @@ export interface Item {
   images: Array<string>;
   attributes: Array<string>;
   description?: string;
+  hasStock: boolean;
 }
 
 export interface ItemsObject {

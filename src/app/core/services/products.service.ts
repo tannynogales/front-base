@@ -97,6 +97,7 @@ export class ProductsService {
                 }
               ),
               attributes: attributesValues,
+              hasStock: element.attributes.has_stock,
             };
           });
         })
