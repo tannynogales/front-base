@@ -82,7 +82,7 @@ export class HighlightedHomeProductsService {
                 }
               ),
               attributes: attributesValues,
-              hasStock: element.attributes.has_stock,
+              hasStock: element.attributes.hasStock,
             };
           });
         })

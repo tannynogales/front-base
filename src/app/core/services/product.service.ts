@@ -44,7 +44,6 @@ export class ProductService {
     this.productObject.loading = true;
     this._product.next(this.productObject);
     const url = this.baseUrl + `/products/${productID}?populate=*`;
-    // console.log(url);
 
     this.httpClient
       .get<Response>(url)
@@ -57,6 +56,7 @@ export class ProductService {
               }
             );
 
+          console.log(response.data.attributes.hasStock);
           return {
             slug: response.data.attributes.slug,
             id: response.id,
@@ -82,14 +82,13 @@ export class ProductService {
               }
             ),
             attributes: attributesValues,
-            hasStock: response.data.attributes.has_stock,
+            hasStock: response.data.attributes.hasStock,
           };
         })
       )
       .subscribe((data) => {
         this.productObject.data = data;
         this.productObject.loading = false;
-        console.log(this.productObject);
         this._product.next(this.productObject);
       });
   }
